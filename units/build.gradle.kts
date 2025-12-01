@@ -5,6 +5,7 @@ plugins {
 description = "A custom units library for NextControl."
 
 dependencies {
+    testImplementation(libs.bundles.kotest)
 }
 
 nextFTCPublishing {
@@ -17,4 +18,8 @@ kotlin {
     compilerOptions {
         freeCompilerArgs.addAll("-Xjvm-default=all", "-Xconsistent-data-class-copy-visibility")
     }
+}
+
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
 }
