@@ -1,0 +1,21 @@
+[versions]
+kotlin = "2.2.21"
+kotest = "5.9.1"
+ojalgo = "56.1.1"
+
+[libraries]
+ojalgo = { module = "org.ojalgo:ojalgo", version.ref = "ojalgo" }
+kotest-runner = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+kotest-assertations = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+kotest-property = { module = "io.kotest:kotest-property", version.ref = "kotest" }
+kotest-data-driven = { module = "io.kotest:kotest-framework-datatest", version.ref = "kotest" }
+mockk = { module = "io.mockk:mockk", version = "1.14.2" }
+functional-interfaces = { module = "dev.nextftc:functional-interfaces", version = "1.0.1" }
+
+[bundles]
+kotest = ["kotest-runner", "kotest-assertations", "kotest-property", "kotest-data-driven"]
+
+[plugins]
+kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+dokka = { id = "org.jetbrains.dokka", version = "2.0.0" }
+nextftc-publishing = { id = "dev.nextftc.publishing.multi-module", version = "1.0.1" }
