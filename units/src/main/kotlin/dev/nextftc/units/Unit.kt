@@ -13,8 +13,8 @@ import kotlin.math.abs
  */
 abstract class Unit<U : Unit<U>> protected constructor(
     baseUnit: Unit<U>?,
-    private val toBaseConverter: (Double) -> Double,
-    private val fromBaseConverter: (Double) -> Double,
+    toParentConverter: (Double) -> Double,
+    fromParentConverter: (Double) -> Double,
     private val unitName: String,
     private val unitSymbol: String
 ) {
@@ -28,6 +28,19 @@ abstract class Unit<U : Unit<U>> protected constructor(
             current = current.baseUnit
         }
         current as U
+    }
+
+    // Compose converters through the parent chain
+    private val toBaseConverter: (Double) -> Double = if (baseUnit == null || baseUnit == this.baseUnit) {
+        toParentConverter
+    } else {
+        { x -> baseUnit.toBaseUnits(toParentConverter(x)) }
+    }
+
+    private val fromBaseConverter: (Double) -> Double = if (baseUnit == null || baseUnit == this.baseUnit) {
+        fromParentConverter
+    } else {
+        { x -> fromParentConverter(baseUnit.fromBaseUnits(x)) }
     }
 
     private val zeroMeasure: Measure<U> by lazy { of(0.0) }
