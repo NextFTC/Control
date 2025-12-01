@@ -19,3 +19,4 @@ dependencyResolutionManagement {
 rootProject.name = "NextControl"
 include(":units")
 include(":control")
+include(":linalg")

@@ -6,6 +6,7 @@ description = "A WPIMath inspired library for controls and other math classes an
 
 dependencies {
     api(project(":units"))
+    api(project(":linalg"))
 }
 
 nextFTCPublishing {

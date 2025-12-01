@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/control" />
+            <option value="$PROJECT_DIR$/linalg" />
             <option value="$PROJECT_DIR$/units" />
           </set>
         </option>
