@@ -9,38 +9,87 @@ import kotlin.math.abs
  * This is the base class for units. Actual units (such as Grams and Meters) can be found
  * in the Units class.
  *
+ * Units can be organized in a hierarchy where each unit has an optional parent unit. The
+ * parent chain is automatically traversed to find the base unit - the unit at the root of
+ * the hierarchy that has no parent. For example, in a time unit hierarchy:
+ * - Days has parent Hours
+ * - Hours has parent Minutes
+ * - Minutes has parent Seconds
+ * - Seconds has no parent (it is the base unit)
+ *
+ * Conversions between units are automatically composed through the parent chain, so converting
+ * from Days to the base unit (Seconds) properly chains through Hours and Minutes.
+ *
  * @param U the self-referencing type parameter for type-safe unit operations
  */
-abstract class Unit<U : Unit<U>> protected constructor(
-    baseUnit: Unit<U>?,
+abstract class Unit<U : Unit<U>>
+/**
+ * Creates a new unit with custom converters to its parent unit.
+ *
+ * @param parent the parent unit in the hierarchy, or null if this is the base unit. The base unit
+ *     is automatically determined by traversing the parent chain until a unit with no parent is found.
+ * @param toParentConverter function to convert a value from this unit to the parent unit. This
+ *     converter is automatically composed with the parent's converters to create a full chain to
+ *     the base unit.
+ * @param fromParentConverter function to convert a value from the parent unit to this unit. This
+ *     converter is automatically composed with the parent's converters to create a full chain from
+ *     the base unit.
+ * @param unitName the name of the unit. This should be a singular noun (so "Meter", not "Meters")
+ * @param unitSymbol the short symbol for the unit, such as "m" for meters or "lb." for pounds
+ */
+protected constructor(
+    parent: Unit<U>?,
     toParentConverter: (Double) -> Double,
     fromParentConverter: (Double) -> Double,
     private val unitName: String,
     private val unitSymbol: String
 ) {
+    /**
+     * The base unit for this unit's measurement system. This is found by traversing the parent
+     * chain until reaching a unit with no parent. For example:
+     * - Seconds.baseUnit returns Seconds (it has no parent)
+     * - Milliseconds.baseUnit returns Seconds (direct parent is base)
+     * - Hours.baseUnit returns Seconds (traverses: Hours -> Minutes -> Seconds)
+     * - Days.baseUnit returns Seconds (traverses: Days -> Hours -> Minutes -> Seconds)
+     *
+     * All units in the same measurement system share the same base unit.
+     */
     @Suppress("UNCHECKED_CAST")
-    val baseUnit: U = if (baseUnit == null) {
+    val baseUnit: U = if (parent == null) {
         this as U
     } else {
         // Traverse the chain until we reach the true base unit
-        var current = baseUnit
+        var current = parent
         while (current != current.baseUnit) {
             current = current.baseUnit
         }
         current as U
     }
 
-    // Compose converters through the parent chain
-    private val toBaseConverter: (Double) -> Double = if (baseUnit == null || baseUnit == this.baseUnit) {
+    /**
+     * Converter function to transform values from this unit to the base unit. This is automatically
+     * composed through the parent chain. For example, for Days with parent Hours:
+     * - toParentConverter converts days to hours (1 day -> 24 hours)
+     * - parent.toBaseUnits converts hours through the chain to seconds
+     * - Final composition: 1 day -> 24 hours -> 1440 minutes -> 86400 seconds
+     */
+    private val toBaseConverter: (Double) -> Double = if (parent == null || parent == this.baseUnit) {
         toParentConverter
     } else {
-        { x -> baseUnit.toBaseUnits(toParentConverter(x)) }
+        { x -> parent.toBaseUnits(toParentConverter(x)) }
     }
 
-    private val fromBaseConverter: (Double) -> Double = if (baseUnit == null || baseUnit == this.baseUnit) {
+    /**
+     * Converter function to transform values from the base unit to this unit. This is automatically
+     * composed through the parent chain. For example, for Days with parent Hours:
+     * - parent.fromBaseUnits converts from seconds through the chain to hours
+     * - fromParentConverter converts hours to days (24 hours -> 1 day)
+     * - Final composition: 86400 seconds -> 1440 minutes -> 24 hours -> 1 day
+     */
+    private val fromBaseConverter: (Double) -> Double = if (parent == null || parent == this.baseUnit) {
         fromParentConverter
     } else {
-        { x -> fromParentConverter(baseUnit.fromBaseUnits(x)) }
+        { x -> fromParentConverter(parent.fromBaseUnits(x)) }
     }
 
     private val zeroMeasure: Measure<U> by lazy { of(0.0) }
@@ -49,22 +98,22 @@ abstract class Unit<U : Unit<U>> protected constructor(
     /**
      * Creates a new unit with the given name and multiplier to the base unit.
      *
-     * @param baseUnit the base unit, e.g. Meters for distances
-     * @param baseUnitEquivalent the multiplier to convert this unit to the base unit of this type.
+     * @param parent the base unit, e.g. Meters for distances
+     * @param parentEquivalent the multiplier to convert this unit to the base unit of this type.
      *     For example, meters has a multiplier of 1, mm has a multiplier of 1e-3, and km has
      *     multiplier of 1e3.
      * @param name the name of the unit. This should be a singular noun (so "Meter", not "Meters")
      * @param symbol the short symbol for the unit, such as "m" for meters or "lb." for pounds
      */
     protected constructor(
-        baseUnit: Unit<U>,
-        baseUnitEquivalent: Double,
+        parent: Unit<U>,
+        parentEquivalent: Double,
         name: String,
         symbol: String
     ) : this(
-        baseUnit,
-        { x -> x * baseUnitEquivalent },
-        { x -> x / baseUnitEquivalent },
+        parent,
+        { x -> x * parentEquivalent },
+        { x -> x / parentEquivalent },
         name,
         symbol
     )
