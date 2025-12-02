@@ -10,14 +10,14 @@ import io.kotest.matchers.doubles.shouldBeLessThan
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 
-const val EPSILON = 1e-6
+private const val EPSILON = 1e-6
 
 class TimeTest : FunSpec({
 
     context("Time creation") {
         test("should create Time with correct magnitude") {
             val time = Seconds.of(10.0)
-            time.magnitude shouldBe 10.0 plusOrMinus EPSILON
+            time.magnitude shouldBe (10.0 plusOrMinus EPSILON)
         }
 
         test("should create Time with correct unit") {
@@ -27,24 +27,24 @@ class TimeTest : FunSpec({
 
         test("should create Time with correct base unit magnitude") {
             val time = Minutes.of(2.0)
-            time.baseUnitMagnitude shouldBe 120.0 plusOrMinus EPSILON
+            time.baseUnitMagnitude shouldBe (120.0 plusOrMinus EPSILON)
         }
     }
 
     context("Time.into() conversions") {
         test("should convert seconds to milliseconds") {
             val time = Seconds.of(2.0)
-            time.into(Milliseconds) shouldBe 2000.0 plusOrMinus EPSILON
+            time.into(Milliseconds) shouldBe (2000.0 plusOrMinus EPSILON)
         }
 
         test("should convert milliseconds to seconds") {
             val time = Milliseconds.of(3000.0)
-            time.into(Seconds) shouldBe 3.0 plusOrMinus EPSILON
+            time.into(Seconds) shouldBe (3.0 plusOrMinus EPSILON)
         }
 
         test("should convert microseconds to milliseconds") {
             val time = Microseconds.of(5000.0)
-            time.into(Milliseconds) shouldBe 5.0 plusOrMinus EPSILON
+            time.into(Milliseconds) shouldBe (5.0 plusOrMinus EPSILON)
         }
 
         test("should convert nanoseconds to microseconds") {
@@ -54,24 +54,24 @@ class TimeTest : FunSpec({
 
         test("should convert minutes to seconds") {
             val time = Minutes.of(3.0)
-            time.into(Seconds) shouldBe 180.0 plusOrMinus EPSILON
+            time.into(Seconds) shouldBe (180.0 plusOrMinus EPSILON)
         }
 
         test("should convert hours to minutes") {
             val time = Hours.of(2.0)
-            time.into(Minutes) shouldBe 120.0 plusOrMinus EPSILON
+            time.into(Minutes) shouldBe (120.0 plusOrMinus EPSILON)
         }
 
         test("should convert days to hours") {
             val time = Days.of(1.0)
             time.magnitude shouldBe 1.0
             time.unit shouldBe Days
-            time.into(Hours) shouldBe 24.0 plusOrMinus EPSILON
+            time.into(Hours) shouldBe (24.0 plusOrMinus EPSILON)
         }
 
         test("should handle same unit conversion") {
             val time = Seconds.of(42.0)
-            time.into(Seconds) shouldBe 42.0 plusOrMinus EPSILON
+            time.into(Seconds) shouldBe (42.0 plusOrMinus EPSILON)
         }
     }
 
@@ -81,7 +81,7 @@ class TimeTest : FunSpec({
             val time2 = Seconds.of(5.0)
             val result = time1 + time2
 
-            result.magnitude shouldBe 15.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (15.0 plusOrMinus EPSILON)
             result.unit shouldBe Seconds
         }
 
@@ -90,7 +90,7 @@ class TimeTest : FunSpec({
             val time2 = Minutes.of(1.0)
             val result = time1 + time2
 
-            result.magnitude shouldBe 120.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (120.0 plusOrMinus EPSILON)
             result.unit shouldBe Seconds
         }
 
@@ -99,7 +99,7 @@ class TimeTest : FunSpec({
             val time2 = Milliseconds.of(500.0)
             val result = time1 + time2
 
-            result.magnitude shouldBe 1.5 plusOrMinus EPSILON
+            result.magnitude shouldBe (1.5 plusOrMinus EPSILON)
             result.unit shouldBe Seconds
         }
 
@@ -108,7 +108,7 @@ class TimeTest : FunSpec({
             val time2 = Microseconds.of(1000.0)
             val result = time1 + time2
 
-            result.magnitude shouldBe 2.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (2.0 plusOrMinus EPSILON)
             result.unit shouldBe Milliseconds
         }
 
@@ -117,7 +117,7 @@ class TimeTest : FunSpec({
             val time2 = Nanoseconds.of(500_000_000.0)
             val result = time1 + time2
 
-            result.magnitude shouldBe 1_500_000_000.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (1_500_000_000.0 plusOrMinus EPSILON)
             result.unit shouldBe Nanoseconds
         }
 
@@ -127,7 +127,7 @@ class TimeTest : FunSpec({
             val result = time1 + time2
 
             result.unit shouldBe Minutes
-            result.magnitude shouldBe 1.5 plusOrMinus EPSILON
+            result.magnitude shouldBe (1.5 plusOrMinus EPSILON)
         }
     }
 
@@ -137,7 +137,7 @@ class TimeTest : FunSpec({
             val time2 = Seconds.of(3.0)
             val result = time1 - time2
 
-            result.magnitude shouldBe 7.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (7.0 plusOrMinus EPSILON)
             result.unit shouldBe Seconds
         }
 
@@ -146,7 +146,7 @@ class TimeTest : FunSpec({
             val time2 = Seconds.of(30.0)
             val result = time1 - time2
 
-            result.magnitude shouldBe 1.5 plusOrMinus EPSILON
+            result.magnitude shouldBe (1.5 plusOrMinus EPSILON)
             result.unit shouldBe Minutes
         }
 
@@ -155,7 +155,7 @@ class TimeTest : FunSpec({
             val time2 = Seconds.of(10.0)
             val result = time1 - time2
 
-            result.magnitude shouldBe -5.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (-5.0 plusOrMinus EPSILON)
         }
 
         test("should subtract milliseconds from seconds") {
@@ -163,7 +163,7 @@ class TimeTest : FunSpec({
             val time2 = Milliseconds.of(500.0)
             val result = time1 - time2
 
-            result.magnitude shouldBe 1.5 plusOrMinus EPSILON
+            result.magnitude shouldBe (1.5 plusOrMinus EPSILON)
             result.unit shouldBe Seconds
         }
 
@@ -172,7 +172,7 @@ class TimeTest : FunSpec({
             val time2 = Microseconds.of(500.0)
             val result = time1 - time2
 
-            result.magnitude shouldBe 1.5 plusOrMinus EPSILON
+            result.magnitude shouldBe (1.5 plusOrMinus EPSILON)
             result.unit shouldBe Milliseconds
         }
     }
@@ -182,7 +182,7 @@ class TimeTest : FunSpec({
             val time = Seconds.of(10.0)
             val result = time * 3.0
 
-            result.magnitude shouldBe 30.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (30.0 plusOrMinus EPSILON)
             result.unit shouldBe Seconds
         }
 
@@ -190,7 +190,7 @@ class TimeTest : FunSpec({
             val time = Minutes.of(5.0)
             val result = time * -2.0
 
-            result.magnitude shouldBe -10.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (-10.0 plusOrMinus EPSILON)
             result.unit shouldBe Minutes
         }
 
@@ -198,14 +198,14 @@ class TimeTest : FunSpec({
             val time = Seconds.of(100.0)
             val result = time * 0.5
 
-            result.magnitude shouldBe 50.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (50.0 plusOrMinus EPSILON)
         }
 
         test("should multiply time by zero") {
             val time = Hours.of(3.0)
             val result = time * 0.0
 
-            result.magnitude shouldBe 0.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (0.0 plusOrMinus EPSILON)
         }
 
         test("should preserve unit after multiplication") {
@@ -213,7 +213,7 @@ class TimeTest : FunSpec({
             val result = time * 4.0
 
             result.unit shouldBe Milliseconds
-            result.magnitude shouldBe 1000.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (1000.0 plusOrMinus EPSILON)
         }
     }
 
@@ -222,7 +222,7 @@ class TimeTest : FunSpec({
             val time = Seconds.of(20.0)
             val result = time / 4.0
 
-            result.magnitude shouldBe 5.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (5.0 plusOrMinus EPSILON)
             result.unit shouldBe Seconds
         }
 
@@ -230,7 +230,7 @@ class TimeTest : FunSpec({
             val time = Minutes.of(10.0)
             val result = time / 0.5
 
-            result.magnitude shouldBe 20.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (20.0 plusOrMinus EPSILON)
         }
 
         test("should preserve unit after division") {
@@ -238,14 +238,14 @@ class TimeTest : FunSpec({
             val result = time / 3.0
 
             result.unit shouldBe Hours
-            result.magnitude shouldBe 2.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (2.0 plusOrMinus EPSILON)
         }
 
         test("should handle small divisions") {
             val time = Milliseconds.of(1.0)
             val result = time / 2.0
 
-            result.magnitude shouldBe 0.5 plusOrMinus EPSILON
+            result.magnitude shouldBe (0.5 plusOrMinus EPSILON)
         }
     }
 
@@ -254,7 +254,7 @@ class TimeTest : FunSpec({
             val time = Seconds.of(10.0)
             val result = -time
 
-            result.magnitude shouldBe -10.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (-10.0 plusOrMinus EPSILON)
             result.unit shouldBe Seconds
         }
 
@@ -262,14 +262,14 @@ class TimeTest : FunSpec({
             val time = Minutes.of(-5.0)
             val result = -time
 
-            result.magnitude shouldBe 5.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (5.0 plusOrMinus EPSILON)
         }
 
         test("should negate zero time") {
             val time = Seconds.of(0.0)
             val result = -time
 
-            result.magnitude shouldBe 0.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (0.0 plusOrMinus EPSILON)
         }
     }
 
@@ -363,7 +363,7 @@ class TimeTest : FunSpec({
             val zero = Seconds.zero()
             val result = time + zero
 
-            result.magnitude shouldBe 10.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (10.0 plusOrMinus EPSILON)
         }
 
         test("should subtract zero time") {
@@ -371,14 +371,14 @@ class TimeTest : FunSpec({
             val zero = Minutes.zero()
             val result = time - zero
 
-            result.magnitude shouldBe 5.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (5.0 plusOrMinus EPSILON)
         }
 
         test("should multiply zero time") {
             val zero = Seconds.zero()
             val result = zero * 100.0
 
-            result.magnitude shouldBe 0.0 plusOrMinus EPSILON
+            result.magnitude shouldBe (0.0 plusOrMinus EPSILON)
         }
     }
 })

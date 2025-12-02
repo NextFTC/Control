@@ -66,13 +66,21 @@ class TimeUnit(
     }
 }
 
+// Conversion constants
+private const val MILLISECONDS_PER_SECOND = 1e-3
+private const val MICROSECONDS_PER_SECOND = 1e-6
+private const val NANOSECONDS_PER_SECOND = 1e-9
+private const val MINUTES_PER_SECOND = 60.0
+private const val HOURS_PER_MINUTE = 60.0
+private const val DAYS_PER_HOUR = 24.0
+
 val Seconds = TimeUnit(null, { it }, { it }, "second", "s")
-val Milliseconds = TimeUnit(Seconds, 1e-3, "millisecond", "ms")
-val Microseconds = TimeUnit(Seconds, 1e-6, "microsecond", "us")
-val Nanoseconds = TimeUnit(Seconds, 1e-9, "nanosecond", "ns")
-val Minutes = TimeUnit(Seconds, 60.0, "minute", "min")
-val Hours = TimeUnit(Minutes, 60.0, "hour", "h")
-val Days = TimeUnit(Hours, 24.0, "day", "d")
+val Milliseconds = TimeUnit(Seconds, MILLISECONDS_PER_SECOND, "millisecond", "ms")
+val Microseconds = TimeUnit(Seconds, MICROSECONDS_PER_SECOND, "microsecond", "us")
+val Nanoseconds = TimeUnit(Seconds, NANOSECONDS_PER_SECOND, "nanosecond", "ns")
+val Minutes = TimeUnit(Seconds, MINUTES_PER_SECOND, "minute", "min")
+val Hours = TimeUnit(Minutes, HOURS_PER_MINUTE, "hour", "h")
+val Days = TimeUnit(Hours, DAYS_PER_HOUR, "day", "d")
 
 
 val DurationUnit.timeUnit get() = when(this) {
