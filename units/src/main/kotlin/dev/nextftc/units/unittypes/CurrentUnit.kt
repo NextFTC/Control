@@ -1,0 +1,57 @@
+package dev.nextftc.units.unittypes
+
+import dev.nextftc.units.Measure
+import dev.nextftc.units.Unit
+import dev.nextftc.units.measuretypes.Current
+
+/**
+ * Unit of measurement for electrical current.
+ *
+ * Supported units include amperes (base unit), milliamperes, microamperes, and kiloamperes.
+ */
+class CurrentUnit(
+    baseUnit: CurrentUnit?,
+    toBaseConverter: (Double) -> Double,
+    fromBaseConverter: (Double) -> Double,
+    unitName: String,
+    unitSymbol: String
+) : Unit<CurrentUnit>(
+    baseUnit, toBaseConverter, fromBaseConverter, unitName, unitSymbol
+) {
+    internal constructor(
+        baseUnit: CurrentUnit,
+        baseUnitEquivalent: Double,
+        name: String,
+        symbol: String
+    ) : this(
+        baseUnit,
+        { x -> x * baseUnitEquivalent },
+        { x -> x / baseUnitEquivalent },
+        name,
+        symbol
+    )
+
+    override fun of(magnitude: Double): Current {
+        return Current(magnitude, this)
+    }
+
+    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<CurrentUnit> {
+        return of(this.fromBaseUnits(baseUnitMagnitude))
+    }
+
+    override fun per(time: TimeUnit): Unit<*> {
+        TODO("Current rate units not yet implemented")
+    }
+}
+
+// Conversion constants
+private const val MILLIAMPERES_PER_AMPERE = 1e-3
+private const val MICROAMPERES_PER_AMPERE = 1e-6
+private const val KILOAMPERES_PER_AMPERE = 1e3
+
+// Current units
+val Amperes = CurrentUnit(null, { it }, { it }, "ampere", "A")
+val Milliamperes = CurrentUnit(Amperes, MILLIAMPERES_PER_AMPERE, "milliampere", "mA")
+val Microamperes = CurrentUnit(Amperes, MICROAMPERES_PER_AMPERE, "microampere", "µA")
+val Kiloamperes = CurrentUnit(Amperes, KILOAMPERES_PER_AMPERE, "kiloampere", "kA")
+
