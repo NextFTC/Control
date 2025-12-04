@@ -57,3 +57,9 @@ val NewtonCentimeters =
     TorqueUnit(NewtonMeters, NEWTON_CENTIMETERS_PER_NEWTON_METER, "newton-centimeter", "N·cm")
 val NewtonMillimeters =
     TorqueUnit(NewtonMeters, NEWTON_MILLIMETERS_PER_NEWTON_METER, "newton-millimeter", "N·mm")
+
+// Extension properties for Double
+inline val Double.newtonMeters get() = NewtonMeters.of(this)
+inline val Double.poundFeet get() = PoundFeet.of(this)
+inline val Double.newtonCentimeters get() = NewtonCentimeters.of(this)
+inline val Double.newtonMillimeters get() = NewtonMillimeters.of(this)

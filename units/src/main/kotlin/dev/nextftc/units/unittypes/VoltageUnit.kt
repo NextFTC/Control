@@ -68,3 +68,9 @@ val Volts = VoltageUnit(null, { it }, { it }, "volt", "V")
 val Millivolts = VoltageUnit(Volts, MILLIVOLTS_PER_VOLT, "millivolt", "mV")
 val Microvolts = VoltageUnit(Volts, MICROVOLTS_PER_VOLT, "microvolt", "µV")
 val Kilovolts = VoltageUnit(Volts, KILOVOLTS_PER_VOLT, "kilovolt", "kV")
+
+// Extension properties for Double
+inline val Double.volts get() = Volts.of(this)
+inline val Double.millivolts get() = Millivolts.of(this)
+inline val Double.microvolts get() = Microvolts.of(this)
+inline val Double.kilovolts get() = Kilovolts.of(this)

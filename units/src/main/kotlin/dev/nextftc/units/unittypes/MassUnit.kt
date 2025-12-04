@@ -61,3 +61,11 @@ val MetricTons = MassUnit(Kilograms, METRIC_TONS_PER_KILOGRAM, "metric ton", "t"
 // Imperial units
 val Pounds = MassUnit(Kilograms, POUNDS_PER_KILOGRAM, "pound", "lb")
 val Ounces = MassUnit(Pounds, OUNCES_PER_POUND, "ounce", "oz")
+
+// Extension properties for Double
+inline val Double.kilograms get() = Kilograms.of(this)
+inline val Double.grams get() = Grams.of(this)
+inline val Double.milligrams get() = Milligrams.of(this)
+inline val Double.metricTons get() = MetricTons.of(this)
+inline val Double.pounds get() = Pounds.of(this)
+inline val Double.ounces get() = Ounces.of(this)

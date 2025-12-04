@@ -59,3 +59,9 @@ val Joules = EnergyUnit(null, { it }, { it }, "joule", "J")
 val Kilojoules = EnergyUnit(Joules, KILOJOULES_PER_JOULE, "kilojoule", "kJ")
 val WattHours = EnergyUnit(Joules, WATT_HOURS_PER_JOULE, "watt-hour", "Wh")
 val KilowattHours = EnergyUnit(Joules, KILOWATT_HOURS_PER_JOULE, "kilowatt-hour", "kWh")
+
+// Extension properties for Double
+inline val Double.joules get() = Joules.of(this)
+inline val Double.kilojoules get() = Kilojoules.of(this)
+inline val Double.wattHours get() = WattHours.of(this)
+inline val Double.kilowattHours get() = KilowattHours.of(this)

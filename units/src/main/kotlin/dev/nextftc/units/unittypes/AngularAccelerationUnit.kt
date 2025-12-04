@@ -26,3 +26,8 @@ class AngularAccelerationUnit(
 val RadiansPerSecondSquared = AngularAccelerationUnit(RadiansPerSecond, Seconds)
 val DegreesPerSecondSquared = AngularAccelerationUnit(DegreesPerSecond, Seconds)
 val RotationsPerSecondSquared = AngularAccelerationUnit(RotationsPerSecond, Seconds)
+
+// Extension properties for Double
+inline val Double.radiansPerSecondSquared get() = RadiansPerSecondSquared.of(this)
+inline val Double.degreesPerSecondSquared get() = DegreesPerSecondSquared.of(this)
+inline val Double.rotationsPerSecondSquared get() = RotationsPerSecondSquared.of(this)

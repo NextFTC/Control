@@ -68,3 +68,9 @@ val Radians = AngleUnit(null, { it }, { it }, "radian", "rad")
 val Degrees = AngleUnit(Radians, DEGREES_PER_RADIAN, "degree", "deg")
 val Rotations = AngleUnit(Radians, ROTATIONS_PER_RADIAN, "rotation", "rot")
 val Gradians = AngleUnit(Radians, GRADIANS_PER_RADIAN, "gradian", "grad")
+
+// Extension properties for Double
+inline val Double.radians get() = Radians.of(this)
+inline val Double.degrees get() = Degrees.of(this)
+inline val Double.rotations get() = Rotations.of(this)
+inline val Double.gradians get() = Gradians.of(this)

@@ -28,3 +28,10 @@ val RadiansPerSecond = AngularVelocityUnit(Radians, Seconds)
 val DegreesPerSecond = AngularVelocityUnit(Degrees, Seconds)
 val RotationsPerMinute = AngularVelocityUnit(Rotations, Minutes)
 val RotationsPerSecond = AngularVelocityUnit(Rotations, Seconds)
+
+// Extension properties for Double
+inline val Double.radiansPerSecond get() = RadiansPerSecond.of(this)
+inline val Double.degreesPerSecond get() = DegreesPerSecond.of(this)
+inline val Double.rotationsPerMinute get() = RotationsPerMinute.of(this)
+inline val Double.rotationsPerSecond get() = RotationsPerSecond.of(this)
+inline val Double.rpm get() = RotationsPerMinute.of(this)

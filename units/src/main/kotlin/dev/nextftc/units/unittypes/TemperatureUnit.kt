@@ -54,3 +54,8 @@ val Kelvin =
         "kelvin",
         "K",
     )
+
+// Extension properties for Double
+inline val Double.celsius get() = Celsius.of(this)
+inline val Double.fahrenheit get() = Fahrenheit.of(this)
+inline val Double.kelvin get() = Kelvin.of(this)

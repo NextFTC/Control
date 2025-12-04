@@ -28,3 +28,7 @@ val FeetPerSecondSquared = LinearAccelerationUnit(FeetPerSecond, Seconds)
 
 // Standard gravity constant (approximately 9.80665 m/s²)
 const val STANDARD_GRAVITY_MPS2 = 9.80665
+
+// Extension properties for Double
+inline val Double.metersPerSecondSquared get() = MetersPerSecondSquared.of(this)
+inline val Double.feetPerSecondSquared get() = FeetPerSecondSquared.of(this)

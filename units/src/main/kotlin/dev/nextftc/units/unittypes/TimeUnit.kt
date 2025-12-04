@@ -80,6 +80,15 @@ val Minutes = TimeUnit(Seconds, MINUTES_PER_SECOND, "minute", "min")
 val Hours = TimeUnit(Minutes, HOURS_PER_MINUTE, "hour", "h")
 val Days = TimeUnit(Hours, DAYS_PER_HOUR, "day", "d")
 
+// Extension properties for Double
+inline val Double.seconds get() = Seconds.of(this)
+inline val Double.milliseconds get() = Milliseconds.of(this)
+inline val Double.microseconds get() = Microseconds.of(this)
+inline val Double.nanoseconds get() = Nanoseconds.of(this)
+inline val Double.minutes get() = Minutes.of(this)
+inline val Double.hours get() = Hours.of(this)
+inline val Double.days get() = Days.of(this)
+
 val DurationUnit.timeUnit
     get() =
         when (this) {

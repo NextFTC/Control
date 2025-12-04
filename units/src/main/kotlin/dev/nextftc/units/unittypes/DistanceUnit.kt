@@ -77,3 +77,13 @@ val Inches = DistanceUnit(Centimeters, INCHES_PER_CM, "inch", "in")
 val Feet = DistanceUnit(Inches, FEET_PER_INCH, "foot", "ft")
 val Yards = DistanceUnit(Feet, YARDS_PER_FOOT, "yard", "yd")
 val Miles = DistanceUnit(Feet, MILES_PER_FOOT, "mile", "mi")
+
+// Extension properties for Double
+inline val Double.meters get() = Meters.of(this)
+inline val Double.millimeters get() = Millimeters.of(this)
+inline val Double.centimeters get() = Centimeters.of(this)
+inline val Double.kilometers get() = Kilometers.of(this)
+inline val Double.inches get() = Inches.of(this)
+inline val Double.feet get() = Feet.of(this)
+inline val Double.yards get() = Yards.of(this)
+inline val Double.miles get() = Miles.of(this)

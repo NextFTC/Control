@@ -57,3 +57,10 @@ val Milliwatts = PowerUnit(Watts, MILLIWATTS_PER_WATT, "milliwatt", "mW")
 val Kilowatts = PowerUnit(Watts, KILOWATTS_PER_WATT, "kilowatt", "kW")
 val Megawatts = PowerUnit(Watts, MEGAWATTS_PER_WATT, "megawatt", "MW")
 val Horsepower = PowerUnit(Watts, HORSEPOWER_PER_WATT, "horsepower", "hp")
+
+// Extension properties for Double
+inline val Double.watts get() = Watts.of(this)
+inline val Double.milliwatts get() = Milliwatts.of(this)
+inline val Double.kilowatts get() = Kilowatts.of(this)
+inline val Double.megawatts get() = Megawatts.of(this)
+inline val Double.horsepower get() = Horsepower.of(this)

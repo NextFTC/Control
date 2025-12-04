@@ -54,3 +54,9 @@ val Amperes = CurrentUnit(null, { it }, { it }, "ampere", "A")
 val Milliamperes = CurrentUnit(Amperes, MILLIAMPERES_PER_AMPERE, "milliampere", "mA")
 val Microamperes = CurrentUnit(Amperes, MICROAMPERES_PER_AMPERE, "microampere", "µA")
 val Kiloamperes = CurrentUnit(Amperes, KILOAMPERES_PER_AMPERE, "kiloampere", "kA")
+
+// Extension properties for Double
+inline val Double.amperes get() = Amperes.of(this)
+inline val Double.milliamperes get() = Milliamperes.of(this)
+inline val Double.microamperes get() = Microamperes.of(this)
+inline val Double.kiloamperes get() = Kiloamperes.of(this)
