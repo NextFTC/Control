@@ -45,4 +45,18 @@ class LinearAcceleration(
         val timeInCorrectUnit = time.into((unit as LinearAccelerationUnit).denominator)
         return LinearVelocity(magnitude * timeInCorrectUnit, velocityUnit)
     }
+
+    /**
+     * Multiplies this acceleration by a mass to get force.
+     *
+     * Force = Acceleration × Mass (F = a × m)
+     *
+     * @param mass the mass being accelerated
+     * @return the force in newtons
+     */
+    operator fun times(mass: Mass): Force {
+        val accelerationInMps2 = this.baseUnitMagnitude
+        val massInKg = mass.baseUnitMagnitude
+        return Force(accelerationInMps2 * massInKg, dev.nextftc.units.unittypes.Newtons)
+    }
 }

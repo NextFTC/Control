@@ -2,6 +2,8 @@ package dev.nextftc.units.measuretypes
 
 import dev.nextftc.units.Measure
 import dev.nextftc.units.unittypes.ForceUnit
+import dev.nextftc.units.unittypes.Joules
+import dev.nextftc.units.unittypes.NewtonMeters
 
 /**
  * Immutable measurement of force.
@@ -33,4 +35,32 @@ internal constructor(
     override fun times(multiplier: Double): Force = Force(magnitude * multiplier, unit)
 
     override fun div(divisor: Double): Force = Force(magnitude / divisor, unit)
+
+    /**
+     * Multiplies this force by a distance to get energy (work done).
+     *
+     * Work = Force × Distance
+     *
+     * @param distance the distance over which the force is applied
+     * @return the energy (work) in joules
+     */
+    operator fun times(distance: Distance): Energy {
+        val forceInNewtons = this.baseUnitMagnitude
+        val distanceInMeters = distance.baseUnitMagnitude
+        return Energy(forceInNewtons * distanceInMeters, Joules)
+    }
+
+    /**
+     * Multiplies this force by a distance (moment arm) to get torque.
+     *
+     * Torque = Force × Distance (perpendicular moment arm)
+     *
+     * @param momentArm the perpendicular distance from the pivot point
+     * @return the torque in newton-meters
+     */
+    fun timesTorque(momentArm: Distance): Torque {
+        val forceInNewtons = this.baseUnitMagnitude
+        val distanceInMeters = momentArm.baseUnitMagnitude
+        return Torque(forceInNewtons * distanceInMeters, NewtonMeters)
+    }
 }

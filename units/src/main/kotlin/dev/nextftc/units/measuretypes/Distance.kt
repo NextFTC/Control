@@ -75,4 +75,18 @@ internal constructor(
                 .LinearVelocityUnit(unit, time.unit)
         return LinearVelocity(magnitude / time.magnitude, velocityUnit)
     }
+
+    /**
+     * Multiplies this distance by a force to get energy (work done).
+     *
+     * Work = Distance × Force
+     *
+     * @param force the force applied over this distance
+     * @return the energy (work) in joules
+     */
+    operator fun times(force: Force): Energy {
+        val distanceInMeters = this.baseUnitMagnitude
+        val forceInNewtons = force.baseUnitMagnitude
+        return Energy(distanceInMeters * forceInNewtons, dev.nextftc.units.unittypes.Joules)
+    }
 }

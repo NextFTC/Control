@@ -2,6 +2,7 @@ package dev.nextftc.units.measuretypes
 
 import dev.nextftc.units.Measure
 import dev.nextftc.units.unittypes.VoltageUnit
+import dev.nextftc.units.unittypes.Watts
 
 /**
  * Immutable measurement of electrical potential difference (voltage).
@@ -62,4 +63,18 @@ internal constructor(
      * @return the division result
      */
     override fun div(divisor: Double): Voltage = Voltage(magnitude / divisor, unit)
+
+    /**
+     * Multiplies this voltage by a current to get power.
+     *
+     * Power = Voltage × Current (P = V × I)
+     *
+     * @param current the current flowing
+     * @return the power in watts
+     */
+    operator fun times(current: Current): Power {
+        val voltageInVolts = this.baseUnitMagnitude
+        val currentInAmperes = current.baseUnitMagnitude
+        return Power(voltageInVolts * currentInAmperes, Watts)
+    }
 }

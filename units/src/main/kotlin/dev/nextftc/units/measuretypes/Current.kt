@@ -2,6 +2,7 @@ package dev.nextftc.units.measuretypes
 
 import dev.nextftc.units.Measure
 import dev.nextftc.units.unittypes.CurrentUnit
+import dev.nextftc.units.unittypes.Watts
 
 /**
  * Immutable measurement of electrical current.
@@ -33,4 +34,18 @@ internal constructor(
     override fun times(multiplier: Double): Current = Current(magnitude * multiplier, unit)
 
     override fun div(divisor: Double): Current = Current(magnitude / divisor, unit)
+
+    /**
+     * Multiplies this current by a voltage to get power.
+     *
+     * Power = Current × Voltage (P = I × V)
+     *
+     * @param voltage the voltage across the circuit
+     * @return the power in watts
+     */
+    operator fun times(voltage: Voltage): Power {
+        val currentInAmperes = this.baseUnitMagnitude
+        val voltageInVolts = voltage.baseUnitMagnitude
+        return Power(currentInAmperes * voltageInVolts, Watts)
+    }
 }

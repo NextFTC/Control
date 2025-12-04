@@ -2,8 +2,7 @@ package dev.nextftc.units.measuretypes
 
 import dev.nextftc.units.Measure
 import dev.nextftc.units.unittypes.EnergyUnit
-import dev.nextftc.units.unittypes.PerUnit
-import dev.nextftc.units.unittypes.TimeUnit
+import dev.nextftc.units.unittypes.Watts
 
 /**
  * Immutable measurement of energy.
@@ -35,13 +34,16 @@ internal constructor(
     override fun div(divisor: Double): Energy = Energy(magnitude / divisor, unit)
 
     /**
-     * Divides this energy by a time to get energy rate (energy per time).
+     * Divides this energy by a time to get power.
      *
-     * @param time the time to divide by
-     * @return the energy rate (energy/time)
+     * Power = Energy / Time
+     *
+     * @param time the time over which the energy is expended
+     * @return the power in watts
      */
-    operator fun div(time: Time): Per<EnergyUnit, TimeUnit> {
-        val rateUnit = PerUnit(unit, time.unit)
-        return Per(magnitude / time.magnitude, rateUnit)
+    operator fun div(time: Time): Power {
+        val energyInJoules = this.baseUnitMagnitude
+        val timeInSeconds = time.baseUnitMagnitude
+        return Power(energyInJoules / timeInSeconds, Watts)
     }
 }

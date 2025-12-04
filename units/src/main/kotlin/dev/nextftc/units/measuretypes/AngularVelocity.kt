@@ -55,4 +55,18 @@ class AngularVelocity(
             )
         return AngularAcceleration(magnitude / time.magnitude, accelerationUnit)
     }
+
+    /**
+     * Multiplies this angular velocity by a torque to get power.
+     *
+     * Power = Angular Velocity × Torque (P = ω × τ)
+     *
+     * @param torque the torque being applied
+     * @return the power in watts
+     */
+    operator fun times(torque: Torque): Power {
+        val angularVelocityInRadPerSec = this.baseUnitMagnitude
+        val torqueInNm = torque.baseUnitMagnitude
+        return Power(angularVelocityInRadPerSec * torqueInNm, dev.nextftc.units.unittypes.Watts)
+    }
 }

@@ -1,6 +1,7 @@
 package dev.nextftc.units.measuretypes
 
 import dev.nextftc.units.Measure
+import dev.nextftc.units.unittypes.Joules
 import dev.nextftc.units.unittypes.PowerUnit
 
 /**
@@ -33,4 +34,18 @@ internal constructor(
     override fun times(multiplier: Double): Power = Power(magnitude * multiplier, unit)
 
     override fun div(divisor: Double): Power = Power(magnitude / divisor, unit)
+
+    /**
+     * Multiplies this power by a time to get energy.
+     *
+     * Energy = Power × Time
+     *
+     * @param time the duration of power application
+     * @return the energy in joules
+     */
+    operator fun times(time: Time): Energy {
+        val powerInWatts = this.baseUnitMagnitude
+        val timeInSeconds = time.baseUnitMagnitude
+        return Energy(powerInWatts * timeInSeconds, Joules)
+    }
 }
