@@ -1,3 +1,5 @@
+@file:JvmName("PerUnits")
+
 package dev.nextftc.units.unittypes
 
 import dev.nextftc.units.Unit

@@ -1,3 +1,5 @@
+@file:JvmName("LinearVelocityUnits")
+
 package dev.nextftc.units.unittypes
 
 import dev.nextftc.units.measuretypes.LinearVelocity

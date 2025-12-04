@@ -153,7 +153,7 @@ class PhysicalRelationshipsTest :
                 val mass = Kilograms.of(1.0)
                 val acceleration = LinearAccelerationUnit(
                     LinearVelocityUnit(Meters, Seconds),
-                    Seconds
+                    Seconds,
                 ).of(1.0)
                 val force = mass * acceleration
 
@@ -165,7 +165,7 @@ class PhysicalRelationshipsTest :
                 val mass = Kilograms.of(10.0)
                 val gravity = LinearAccelerationUnit(
                     LinearVelocityUnit(Meters, Seconds),
-                    Seconds
+                    Seconds,
                 ).of(9.81)
                 val weight = mass * gravity
 
@@ -176,7 +176,7 @@ class PhysicalRelationshipsTest :
                 val mass = Kilograms.of(5.0)
                 val acceleration = LinearAccelerationUnit(
                     LinearVelocityUnit(Meters, Seconds),
-                    Seconds
+                    Seconds,
                 ).of(2.0)
 
                 val force1 = mass * acceleration
@@ -317,7 +317,7 @@ class PhysicalRelationshipsTest :
                 val mass = Pounds.of(10.0) // ~4.536 kg
                 val acceleration = LinearAccelerationUnit(
                     LinearVelocityUnit(Meters, Seconds),
-                    Seconds
+                    Seconds,
                 ).of(9.81) // m/s²
                 val force = mass * acceleration
 

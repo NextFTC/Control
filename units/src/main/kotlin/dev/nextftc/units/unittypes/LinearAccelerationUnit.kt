@@ -1,3 +1,5 @@
+@file:JvmName("LinearAccelerationUnits")
+
 package dev.nextftc.units.unittypes
 
 import dev.nextftc.units.measuretypes.LinearAcceleration

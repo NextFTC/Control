@@ -1,3 +1,5 @@
+@file:JvmName("TorqueUnits")
+
 package dev.nextftc.units.unittypes
 
 import dev.nextftc.units.Measure

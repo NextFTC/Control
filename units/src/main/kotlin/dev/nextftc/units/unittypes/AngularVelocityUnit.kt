@@ -1,3 +1,5 @@
+@file:JvmName("AngularVelocityUnits")
+
 package dev.nextftc.units.unittypes
 
 import dev.nextftc.units.measuretypes.AngularVelocity
