@@ -1,6 +1,5 @@
 package dev.nextftc.units.unittypes
 
-import dev.nextftc.units.Measure
 import dev.nextftc.units.Unit
 import dev.nextftc.units.measuretypes.Per
 
@@ -57,11 +56,11 @@ open class PerUnit<N : Unit<N>, D : Unit<D>>(val numerator: N, val denominator: 
         }
     }
 
-    override fun of(magnitude: Double): Measure<PerUnit<N, D>> {
+    override fun of(magnitude: Double): Per<N, D> {
         return Per(magnitude, this)
     }
 
-    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<PerUnit<N, D>> {
+    override fun ofBaseUnits(baseUnitMagnitude: Double): Per<N, D> {
         return of(this.fromBaseUnits(baseUnitMagnitude))
     }
 

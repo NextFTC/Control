@@ -1,6 +1,6 @@
 package dev.nextftc.units.unittypes
 
-import dev.nextftc.units.Measure
+import dev.nextftc.units.measuretypes.AngularAcceleration
 
 /**
  * Unit representing angular acceleration (angular velocity per time, or angle per time squared).
@@ -16,13 +16,11 @@ import dev.nextftc.units.Measure
 class AngularAccelerationUnit(angularVelocity: AngularVelocityUnit, time: TimeUnit) :
     PerUnit<PerUnit<AngleUnit, TimeUnit>, TimeUnit>(angularVelocity, time) {
 
-    override fun of(magnitude: Double): Measure<PerUnit<PerUnit<AngleUnit, TimeUnit>, TimeUnit>> {
-        return dev.nextftc.units.measuretypes.AngularAcceleration(magnitude, this)
+    override fun of(magnitude: Double): AngularAcceleration {
+        return AngularAcceleration(magnitude, this)
     }
 
-    override fun ofBaseUnits(
-        baseUnitMagnitude: Double
-    ): Measure<PerUnit<PerUnit<AngleUnit, TimeUnit>, TimeUnit>> {
+    override fun ofBaseUnits(baseUnitMagnitude: Double): AngularAcceleration {
         return of(this.fromBaseUnits(baseUnitMagnitude))
     }
 }

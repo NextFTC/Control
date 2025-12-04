@@ -1,6 +1,6 @@
 package dev.nextftc.units.unittypes
 
-import dev.nextftc.units.Measure
+import dev.nextftc.units.measuretypes.AngularVelocity
 
 /**
  * Unit representing angular velocity (angle per time).
@@ -17,11 +17,11 @@ import dev.nextftc.units.Measure
 class AngularVelocityUnit(angle: AngleUnit, time: TimeUnit) :
     PerUnit<AngleUnit, TimeUnit>(angle, time) {
 
-    override fun of(magnitude: Double): Measure<PerUnit<AngleUnit, TimeUnit>> {
-        return dev.nextftc.units.measuretypes.AngularVelocity(magnitude, this)
+    override fun of(magnitude: Double): AngularVelocity {
+        return AngularVelocity(magnitude, this)
     }
 
-    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<PerUnit<AngleUnit, TimeUnit>> {
+    override fun ofBaseUnits(baseUnitMagnitude: Double): AngularVelocity {
         return of(this.fromBaseUnits(baseUnitMagnitude))
     }
 }

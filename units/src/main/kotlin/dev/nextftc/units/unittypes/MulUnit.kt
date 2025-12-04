@@ -1,6 +1,5 @@
 package dev.nextftc.units.unittypes
 
-import dev.nextftc.units.Measure
 import dev.nextftc.units.Unit
 import dev.nextftc.units.measuretypes.Mul
 
@@ -48,11 +47,11 @@ open class MulUnit<N : Unit<N>, D : Unit<D>>(val first: N, val second: D) :
         }
     }
 
-    override fun of(magnitude: Double): Measure<MulUnit<N, D>> {
+    override fun of(magnitude: Double): Mul<N, D> {
         return Mul(magnitude, this)
     }
 
-    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<MulUnit<N, D>> {
+    override fun ofBaseUnits(baseUnitMagnitude: Double): Mul<N, D> {
         return of(this.fromBaseUnits(baseUnitMagnitude))
     }
 
