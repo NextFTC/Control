@@ -1,0 +1,33 @@
+package dev.nextftc.units.unittypes
+
+import dev.nextftc.units.Measure
+
+/**
+ * Unit representing angular acceleration (angular velocity per time, or angle per time squared).
+ *
+ * Common examples:
+ * - Radians per second squared (rad/s²)
+ * - Degrees per second squared (deg/s²)
+ * - Rotations per second squared (rot/s²)
+ *
+ * @param angularVelocity the angular velocity unit (numerator)
+ * @param time the time unit (denominator)
+ */
+class AngularAccelerationUnit(angularVelocity: AngularVelocityUnit, time: TimeUnit) :
+    PerUnit<PerUnit<AngleUnit, TimeUnit>, TimeUnit>(angularVelocity, time) {
+
+    override fun of(magnitude: Double): Measure<PerUnit<PerUnit<AngleUnit, TimeUnit>, TimeUnit>> {
+        return dev.nextftc.units.measuretypes.AngularAcceleration(magnitude, this)
+    }
+
+    override fun ofBaseUnits(
+        baseUnitMagnitude: Double
+    ): Measure<PerUnit<PerUnit<AngleUnit, TimeUnit>, TimeUnit>> {
+        return of(this.fromBaseUnits(baseUnitMagnitude))
+    }
+}
+
+// Common angular acceleration units
+val RadiansPerSecondSquared = AngularAccelerationUnit(RadiansPerSecond, Seconds)
+val DegreesPerSecondSquared = AngularAccelerationUnit(DegreesPerSecond, Seconds)
+val RotationsPerSecondSquared = AngularAccelerationUnit(RotationsPerSecond, Seconds)

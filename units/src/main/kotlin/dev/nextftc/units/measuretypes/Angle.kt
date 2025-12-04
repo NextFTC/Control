@@ -6,13 +6,11 @@ import dev.nextftc.units.unittypes.AngleUnit
 /**
  * Immutable measurement of angle.
  *
- * This class represents an angle value with a specific unit (e.g., radians, degrees).
- * It supports arithmetic operations and conversions between different angle units.
+ * This class represents an angle value with a specific unit (e.g., radians, degrees). It supports
+ * arithmetic operations and conversions between different angle units.
  */
-class Angle internal constructor(
-    override val magnitude: Double,
-    override val unit: AngleUnit
-) : Measure<AngleUnit> {
+class Angle internal constructor(override val magnitude: Double, override val unit: AngleUnit) :
+    Measure<AngleUnit> {
     override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
     /**
@@ -67,5 +65,15 @@ class Angle internal constructor(
     override fun div(divisor: Double): Measure<AngleUnit> {
         return Angle(magnitude / divisor, unit)
     }
-}
 
+    /**
+     * Divides this angle by a time to get angular velocity (angle per time).
+     *
+     * @param time the time to divide by
+     * @return the angular velocity (angle/time)
+     */
+    operator fun div(time: Time): AngularVelocity {
+        val velocityUnit = dev.nextftc.units.unittypes.AngularVelocityUnit(unit, time.unit)
+        return AngularVelocity(magnitude / time.magnitude, velocityUnit)
+    }
+}

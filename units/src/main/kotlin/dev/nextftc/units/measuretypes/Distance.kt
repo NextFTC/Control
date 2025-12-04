@@ -6,13 +6,12 @@ import dev.nextftc.units.unittypes.DistanceUnit
 /**
  * Immutable measurement of distance/length.
  *
- * This class represents a distance value with a specific unit (e.g., meters, feet).
- * It supports arithmetic operations and conversions between different distance units.
+ * This class represents a distance value with a specific unit (e.g., meters, feet). It supports
+ * arithmetic operations and conversions between different distance units.
  */
-class Distance internal constructor(
-    override val magnitude: Double,
-    override val unit: DistanceUnit
-) : Measure<DistanceUnit> {
+class Distance
+internal constructor(override val magnitude: Double, override val unit: DistanceUnit) :
+    Measure<DistanceUnit> {
     override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
     /**
@@ -67,5 +66,15 @@ class Distance internal constructor(
     override fun div(divisor: Double): Measure<DistanceUnit> {
         return Distance(magnitude / divisor, unit)
     }
-}
 
+    /**
+     * Divides this distance by a time to get velocity (distance per time).
+     *
+     * @param time the time to divide by
+     * @return the velocity (distance/time)
+     */
+    operator fun div(time: Time): LinearVelocity {
+        val velocityUnit = dev.nextftc.units.unittypes.LinearVelocityUnit(unit, time.unit)
+        return LinearVelocity(magnitude / time.magnitude, velocityUnit)
+    }
+}
