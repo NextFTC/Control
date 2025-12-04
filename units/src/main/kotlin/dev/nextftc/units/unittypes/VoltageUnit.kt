@@ -14,21 +14,19 @@ class VoltageUnit(
     toBaseConverter: (Double) -> Double,
     fromBaseConverter: (Double) -> Double,
     unitName: String,
-    unitSymbol: String
-) : Unit<VoltageUnit>(
-    baseUnit, toBaseConverter, fromBaseConverter, unitName, unitSymbol
-) {
+    unitSymbol: String,
+) : Unit<VoltageUnit>(baseUnit, toBaseConverter, fromBaseConverter, unitName, unitSymbol) {
     internal constructor(
         baseUnit: VoltageUnit,
         baseUnitEquivalent: Double,
         name: String,
-        symbol: String
+        symbol: String,
     ) : this(
         baseUnit,
         { x -> x * baseUnitEquivalent },
         { x -> x / baseUnitEquivalent },
         name,
-        symbol
+        symbol,
     )
 
     /**
@@ -74,4 +72,3 @@ val Volts = VoltageUnit(null, { it }, { it }, "volt", "V")
 val Millivolts = VoltageUnit(Volts, MILLIVOLTS_PER_VOLT, "millivolt", "mV")
 val Microvolts = VoltageUnit(Volts, MICROVOLTS_PER_VOLT, "microvolt", "µV")
 val Kilovolts = VoltageUnit(Volts, KILOVOLTS_PER_VOLT, "kilovolt", "kV")
-

@@ -6,13 +6,11 @@ import dev.nextftc.units.unittypes.VoltageUnit
 /**
  * Immutable measurement of electrical potential difference (voltage).
  *
- * This class represents a voltage value with a specific unit (e.g., volts, millivolts).
- * It supports arithmetic operations and conversions between different voltage units.
+ * This class represents a voltage value with a specific unit (e.g., volts, millivolts). It supports
+ * arithmetic operations and conversions between different voltage units.
  */
-class Voltage internal constructor(
-    override val magnitude: Double,
-    override val unit: VoltageUnit
-) : Measure<VoltageUnit> {
+class Voltage internal constructor(override val magnitude: Double, override val unit: VoltageUnit) :
+    Measure<VoltageUnit> {
     override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
     /**
@@ -68,4 +66,3 @@ class Voltage internal constructor(
         return Voltage(magnitude / divisor, unit)
     }
 }
-

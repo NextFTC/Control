@@ -4,18 +4,18 @@ import dev.nextftc.units.Measure
 import dev.nextftc.units.Unit
 import dev.nextftc.units.unittypes.PerUnit
 
-open class Per<N : Unit<N>, D: Unit<D>>(
+open class Per<N : Unit<N>, D : Unit<D>>(
     override val magnitude: Double,
-    override val unit: PerUnit<N, D>
+    override val unit: PerUnit<N, D>,
 ) : Measure<PerUnit<N, D>> {
 
     override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
     /**
-     * Returns a measure equivalent to this one equal to zero minus its current value. For non-linear
-     * unit types like temperature, the zero point is treated as the zero value of the base unit (eg
-     * Kelvin). In effect, this means code like `Celsius.of(10).unaryMinus()` returns a value
-     * equivalent to -10 Kelvin, and *not* -10° Celsius.
+     * Returns a measure equivalent to this one equal to zero minus its current value. For
+     * non-linear unit types like temperature, the zero point is treated as the zero value of the
+     * base unit (eg Kelvin). In effect, this means code like `Celsius.of(10).unaryMinus()` returns
+     * a value equivalent to -10 Kelvin, and *not* -10° Celsius.
      *
      * @return a measure equal to zero minus this measure
      */

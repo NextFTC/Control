@@ -8,39 +8,37 @@ import dev.nextftc.units.measuretypes.Mul
  * Represents a unit that is the product of two other units (e.g., Newton-meters for torque,
  * kilowatt-hours for energy).
  *
- * The MulUnit automatically normalizes to use base units for internal calculations. For example,
- * if you create a MulUnit with Kilometers and Hours, it internally works with Meters and Seconds
- * (the base units), ensuring that conversions work correctly.
+ * The MulUnit automatically normalizes to use base units for internal calculations. For example, if
+ * you create a MulUnit with Kilometers and Hours, it internally works with Meters and Seconds (the
+ * base units), ensuring that conversions work correctly.
  *
  * @param N the type of the first unit
  * @param D the type of the second unit
  * @param first the first unit (e.g., Newtons, Meters)
  * @param second the second unit (e.g., Meters, Seconds)
  */
-open class MulUnit<N: Unit<N>, D: Unit<D>>(
-    val first: N,
-    val second: D
-) : Unit<MulUnit<N, D>>(
-    null,
-    { value ->
-        // Convert to base units: (first * second) -> (baseFirst * baseSecond)
-        // Example: newton-meters -> (kg⋅m/s²)⋅m = kg⋅m²/s²
-        val firstInBase = first.toBaseUnits(value)
-        val secondRatio = second.toBaseUnits(1.0)
-        firstInBase * secondRatio
-    },
-    { baseValue ->
-        // Convert from base units: (baseFirst * baseSecond) -> (first * second)
-        val firstFromBase = first.fromBaseUnits(baseValue)
-        val secondRatio = second.toBaseUnits(1.0)
-        firstFromBase / secondRatio
-    },
-    "${first}⋅${second}",
-    "${first}⋅${second}"
-) {
+open class MulUnit<N : Unit<N>, D : Unit<D>>(val first: N, val second: D) :
+    Unit<MulUnit<N, D>>(
+        null,
+        { value ->
+            // Convert to base units: (first * second) -> (baseFirst * baseSecond)
+            // Example: newton-meters -> (kg⋅m/s²)⋅m = kg⋅m²/s²
+            val firstInBase = first.toBaseUnits(value)
+            val secondRatio = second.toBaseUnits(1.0)
+            firstInBase * secondRatio
+        },
+        { baseValue ->
+            // Convert from base units: (baseFirst * baseSecond) -> (first * second)
+            val firstFromBase = first.fromBaseUnits(baseValue)
+            val secondRatio = second.toBaseUnits(1.0)
+            firstFromBase / secondRatio
+        },
+        "${first}⋅${second}",
+        "${first}⋅${second}",
+    ) {
     /**
-     * The base MulUnit using the base units of both first and second.
-     * For example, Kilometers⋅Hours would have a baseMulUnit of Meters⋅Seconds.
+     * The base MulUnit using the base units of both first and second. For example, Kilometers⋅Hours
+     * would have a baseMulUnit of Meters⋅Seconds.
      */
     val baseMulUnit: MulUnit<N, D> by lazy {
         if (first == first.baseUnit && second == second.baseUnit) {
@@ -70,4 +68,3 @@ open class MulUnit<N: Unit<N>, D: Unit<D>>(
         return PerUnit(this, time)
     }
 }
-

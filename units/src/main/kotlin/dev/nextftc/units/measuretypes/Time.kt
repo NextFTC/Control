@@ -7,19 +7,18 @@ import kotlin.time.Duration
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
-class Time internal constructor(
-    private val duration: Duration,
-    override val unit: TimeUnit
-) : Measure<TimeUnit> {
+class Time internal constructor(private val duration: Duration, override val unit: TimeUnit) :
+    Measure<TimeUnit> {
     override val magnitude = duration.toDouble(unit.durationUnit ?: DurationUnit.MILLISECONDS)
 
-    override val baseUnitMagnitude: Double = duration.toDouble(unit.baseUnit.durationUnit ?: DurationUnit.MILLISECONDS)
+    override val baseUnitMagnitude: Double =
+        duration.toDouble(unit.baseUnit.durationUnit ?: DurationUnit.MILLISECONDS)
 
     /**
-     * Returns a measure equivalent to this one equal to zero minus its current value. For non-linear
-     * unit types like temperature, the zero point is treated as the zero value of the base unit (eg
-     * Kelvin). In effect, this means code like `Celsius.of(10).unaryMinus()` returns a value
-     * equivalent to -10 Kelvin, and *not* -10° Celsius.
+     * Returns a measure equivalent to this one equal to zero minus its current value. For
+     * non-linear unit types like temperature, the zero point is treated as the zero value of the
+     * base unit (eg Kelvin). In effect, this means code like `Celsius.of(10).unaryMinus()` returns
+     * a value equivalent to -10 Kelvin, and *not* -10° Celsius.
      *
      * @return a measure equal to zero minus this measure
      */
@@ -71,5 +70,45 @@ class Time internal constructor(
      */
     override fun div(divisor: Double): Measure<TimeUnit> {
         return Time(this.duration / divisor, unit)
+    }
+
+    /**
+     * Multiplies this time by a linear velocity to get distance.
+     *
+     * @param velocity the linear velocity to multiply by
+     * @return the distance traveled
+     */
+    operator fun times(velocity: LinearVelocity): Distance {
+        return velocity * this
+    }
+
+    /**
+     * Multiplies this time by an angular velocity to get angle.
+     *
+     * @param velocity the angular velocity to multiply by
+     * @return the angle traveled
+     */
+    operator fun times(velocity: AngularVelocity): Angle {
+        return velocity * this
+    }
+
+    /**
+     * Multiplies this time by a linear acceleration to get velocity.
+     *
+     * @param acceleration the linear acceleration to multiply by
+     * @return the velocity achieved
+     */
+    operator fun times(acceleration: LinearAcceleration): LinearVelocity {
+        return acceleration * this
+    }
+
+    /**
+     * Multiplies this time by an angular acceleration to get angular velocity.
+     *
+     * @param acceleration the angular acceleration to multiply by
+     * @return the angular velocity achieved
+     */
+    operator fun times(acceleration: AngularAcceleration): AngularVelocity {
+        return acceleration * this
     }
 }

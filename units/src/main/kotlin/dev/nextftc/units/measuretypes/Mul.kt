@@ -7,12 +7,12 @@ import dev.nextftc.units.unittypes.MulUnit
 /**
  * Immutable measurement representing the product of two units.
  *
- * This class represents values like torque (Newton-meters), energy (kilowatt-hours),
- * or any other quantity that is the product of two units.
+ * This class represents values like torque (Newton-meters), energy (kilowatt-hours), or any other
+ * quantity that is the product of two units.
  */
-open class Mul<N : Unit<N>, D: Unit<D>>(
+open class Mul<N : Unit<N>, D : Unit<D>>(
     override val magnitude: Double,
-    override val unit: MulUnit<N, D>
+    override val unit: MulUnit<N, D>,
 ) : Measure<MulUnit<N, D>> {
 
     override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
@@ -67,4 +67,3 @@ open class Mul<N : Unit<N>, D: Unit<D>>(
         return Mul(magnitude / divisor, unit)
     }
 }
-

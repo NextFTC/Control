@@ -7,29 +7,27 @@ import dev.nextftc.units.measuretypes.Distance
 /**
  * Unit of measurement for distance/length.
  *
- * Supported units include meters (base unit), millimeters, centimeters, kilometers,
- * inches, feet, yards, and miles.
+ * Supported units include meters (base unit), millimeters, centimeters, kilometers, inches, feet,
+ * yards, and miles.
  */
 class DistanceUnit(
     baseUnit: DistanceUnit?,
     toBaseConverter: (Double) -> Double,
     fromBaseConverter: (Double) -> Double,
     unitName: String,
-    unitSymbol: String
-) : Unit<DistanceUnit>(
-    baseUnit, toBaseConverter, fromBaseConverter, unitName, unitSymbol
-) {
+    unitSymbol: String,
+) : Unit<DistanceUnit>(baseUnit, toBaseConverter, fromBaseConverter, unitName, unitSymbol) {
     internal constructor(
         baseUnit: DistanceUnit,
         baseUnitEquivalent: Double,
         name: String,
-        symbol: String
+        symbol: String,
     ) : this(
         baseUnit,
         { x -> x * baseUnitEquivalent },
         { x -> x / baseUnitEquivalent },
         name,
-        symbol
+        symbol,
     )
 
     /**
@@ -83,4 +81,3 @@ val Inches = DistanceUnit(Centimeters, INCHES_PER_CM, "inch", "in")
 val Feet = DistanceUnit(Inches, FEET_PER_INCH, "foot", "ft")
 val Yards = DistanceUnit(Feet, YARDS_PER_FOOT, "yard", "yd")
 val Miles = DistanceUnit(Feet, MILES_PER_FOOT, "mile", "mi")
-
