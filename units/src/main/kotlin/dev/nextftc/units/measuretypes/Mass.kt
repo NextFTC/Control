@@ -6,18 +6,17 @@ import dev.nextftc.units.unittypes.MassUnit
 /**
  * Immutable measurement of mass.
  *
- * This class represents mass values like kilograms, pounds, etc.
- * It supports arithmetic operations and conversions between different mass units.
+ * This class represents mass values like kilograms, pounds, etc. It supports arithmetic operations
+ * and conversions between different mass units.
  */
-class Mass internal constructor(
+class Mass
+internal constructor(
     override val magnitude: Double,
-    override val unit: MassUnit
+    override val unit: MassUnit,
 ) : Measure<MassUnit> {
     override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
-    override fun unaryMinus(): Mass {
-        return Mass(-magnitude, unit)
-    }
+    override fun unaryMinus(): Mass = Mass(-magnitude, unit)
 
     override fun plus(other: Measure<out MassUnit>): Mass {
         val otherInBaseUnits = other.baseUnitMagnitude
@@ -31,12 +30,7 @@ class Mass internal constructor(
         return Mass(unit.fromBaseUnits(diffInBaseUnits), unit)
     }
 
-    override fun times(multiplier: Double): Mass {
-        return Mass(magnitude * multiplier, unit)
-    }
+    override fun times(multiplier: Double): Mass = Mass(magnitude * multiplier, unit)
 
-    override fun div(divisor: Double): Mass {
-        return Mass(magnitude / divisor, unit)
-    }
+    override fun div(divisor: Double): Mass = Mass(magnitude / divisor, unit)
 }
-

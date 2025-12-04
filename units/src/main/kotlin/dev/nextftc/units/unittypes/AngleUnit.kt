@@ -35,9 +35,7 @@ class AngleUnit(
      * @param magnitude the magnitude of the measurement.
      * @return the measurement object
      */
-    override fun of(magnitude: Double): Angle {
-        return Angle(magnitude, this)
-    }
+    override fun of(magnitude: Double): Angle = Angle(magnitude, this)
 
     /**
      * Creates a new immutable measurement of the given magnitude in terms of this unit's base unit.
@@ -45,9 +43,7 @@ class AngleUnit(
      * @param baseUnitMagnitude the magnitude in terms of the base unit
      * @return the measurement object
      */
-    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<AngleUnit> {
-        return of(this.fromBaseUnits(baseUnitMagnitude))
-    }
+    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<AngleUnit> = of(this.fromBaseUnits(baseUnitMagnitude))
 
     /**
      * Combines this unit with a unit of time to create an angular velocity unit.

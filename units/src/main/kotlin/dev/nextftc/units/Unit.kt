@@ -46,8 +46,8 @@ protected constructor(
     private val unitSymbol: String,
 ) {
     /**
-     * The base unit for this unit's measurement system. This is found by traversing the parent
-     * chain until reaching a unit with no parent. For example:
+     * The base unit for this unit's measurement system. This is found by traversing the parent chain
+     * until reaching a unit with no parent. For example:
      * - Seconds.baseUnit returns Seconds (it has no parent)
      * - Milliseconds.baseUnit returns Seconds (direct parent is base)
      * - Hours.baseUnit returns Seconds (traverses: Hours -> Minutes -> Seconds)
@@ -103,9 +103,9 @@ protected constructor(
      * Creates a new unit with the given name and multiplier to the base unit.
      *
      * @param parent the base unit, e.g. Meters for distances
-     * @param parentEquivalent the multiplier to convert this unit to the base unit of this type.
-     *   For example, meters has a multiplier of 1, mm has a multiplier of 1e-3, and km has
-     *   multiplier of 1e3.
+     * @param parentEquivalent the multiplier to convert this unit to the base unit of this type. For
+     *   example, meters has a multiplier of 1, mm has a multiplier of 1e-3, and km has multiplier of
+     *   1e3.
      * @param name the name of the unit. This should be a singular noun (so "Meter", not "Meters")
      * @param symbol the short symbol for the unit, such as "m" for meters or "lb." for pounds
      */
@@ -137,18 +137,18 @@ protected constructor(
     abstract fun ofBaseUnits(baseUnitMagnitude: Double): Measure<U>
 
     /**
-     * Gets a measure of zero magnitude in terms of this unit. The returned object is guaranteed to
-     * be of the same type returned by [of]. Subclasses are encouraged to override this method to
-     * sharpen the return type.
+     * Gets a measure of zero magnitude in terms of this unit. The returned object is guaranteed to be
+     * of the same type returned by [of]. Subclasses are encouraged to override this method to sharpen
+     * the return type.
      *
      * @return a zero-magnitude measure of this unit
      */
     open fun zero(): Measure<U> = zeroMeasure
 
     /**
-     * Gets a measure with a magnitude of 1.0 in terms of this unit. The returned object is
-     * guaranteed to be of the same type returned by [of]. Subclasses are encouraged to override
-     * this method to sharpen the return type.
+     * Gets a measure with a magnitude of 1.0 in terms of this unit. The returned object is guaranteed
+     * to be of the same type returned by [of]. Subclasses are encouraged to override this method to
+     * sharpen the return type.
      *
      * @return a measure of magnitude 1.0 in terms of this unit
      */
@@ -188,8 +188,8 @@ protected constructor(
 
     /**
      * Checks if this unit is equivalent to another one. Equivalence is determined by both units
-     * having the same base type and treat the same base unit magnitude as the same magnitude in
-     * their own units, to within [Measure.EQUIVALENCE_THRESHOLD].
+     * having the same base type and treat the same base unit magnitude as the same magnitude in their
+     * own units, to within [Measure.EQUIVALENCE_THRESHOLD].
      *
      * @param other the unit to compare to.
      * @return true if both units are equivalent, false if not
@@ -205,16 +205,14 @@ protected constructor(
         return abs(this.fromBaseConverter(arbitrary) - other.fromBaseConverter(arbitrary)) <=
             Measure.EQUIVALENCE_THRESHOLD &&
             abs(this.toBaseConverter(arbitrary) - other.toBaseConverter(arbitrary)) <=
-                Measure.EQUIVALENCE_THRESHOLD
+            Measure.EQUIVALENCE_THRESHOLD
     }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is Unit<*>) return false
 
-        return unitName == other.unitName &&
-            unitSymbol == other.unitSymbol &&
-            this.equivalent(other)
+        return unitName == other.unitName && unitSymbol == other.unitSymbol && this.equivalent(other)
     }
 
     override fun hashCode(): Int {

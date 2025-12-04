@@ -14,30 +14,30 @@ class CurrentUnit(
     toBaseConverter: (Double) -> Double,
     fromBaseConverter: (Double) -> Double,
     unitName: String,
-    unitSymbol: String
+    unitSymbol: String,
 ) : Unit<CurrentUnit>(
-    baseUnit, toBaseConverter, fromBaseConverter, unitName, unitSymbol
+    baseUnit,
+    toBaseConverter,
+    fromBaseConverter,
+    unitName,
+    unitSymbol,
 ) {
     internal constructor(
         baseUnit: CurrentUnit,
         baseUnitEquivalent: Double,
         name: String,
-        symbol: String
+        symbol: String,
     ) : this(
         baseUnit,
         { x -> x * baseUnitEquivalent },
         { x -> x / baseUnitEquivalent },
         name,
-        symbol
+        symbol,
     )
 
-    override fun of(magnitude: Double): Current {
-        return Current(magnitude, this)
-    }
+    override fun of(magnitude: Double): Current = Current(magnitude, this)
 
-    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<CurrentUnit> {
-        return of(this.fromBaseUnits(baseUnitMagnitude))
-    }
+    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<CurrentUnit> = of(this.fromBaseUnits(baseUnitMagnitude))
 
     override fun per(time: TimeUnit): Unit<*> {
         TODO("Current rate units not yet implemented")
@@ -54,4 +54,3 @@ val Amperes = CurrentUnit(null, { it }, { it }, "ampere", "A")
 val Milliamperes = CurrentUnit(Amperes, MILLIAMPERES_PER_AMPERE, "milliampere", "mA")
 val Microamperes = CurrentUnit(Amperes, MICROAMPERES_PER_AMPERE, "microampere", "µA")
 val Kiloamperes = CurrentUnit(Amperes, KILOAMPERES_PER_AMPERE, "kiloampere", "kA")
-

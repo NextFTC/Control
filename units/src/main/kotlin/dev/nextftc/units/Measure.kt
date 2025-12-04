@@ -14,7 +14,6 @@ import kotlin.math.withSign
  * @param U the unit type of the measure
  */
 interface Measure<U : Unit<U>> : Comparable<Measure<U>> {
-
     companion object {
         /**
          * The threshold for two measures to be considered equivalent if converted to the same unit.
@@ -76,8 +75,8 @@ interface Measure<U : Unit<U>> : Comparable<Measure<U>> {
     val magnitude: Double
 
     /**
-     * Gets the magnitude of this measure in terms of the base unit. If the unit is the base unit
-     * for its system of measure, then the value will be equivalent to [magnitude].
+     * Gets the magnitude of this measure in terms of the base unit. If the unit is the base unit for
+     * its system of measure, then the value will be equivalent to [magnitude].
      *
      * @return the magnitude in terms of the base unit
      */
@@ -102,12 +101,10 @@ interface Measure<U : Unit<U>> : Comparable<Measure<U>> {
      * @param unit the unit to convert this measure to
      * @return the value of this measure in the given unit
      */
-    fun into(unit: U): Double {
-        return if (this.unit == unit) {
-            magnitude
-        } else {
-            unit.fromBaseUnits(baseUnitMagnitude)
-        }
+    fun into(unit: U): Double = if (this.unit == unit) {
+        magnitude
+    } else {
+        unit.fromBaseUnits(baseUnitMagnitude)
     }
 
     /**
@@ -124,9 +121,7 @@ interface Measure<U : Unit<U>> : Comparable<Measure<U>> {
      * @param unit unit to use
      * @return the absolute value of this measure in the given unit
      */
-    fun abs(unit: U): Double {
-        return abs(this.into(unit))
-    }
+    fun abs(unit: U): Double = abs(this.into(unit))
 
     /**
      * Take the sign of another measure.
@@ -135,25 +130,26 @@ interface Measure<U : Unit<U>> : Comparable<Measure<U>> {
      * @param unit unit to use
      * @return the value of the measure in the given unit with the sign of the provided measure
      */
-    fun copySign(other: Measure<U>, unit: U): Double {
-        return this.into(unit).withSign(other.into(unit))
-    }
+    fun copySign(
+        other: Measure<U>,
+        unit: U,
+    ): Double = this.into(unit).withSign(other.into(unit))
 
     /**
-     * Returns a measure equivalent to this one equal to zero minus its current value. For
-     * non-linear unit types like temperature, the zero point is treated as the zero value of the
-     * base unit (eg Kelvin). In effect, this means code like `Celsius.of(10).unaryMinus()` returns
-     * a value equivalent to -10 Kelvin, and *not* -10° Celsius.
+     * Returns a measure equivalent to this one equal to zero minus its current value. For non-linear
+     * unit types like temperature, the zero point is treated as the zero value of the base unit (eg
+     * Kelvin). In effect, this means code like `Celsius.of(10).unaryMinus()` returns a value
+     * equivalent to -10 Kelvin, and *not* -10° Celsius.
      *
      * @return a measure equal to zero minus this measure
      */
     operator fun unaryMinus(): Measure<U>
 
     /**
-     * Returns a measure equivalent to this one equal to zero minus its current value. For
-     * non-linear unit types like temperature, the zero point is treated as the zero value of the
-     * base unit (eg Kelvin). In effect, this means code like `Celsius.of(10).negate()` returns a
-     * value equivalent to -10 Kelvin, and *not* -10° Celsius.
+     * Returns a measure equivalent to this one equal to zero minus its current value. For non-linear
+     * unit types like temperature, the zero point is treated as the zero value of the base unit (eg
+     * Kelvin). In effect, this means code like `Celsius.of(10).negate()` returns a value equivalent
+     * to -10 Kelvin, and *not* -10° Celsius.
      *
      * @return a measure equal to zero minus this measure
      * @deprecated use unaryMinus() instead. This was renamed for consistency with other WPILib
@@ -200,9 +196,7 @@ interface Measure<U : Unit<U>> : Comparable<Measure<U>> {
      * @param other the other measure to divide by
      * @return the ratio of the two measures
      */
-    fun div(other: Measure<out U>): Double {
-        return baseUnitMagnitude / other.baseUnitMagnitude
-    }
+    fun div(other: Measure<out U>): Double = baseUnitMagnitude / other.baseUnitMagnitude
 
     /**
      * Multiplies this measure by another measure of a different type to create a compound unit. For
@@ -216,14 +210,17 @@ interface Measure<U : Unit<U>> : Comparable<Measure<U>> {
      * @return a Mul measurement representing the product of the two measures
      */
     operator fun <V : Unit<V>> times(other: Measure<V>): dev.nextftc.units.measuretypes.Mul<U, V> {
-        val mulUnit = dev.nextftc.units.unittypes.MulUnit(this.unit, other.unit)
-        return dev.nextftc.units.measuretypes.Mul(this.magnitude * other.magnitude, mulUnit)
+        val mulUnit =
+            dev.nextftc.units.unittypes
+                .MulUnit(this.unit, other.unit)
+        return dev.nextftc.units.measuretypes
+            .Mul(this.magnitude * other.magnitude, mulUnit)
     }
 
     /**
      * Divides this measure by another measure of a different type to create a ratio unit. For
-     * example, Distance / Time creates a velocity measurement, or Voltage / Distance creates
-     * electric field strength.
+     * example, Distance / Time creates a velocity measurement, or Voltage / Distance creates electric
+     * field strength.
      *
      * Subclasses can override this to return more specific types (e.g., Distance / Time →
      * LinearVelocity).
@@ -233,8 +230,11 @@ interface Measure<U : Unit<U>> : Comparable<Measure<U>> {
      * @return a Per measurement representing the ratio of the two measures
      */
     operator fun <V : Unit<V>> div(other: Measure<V>): dev.nextftc.units.measuretypes.Per<U, V> {
-        val perUnit = dev.nextftc.units.unittypes.PerUnit(this.unit, other.unit)
-        return dev.nextftc.units.measuretypes.Per(this.magnitude / other.magnitude, perUnit)
+        val perUnit =
+            dev.nextftc.units.unittypes
+                .PerUnit(this.unit, other.unit)
+        return dev.nextftc.units.measuretypes
+            .Per(this.magnitude / other.magnitude, perUnit)
     }
 
     /**
@@ -247,12 +247,15 @@ interface Measure<U : Unit<U>> : Comparable<Measure<U>> {
      * ```
      *
      * @param other the other measurement to compare against
-     * @param varianceThreshold the acceptable variance threshold, in terms of an acceptable +/-
-     *   error range multiplier. Checking if a value is within 10% means a value of 0.1 should be
-     *   passed; checking if a value is within 1% means a value of 0.01 should be passed, and so on.
+     * @param varianceThreshold the acceptable variance threshold, in terms of an acceptable +/- error
+     *   range multiplier. Checking if a value is within 10% means a value of 0.1 should be passed;
+     *   checking if a value is within 1% means a value of 0.01 should be passed, and so on.
      * @return true if this unit is near the other measure, otherwise false
      */
-    fun isNear(other: Measure<*>, varianceThreshold: Double): Boolean {
+    fun isNear(
+        other: Measure<*>,
+        varianceThreshold: Double,
+    ): Boolean {
         if (!this.unit.baseUnit.equivalent(other.unit.baseUnit)) {
             return false // Disjoint units, not compatible
         }
@@ -264,8 +267,8 @@ interface Measure<U : Unit<U>> : Comparable<Measure<U>> {
     }
 
     /**
-     * Checks if this measure is near another measure of the same unit, with a specified tolerance
-     * of the same unit.
+     * Checks if this measure is near another measure of the same unit, with a specified tolerance of
+     * the same unit.
      *
      * ```
      * Meters.of(1).isNear(Meters.of(1.2), Millimeters.of(300)) // true
@@ -277,10 +280,10 @@ interface Measure<U : Unit<U>> : Comparable<Measure<U>> {
      *   other.
      * @return true if this unit is near the other measure, otherwise false.
      */
-    fun isNear(other: Measure<U>, tolerance: Measure<U>): Boolean {
-        return (abs(this.baseUnitMagnitude - other.baseUnitMagnitude) <=
-            abs(tolerance.baseUnitMagnitude))
-    }
+    fun isNear(
+        other: Measure<U>,
+        tolerance: Measure<U>,
+    ): Boolean = (abs(this.baseUnitMagnitude - other.baseUnitMagnitude) <= abs(tolerance.baseUnitMagnitude))
 
     /**
      * Checks if this measure is equivalent to another measure of the same unit.
@@ -294,14 +297,12 @@ interface Measure<U : Unit<U>> : Comparable<Measure<U>> {
             abs(baseUnitMagnitude - other.baseUnitMagnitude) <= EQUIVALENCE_THRESHOLD
     }
 
-    override fun compareTo(other: Measure<U>): Int {
-        return this.baseUnitMagnitude.compareTo(other.baseUnitMagnitude)
-    }
+    override fun compareTo(other: Measure<U>): Int = this.baseUnitMagnitude.compareTo(other.baseUnitMagnitude)
 
     /**
      * Returns a string representation of this measurement in a shorthand form. The symbol of the
-     * backing unit is used, rather than the full name, and the magnitude is represented in
-     * scientific notation.
+     * backing unit is used, rather than the full name, and the magnitude is represented in scientific
+     * notation.
      *
      * @return the short form representation of this measurement
      */
@@ -311,10 +312,9 @@ interface Measure<U : Unit<U>> : Comparable<Measure<U>> {
     }
 
     /**
-     * Returns a string representation of this measurement in a longhand form. The name of the
-     * backing unit is used, rather than its symbol, and the magnitude is represented in a full
-     * string, not scientific notation. (Very large values may be represented in scientific
-     * notation, however)
+     * Returns a string representation of this measurement in a longhand form. The name of the backing
+     * unit is used, rather than its symbol, and the magnitude is represented in a full string, not
+     * scientific notation. (Very large values may be represented in scientific notation, however)
      *
      * @return the long form representation of this measurement
      */

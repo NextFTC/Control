@@ -36,9 +36,7 @@ class DistanceUnit(
      * @param magnitude the magnitude of the measurement.
      * @return the measurement object
      */
-    override fun of(magnitude: Double): Distance {
-        return Distance(magnitude, this)
-    }
+    override fun of(magnitude: Double): Distance = Distance(magnitude, this)
 
     /**
      * Creates a new immutable measurement of the given magnitude in terms of this unit's base unit.
@@ -46,9 +44,7 @@ class DistanceUnit(
      * @param baseUnitMagnitude the magnitude in terms of the base unit
      * @return the measurement object
      */
-    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<DistanceUnit> {
-        return of(this.fromBaseUnits(baseUnitMagnitude))
-    }
+    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<DistanceUnit> = of(this.fromBaseUnits(baseUnitMagnitude))
 
     /**
      * Combines this unit with a unit of time to create a velocity unit.

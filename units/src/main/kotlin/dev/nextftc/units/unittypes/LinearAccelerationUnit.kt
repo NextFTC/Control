@@ -13,16 +13,13 @@ import dev.nextftc.units.measuretypes.LinearAcceleration
  * @param velocity the velocity unit (numerator)
  * @param time the time unit (denominator)
  */
-class LinearAccelerationUnit(velocity: LinearVelocityUnit, time: TimeUnit) :
-    PerUnit<PerUnit<DistanceUnit, TimeUnit>, TimeUnit>(velocity, time) {
+class LinearAccelerationUnit(
+    velocity: LinearVelocityUnit,
+    time: TimeUnit,
+) : PerUnit<PerUnit<DistanceUnit, TimeUnit>, TimeUnit>(velocity, time) {
+    override fun of(magnitude: Double): LinearAcceleration = LinearAcceleration(magnitude, this)
 
-    override fun of(magnitude: Double): LinearAcceleration {
-        return LinearAcceleration(magnitude, this)
-    }
-
-    override fun ofBaseUnits(baseUnitMagnitude: Double): LinearAcceleration {
-        return of(this.fromBaseUnits(baseUnitMagnitude))
-    }
+    override fun ofBaseUnits(baseUnitMagnitude: Double): LinearAcceleration = of(this.fromBaseUnits(baseUnitMagnitude))
 }
 
 // Common linear acceleration units

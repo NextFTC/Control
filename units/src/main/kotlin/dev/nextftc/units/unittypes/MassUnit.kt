@@ -7,38 +7,38 @@ import dev.nextftc.units.measuretypes.Mass
 /**
  * Unit of measurement for mass.
  *
- * Supported units include kilograms (base unit), grams, milligrams, metric tons,
- * pounds, and ounces.
+ * Supported units include kilograms (base unit), grams, milligrams, metric tons, pounds, and
+ * ounces.
  */
 class MassUnit(
     baseUnit: MassUnit?,
     toBaseConverter: (Double) -> Double,
     fromBaseConverter: (Double) -> Double,
     unitName: String,
-    unitSymbol: String
+    unitSymbol: String,
 ) : Unit<MassUnit>(
-    baseUnit, toBaseConverter, fromBaseConverter, unitName, unitSymbol
+    baseUnit,
+    toBaseConverter,
+    fromBaseConverter,
+    unitName,
+    unitSymbol,
 ) {
     internal constructor(
         baseUnit: MassUnit,
         baseUnitEquivalent: Double,
         name: String,
-        symbol: String
+        symbol: String,
     ) : this(
         baseUnit,
         { x -> x * baseUnitEquivalent },
         { x -> x / baseUnitEquivalent },
         name,
-        symbol
+        symbol,
     )
 
-    override fun of(magnitude: Double): Mass {
-        return Mass(magnitude, this)
-    }
+    override fun of(magnitude: Double): Mass = Mass(magnitude, this)
 
-    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<MassUnit> {
-        return of(this.fromBaseUnits(baseUnitMagnitude))
-    }
+    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<MassUnit> = of(this.fromBaseUnits(baseUnitMagnitude))
 
     override fun per(time: TimeUnit): Unit<*> {
         TODO("Mass flow rate units not yet implemented")

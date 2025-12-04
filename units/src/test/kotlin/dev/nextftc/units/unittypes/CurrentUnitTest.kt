@@ -7,12 +7,11 @@ import io.kotest.matchers.types.shouldBeSameInstanceAs
 
 private const val EPSILON = 1e-9
 
+@Suppress("ktlint:standard:property-naming")
 class CurrentUnitTest :
     FunSpec({
         context("CurrentUnit constants") {
-            test("Amperes should be the base unit") {
-                Amperes.baseUnit shouldBeSameInstanceAs Amperes
-            }
+            test("Amperes should be the base unit") { Amperes.baseUnit shouldBeSameInstanceAs Amperes }
 
             test("all current units should have Amperes as base unit") {
                 Milliamperes.baseUnit shouldBeSameInstanceAs Amperes
@@ -84,9 +83,7 @@ class CurrentUnitTest :
         }
 
         context("CurrentUnit utility methods") {
-            test("isBaseUnit should return true for Amperes") {
-                Amperes.isBaseUnit() shouldBe true
-            }
+            test("isBaseUnit should return true for Amperes") { Amperes.isBaseUnit() shouldBe true }
 
             test("isBaseUnit should return false for derived units") {
                 Milliamperes.isBaseUnit() shouldBe false
@@ -109,4 +106,3 @@ class CurrentUnitTest :
             }
         }
     })
-

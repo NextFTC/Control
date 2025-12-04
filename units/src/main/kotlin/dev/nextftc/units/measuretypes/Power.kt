@@ -6,18 +6,17 @@ import dev.nextftc.units.unittypes.PowerUnit
 /**
  * Immutable measurement of power.
  *
- * This class represents power values like watts, kilowatts, horsepower, etc.
- * It supports arithmetic operations and conversions between different power units.
+ * This class represents power values like watts, kilowatts, horsepower, etc. It supports arithmetic
+ * operations and conversions between different power units.
  */
-class Power internal constructor(
+class Power
+internal constructor(
     override val magnitude: Double,
-    override val unit: PowerUnit
+    override val unit: PowerUnit,
 ) : Measure<PowerUnit> {
     override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
-    override fun unaryMinus(): Power {
-        return Power(-magnitude, unit)
-    }
+    override fun unaryMinus(): Power = Power(-magnitude, unit)
 
     override fun plus(other: Measure<out PowerUnit>): Power {
         val otherInBaseUnits = other.baseUnitMagnitude
@@ -31,12 +30,7 @@ class Power internal constructor(
         return Power(unit.fromBaseUnits(diffInBaseUnits), unit)
     }
 
-    override fun times(multiplier: Double): Power {
-        return Power(magnitude * multiplier, unit)
-    }
+    override fun times(multiplier: Double): Power = Power(magnitude * multiplier, unit)
 
-    override fun div(divisor: Double): Power {
-        return Power(magnitude / divisor, unit)
-    }
+    override fun div(divisor: Double): Power = Power(magnitude / divisor, unit)
 }
-

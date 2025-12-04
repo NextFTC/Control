@@ -7,12 +7,11 @@ import io.kotest.matchers.types.shouldBeSameInstanceAs
 
 private const val EPSILON = 1e-9
 
+@Suppress("ktlint:standard:property-naming")
 class ForceUnitTest :
     FunSpec({
         context("ForceUnit constants") {
-            test("Newtons should be the base unit") {
-                Newtons.baseUnit shouldBeSameInstanceAs Newtons
-            }
+            test("Newtons should be the base unit") { Newtons.baseUnit shouldBeSameInstanceAs Newtons }
 
             test("all force units should have Newtons as base unit") {
                 Kilonewtons.baseUnit shouldBeSameInstanceAs Newtons
@@ -99,9 +98,7 @@ class ForceUnitTest :
         }
 
         context("ForceUnit utility methods") {
-            test("isBaseUnit should return true for Newtons") {
-                Newtons.isBaseUnit() shouldBe true
-            }
+            test("isBaseUnit should return true for Newtons") { Newtons.isBaseUnit() shouldBe true }
 
             test("isBaseUnit should return false for derived units") {
                 Kilonewtons.isBaseUnit() shouldBe false
@@ -124,4 +121,3 @@ class ForceUnitTest :
             }
         }
     })
-

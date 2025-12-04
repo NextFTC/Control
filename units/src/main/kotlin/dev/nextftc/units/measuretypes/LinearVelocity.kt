@@ -12,29 +12,22 @@ import dev.nextftc.units.unittypes.TimeUnit
  * This class represents velocity values like meters per second, miles per hour, etc. All arithmetic
  * operations return LinearVelocity for type safety.
  */
-class LinearVelocity(magnitude: Double, unit: LinearVelocityUnit) :
-    Per<DistanceUnit, TimeUnit>(magnitude, unit) {
-
-    override fun unaryMinus(): LinearVelocity {
-        return LinearVelocity(-magnitude, unit as LinearVelocityUnit)
-    }
+class LinearVelocity(
+    magnitude: Double,
+    unit: LinearVelocityUnit,
+) : Per<DistanceUnit, TimeUnit>(magnitude, unit) {
+    override fun unaryMinus(): LinearVelocity = LinearVelocity(-magnitude, unit as LinearVelocityUnit)
 
     override fun plus(other: Measure<out PerUnit<DistanceUnit, TimeUnit>>): LinearVelocity {
         val sum = baseUnitMagnitude + other.baseUnitMagnitude
         return LinearVelocity(unit.fromBaseUnits(sum), unit as LinearVelocityUnit)
     }
 
-    override fun minus(other: Measure<out PerUnit<DistanceUnit, TimeUnit>>): LinearVelocity {
-        return this + -other
-    }
+    override fun minus(other: Measure<out PerUnit<DistanceUnit, TimeUnit>>): LinearVelocity = this + -other
 
-    override fun times(multiplier: Double): LinearVelocity {
-        return LinearVelocity(magnitude * multiplier, unit as LinearVelocityUnit)
-    }
+    override fun times(multiplier: Double): LinearVelocity = LinearVelocity(magnitude * multiplier, unit as LinearVelocityUnit)
 
-    override fun div(divisor: Double): LinearVelocity {
-        return LinearVelocity(magnitude / divisor, unit as LinearVelocityUnit)
-    }
+    override fun div(divisor: Double): LinearVelocity = LinearVelocity(magnitude / divisor, unit as LinearVelocityUnit)
 
     /**
      * Multiplies this velocity by a time to get distance.

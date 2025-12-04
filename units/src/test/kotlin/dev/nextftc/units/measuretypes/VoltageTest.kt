@@ -7,6 +7,7 @@ import io.kotest.matchers.shouldBe
 
 private const val EPSILON = 1e-9
 
+@Suppress("ktlint:standard:property-naming")
 class VoltageTest :
     FunSpec({
         context("Voltage creation") {

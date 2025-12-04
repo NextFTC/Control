@@ -9,8 +9,11 @@ import dev.nextftc.units.unittypes.AngleUnit
  * This class represents an angle value with a specific unit (e.g., radians, degrees). It supports
  * arithmetic operations and conversions between different angle units.
  */
-class Angle internal constructor(override val magnitude: Double, override val unit: AngleUnit) :
-    Measure<AngleUnit> {
+class Angle
+internal constructor(
+    override val magnitude: Double,
+    override val unit: AngleUnit,
+) : Measure<AngleUnit> {
     override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
     /**
@@ -18,9 +21,7 @@ class Angle internal constructor(override val magnitude: Double, override val un
      *
      * @return a measure equal to zero minus this measure
      */
-    override fun unaryMinus(): Angle {
-        return Angle(-magnitude, unit)
-    }
+    override fun unaryMinus(): Angle = Angle(-magnitude, unit)
 
     /**
      * Adds another angle measurement to this one.
@@ -52,9 +53,7 @@ class Angle internal constructor(override val magnitude: Double, override val un
      * @param multiplier the scalar multiplication factor
      * @return the scaled result
      */
-    override fun times(multiplier: Double): Angle {
-        return Angle(magnitude * multiplier, unit)
-    }
+    override fun times(multiplier: Double): Angle = Angle(magnitude * multiplier, unit)
 
     /**
      * Divides this angle by a scalar and returns the result.
@@ -62,9 +61,7 @@ class Angle internal constructor(override val magnitude: Double, override val un
      * @param divisor the value to divide by
      * @return the division result
      */
-    override fun div(divisor: Double): Angle {
-        return Angle(magnitude / divisor, unit)
-    }
+    override fun div(divisor: Double): Angle = Angle(magnitude / divisor, unit)
 
     /**
      * Divides this angle by a time to get angular velocity (angle per time).
@@ -73,7 +70,9 @@ class Angle internal constructor(override val magnitude: Double, override val un
      * @return the angular velocity (angle/time)
      */
     operator fun div(time: Time): AngularVelocity {
-        val velocityUnit = dev.nextftc.units.unittypes.AngularVelocityUnit(unit, time.unit)
+        val velocityUnit =
+            dev.nextftc.units.unittypes
+                .AngularVelocityUnit(unit, time.unit)
         return AngularVelocity(magnitude / time.magnitude, velocityUnit)
     }
 }

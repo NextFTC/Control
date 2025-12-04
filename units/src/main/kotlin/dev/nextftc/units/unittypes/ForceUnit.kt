@@ -15,30 +15,30 @@ class ForceUnit(
     toBaseConverter: (Double) -> Double,
     fromBaseConverter: (Double) -> Double,
     unitName: String,
-    unitSymbol: String
+    unitSymbol: String,
 ) : Unit<ForceUnit>(
-    baseUnit, toBaseConverter, fromBaseConverter, unitName, unitSymbol
+    baseUnit,
+    toBaseConverter,
+    fromBaseConverter,
+    unitName,
+    unitSymbol,
 ) {
     internal constructor(
         baseUnit: ForceUnit,
         baseUnitEquivalent: Double,
         name: String,
-        symbol: String
+        symbol: String,
     ) : this(
         baseUnit,
         { x -> x * baseUnitEquivalent },
         { x -> x / baseUnitEquivalent },
         name,
-        symbol
+        symbol,
     )
 
-    override fun of(magnitude: Double): Force {
-        return Force(magnitude, this)
-    }
+    override fun of(magnitude: Double): Force = Force(magnitude, this)
 
-    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<ForceUnit> {
-        return of(this.fromBaseUnits(baseUnitMagnitude))
-    }
+    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<ForceUnit> = of(this.fromBaseUnits(baseUnitMagnitude))
 
     override fun per(time: TimeUnit): Unit<*> {
         TODO("Force rate units not yet implemented")
@@ -47,8 +47,8 @@ class ForceUnit(
 
 // Conversion constants
 private const val KILONEWTONS_PER_NEWTON = 1e3
-private const val POUNDS_FORCE_PER_NEWTON = 4.4482216152605  // 1 lbf ≈ 4.448 N
-private const val KILOGRAMS_FORCE_PER_NEWTON = 9.80665  // 1 kgf = 9.80665 N
+private const val POUNDS_FORCE_PER_NEWTON = 4.4482216152605 // 1 lbf ≈ 4.448 N
+private const val KILOGRAMS_FORCE_PER_NEWTON = 9.80665 // 1 kgf = 9.80665 N
 
 // Force units
 val Newtons = ForceUnit(null, { it }, { it }, "newton", "N")

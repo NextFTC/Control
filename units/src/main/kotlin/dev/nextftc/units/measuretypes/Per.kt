@@ -8,20 +8,17 @@ open class Per<N : Unit<N>, D : Unit<D>>(
     override val magnitude: Double,
     override val unit: PerUnit<N, D>,
 ) : Measure<PerUnit<N, D>> {
-
     override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
     /**
-     * Returns a measure equivalent to this one equal to zero minus its current value. For
-     * non-linear unit types like temperature, the zero point is treated as the zero value of the
-     * base unit (eg Kelvin). In effect, this means code like `Celsius.of(10).unaryMinus()` returns
-     * a value equivalent to -10 Kelvin, and *not* -10° Celsius.
+     * Returns a measure equivalent to this one equal to zero minus its current value. For non-linear
+     * unit types like temperature, the zero point is treated as the zero value of the base unit (eg
+     * Kelvin). In effect, this means code like `Celsius.of(10).unaryMinus()` returns a value
+     * equivalent to -10 Kelvin, and *not* -10° Celsius.
      *
      * @return a measure equal to zero minus this measure
      */
-    override fun unaryMinus(): Per<N, D> {
-        return Per(-magnitude, unit)
-    }
+    override fun unaryMinus(): Per<N, D> = Per(-magnitude, unit)
 
     /**
      * Adds another measure of the same unit type to this one.
@@ -40,9 +37,7 @@ open class Per<N : Unit<N>, D : Unit<D>>(
      * @param other the measurement to subtract
      * @return a measure of the difference between the measures
      */
-    override fun minus(other: Measure<out PerUnit<N, D>>): Per<N, D> {
-        return this + -other
-    }
+    override fun minus(other: Measure<out PerUnit<N, D>>): Per<N, D> = this + -other
 
     /**
      * Multiplies this measure by a scalar unitless multiplier.
@@ -50,9 +45,7 @@ open class Per<N : Unit<N>, D : Unit<D>>(
      * @param multiplier the scalar multiplication factor
      * @return the scaled result
      */
-    override fun times(multiplier: Double): Per<N, D> {
-        return Per(magnitude * multiplier, unit)
-    }
+    override fun times(multiplier: Double): Per<N, D> = Per(magnitude * multiplier, unit)
 
     /**
      * Divides this measure by a scalar and returns the result.
@@ -60,7 +53,5 @@ open class Per<N : Unit<N>, D : Unit<D>>(
      * @param divisor the value to divide by
      * @return the division result
      */
-    override fun div(divisor: Double): Per<N, D> {
-        return Per(magnitude / divisor, unit)
-    }
+    override fun div(divisor: Double): Per<N, D> = Per(magnitude / divisor, unit)
 }

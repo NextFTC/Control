@@ -7,24 +7,25 @@ import kotlin.time.Duration
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
-class Time internal constructor(private val duration: Duration, override val unit: TimeUnit) :
-    Measure<TimeUnit> {
+class Time
+internal constructor(
+    private val duration: Duration,
+    override val unit: TimeUnit,
+) : Measure<TimeUnit> {
     override val magnitude = duration.toDouble(unit.durationUnit ?: DurationUnit.MILLISECONDS)
 
     override val baseUnitMagnitude: Double =
         duration.toDouble(unit.baseUnit.durationUnit ?: DurationUnit.MILLISECONDS)
 
     /**
-     * Returns a measure equivalent to this one equal to zero minus its current value. For
-     * non-linear unit types like temperature, the zero point is treated as the zero value of the
-     * base unit (eg Kelvin). In effect, this means code like `Celsius.of(10).unaryMinus()` returns
-     * a value equivalent to -10 Kelvin, and *not* -10° Celsius.
+     * Returns a measure equivalent to this one equal to zero minus its current value. For non-linear
+     * unit types like temperature, the zero point is treated as the zero value of the base unit (eg
+     * Kelvin). In effect, this means code like `Celsius.of(10).unaryMinus()` returns a value
+     * equivalent to -10 Kelvin, and *not* -10° Celsius.
      *
      * @return a measure equal to zero minus this measure
      */
-    override fun unaryMinus(): Measure<TimeUnit> {
-        return this.times(-1.0)
-    }
+    override fun unaryMinus(): Measure<TimeUnit> = this.times(-1.0)
 
     /**
      * Adds another measure of the same unit type to this one.
@@ -58,9 +59,7 @@ class Time internal constructor(private val duration: Duration, override val uni
      * @param multiplier the scalar multiplication factor
      * @return the scaled result
      */
-    override fun times(multiplier: Double): Time {
-        return Time(this.duration * multiplier, unit)
-    }
+    override fun times(multiplier: Double): Time = Time(this.duration * multiplier, unit)
 
     /**
      * Divides this measure by a scalar and returns the result.
@@ -68,9 +67,7 @@ class Time internal constructor(private val duration: Duration, override val uni
      * @param divisor the value to divide by
      * @return the division result
      */
-    override fun div(divisor: Double): Time {
-        return Time(this.duration / divisor, unit)
-    }
+    override fun div(divisor: Double): Time = Time(this.duration / divisor, unit)
 
     /**
      * Multiplies this time by a linear velocity to get distance.
@@ -78,9 +75,7 @@ class Time internal constructor(private val duration: Duration, override val uni
      * @param velocity the linear velocity to multiply by
      * @return the distance traveled
      */
-    operator fun times(velocity: LinearVelocity): Distance {
-        return velocity * this
-    }
+    operator fun times(velocity: LinearVelocity): Distance = velocity * this
 
     /**
      * Multiplies this time by an angular velocity to get angle.
@@ -88,9 +83,7 @@ class Time internal constructor(private val duration: Duration, override val uni
      * @param velocity the angular velocity to multiply by
      * @return the angle traveled
      */
-    operator fun times(velocity: AngularVelocity): Angle {
-        return velocity * this
-    }
+    operator fun times(velocity: AngularVelocity): Angle = velocity * this
 
     /**
      * Multiplies this time by a linear acceleration to get velocity.
@@ -98,9 +91,7 @@ class Time internal constructor(private val duration: Duration, override val uni
      * @param acceleration the linear acceleration to multiply by
      * @return the velocity achieved
      */
-    operator fun times(acceleration: LinearAcceleration): LinearVelocity {
-        return acceleration * this
-    }
+    operator fun times(acceleration: LinearAcceleration): LinearVelocity = acceleration * this
 
     /**
      * Multiplies this time by an angular acceleration to get angular velocity.
@@ -108,7 +99,5 @@ class Time internal constructor(private val duration: Duration, override val uni
      * @param acceleration the angular acceleration to multiply by
      * @return the angular velocity achieved
      */
-    operator fun times(acceleration: AngularAcceleration): AngularVelocity {
-        return acceleration * this
-    }
+    operator fun times(acceleration: AngularAcceleration): AngularVelocity = acceleration * this
 }

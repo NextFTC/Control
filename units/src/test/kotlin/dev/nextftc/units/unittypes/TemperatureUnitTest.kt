@@ -10,9 +10,7 @@ private const val EPSILON = 1e-9
 class TemperatureUnitTest :
     FunSpec({
         context("TemperatureUnit constants") {
-            test("Celsius should be the base unit") {
-                Celsius.baseUnit shouldBeSameInstanceAs Celsius
-            }
+            test("Celsius should be the base unit") { Celsius.baseUnit shouldBeSameInstanceAs Celsius }
 
             test("all temperature units should have Celsius as base unit") {
                 Fahrenheit.baseUnit shouldBeSameInstanceAs Celsius
@@ -85,9 +83,7 @@ class TemperatureUnitTest :
         }
 
         context("TemperatureUnit utility methods") {
-            test("isBaseUnit should return true for Celsius") {
-                Celsius.isBaseUnit() shouldBe true
-            }
+            test("isBaseUnit should return true for Celsius") { Celsius.isBaseUnit() shouldBe true }
 
             test("isBaseUnit should return false for derived units") {
                 Fahrenheit.isBaseUnit() shouldBe false
@@ -107,4 +103,3 @@ class TemperatureUnitTest :
             }
         }
     })
-

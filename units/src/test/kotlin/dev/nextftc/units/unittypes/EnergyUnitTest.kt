@@ -10,9 +10,7 @@ private const val EPSILON = 1e-9
 class EnergyUnitTest :
     FunSpec({
         context("EnergyUnit constants") {
-            test("Joules should be the base unit") {
-                Joules.baseUnit shouldBeSameInstanceAs Joules
-            }
+            test("Joules should be the base unit") { Joules.baseUnit shouldBeSameInstanceAs Joules }
 
             test("all energy units should have Joules as base unit") {
                 Kilojoules.baseUnit shouldBeSameInstanceAs Joules
@@ -83,9 +81,7 @@ class EnergyUnitTest :
         }
 
         context("EnergyUnit utility methods") {
-            test("isBaseUnit should return true for Joules") {
-                Joules.isBaseUnit() shouldBe true
-            }
+            test("isBaseUnit should return true for Joules") { Joules.isBaseUnit() shouldBe true }
 
             test("isBaseUnit should return false for derived units") {
                 Kilojoules.isBaseUnit() shouldBe false
@@ -107,4 +103,3 @@ class EnergyUnitTest :
             }
         }
     })
-

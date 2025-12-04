@@ -10,8 +10,10 @@ import dev.nextftc.units.unittypes.DistanceUnit
  * arithmetic operations and conversions between different distance units.
  */
 class Distance
-internal constructor(override val magnitude: Double, override val unit: DistanceUnit) :
-    Measure<DistanceUnit> {
+internal constructor(
+    override val magnitude: Double,
+    override val unit: DistanceUnit,
+) : Measure<DistanceUnit> {
     override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
     /**
@@ -19,9 +21,7 @@ internal constructor(override val magnitude: Double, override val unit: Distance
      *
      * @return a measure equal to zero minus this measure
      */
-    override fun unaryMinus(): Distance {
-        return Distance(-magnitude, unit)
-    }
+    override fun unaryMinus(): Distance = Distance(-magnitude, unit)
 
     /**
      * Adds another distance measurement to this one.
@@ -53,9 +53,7 @@ internal constructor(override val magnitude: Double, override val unit: Distance
      * @param multiplier the scalar multiplication factor
      * @return the scaled result
      */
-    override fun times(multiplier: Double): Distance {
-        return Distance(magnitude * multiplier, unit)
-    }
+    override fun times(multiplier: Double): Distance = Distance(magnitude * multiplier, unit)
 
     /**
      * Divides this distance by a scalar and returns the result.
@@ -63,9 +61,7 @@ internal constructor(override val magnitude: Double, override val unit: Distance
      * @param divisor the value to divide by
      * @return the division result
      */
-    override fun div(divisor: Double): Distance {
-        return Distance(magnitude / divisor, unit)
-    }
+    override fun div(divisor: Double): Distance = Distance(magnitude / divisor, unit)
 
     /**
      * Divides this distance by a time to get velocity (distance per time).
@@ -74,7 +70,9 @@ internal constructor(override val magnitude: Double, override val unit: Distance
      * @return the velocity (distance/time)
      */
     operator fun div(time: Time): LinearVelocity {
-        val velocityUnit = dev.nextftc.units.unittypes.LinearVelocityUnit(unit, time.unit)
+        val velocityUnit =
+            dev.nextftc.units.unittypes
+                .LinearVelocityUnit(unit, time.unit)
         return LinearVelocity(magnitude / time.magnitude, velocityUnit)
     }
 }

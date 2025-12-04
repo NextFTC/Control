@@ -9,8 +9,11 @@ import dev.nextftc.units.unittypes.VoltageUnit
  * This class represents a voltage value with a specific unit (e.g., volts, millivolts). It supports
  * arithmetic operations and conversions between different voltage units.
  */
-class Voltage internal constructor(override val magnitude: Double, override val unit: VoltageUnit) :
-    Measure<VoltageUnit> {
+class Voltage
+internal constructor(
+    override val magnitude: Double,
+    override val unit: VoltageUnit,
+) : Measure<VoltageUnit> {
     override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
     /**
@@ -18,9 +21,7 @@ class Voltage internal constructor(override val magnitude: Double, override val 
      *
      * @return a measure equal to zero minus this measure
      */
-    override fun unaryMinus(): Voltage {
-        return Voltage(-magnitude, unit)
-    }
+    override fun unaryMinus(): Voltage = Voltage(-magnitude, unit)
 
     /**
      * Adds another voltage measurement to this one.
@@ -52,9 +53,7 @@ class Voltage internal constructor(override val magnitude: Double, override val 
      * @param multiplier the scalar multiplication factor
      * @return the scaled result
      */
-    override fun times(multiplier: Double): Voltage {
-        return Voltage(magnitude * multiplier, unit)
-    }
+    override fun times(multiplier: Double): Voltage = Voltage(magnitude * multiplier, unit)
 
     /**
      * Divides this voltage by a scalar and returns the result.
@@ -62,7 +61,5 @@ class Voltage internal constructor(override val magnitude: Double, override val 
      * @param divisor the value to divide by
      * @return the division result
      */
-    override fun div(divisor: Double): Voltage {
-        return Voltage(magnitude / divisor, unit)
-    }
+    override fun div(divisor: Double): Voltage = Voltage(magnitude / divisor, unit)
 }

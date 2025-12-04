@@ -6,18 +6,17 @@ import dev.nextftc.units.unittypes.ForceUnit
 /**
  * Immutable measurement of force.
  *
- * This class represents force values like newtons, pounds-force, etc.
- * It supports arithmetic operations and conversions between different force units.
+ * This class represents force values like newtons, pounds-force, etc. It supports arithmetic
+ * operations and conversions between different force units.
  */
-class Force internal constructor(
+class Force
+internal constructor(
     override val magnitude: Double,
-    override val unit: ForceUnit
+    override val unit: ForceUnit,
 ) : Measure<ForceUnit> {
     override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
-    override fun unaryMinus(): Force {
-        return Force(-magnitude, unit)
-    }
+    override fun unaryMinus(): Force = Force(-magnitude, unit)
 
     override fun plus(other: Measure<out ForceUnit>): Force {
         val otherInBaseUnits = other.baseUnitMagnitude
@@ -31,12 +30,7 @@ class Force internal constructor(
         return Force(unit.fromBaseUnits(diffInBaseUnits), unit)
     }
 
-    override fun times(multiplier: Double): Force {
-        return Force(magnitude * multiplier, unit)
-    }
+    override fun times(multiplier: Double): Force = Force(magnitude * multiplier, unit)
 
-    override fun div(divisor: Double): Force {
-        return Force(magnitude / divisor, unit)
-    }
+    override fun div(divisor: Double): Force = Force(magnitude / divisor, unit)
 }
-

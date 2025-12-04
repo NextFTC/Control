@@ -15,30 +15,30 @@ class PowerUnit(
     toBaseConverter: (Double) -> Double,
     fromBaseConverter: (Double) -> Double,
     unitName: String,
-    unitSymbol: String
+    unitSymbol: String,
 ) : Unit<PowerUnit>(
-    baseUnit, toBaseConverter, fromBaseConverter, unitName, unitSymbol
+    baseUnit,
+    toBaseConverter,
+    fromBaseConverter,
+    unitName,
+    unitSymbol,
 ) {
     internal constructor(
         baseUnit: PowerUnit,
         baseUnitEquivalent: Double,
         name: String,
-        symbol: String
+        symbol: String,
     ) : this(
         baseUnit,
         { x -> x * baseUnitEquivalent },
         { x -> x / baseUnitEquivalent },
         name,
-        symbol
+        symbol,
     )
 
-    override fun of(magnitude: Double): Power {
-        return Power(magnitude, this)
-    }
+    override fun of(magnitude: Double): Power = Power(magnitude, this)
 
-    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<PowerUnit> {
-        return of(this.fromBaseUnits(baseUnitMagnitude))
-    }
+    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<PowerUnit> = of(this.fromBaseUnits(baseUnitMagnitude))
 
     override fun per(time: TimeUnit): Unit<*> {
         TODO("Power rate units not yet implemented")
@@ -49,7 +49,7 @@ class PowerUnit(
 private const val MILLIWATTS_PER_WATT = 1e-3
 private const val KILOWATTS_PER_WATT = 1e3
 private const val MEGAWATTS_PER_WATT = 1e6
-private const val HORSEPOWER_PER_WATT = 745.699872  // Mechanical horsepower
+private const val HORSEPOWER_PER_WATT = 745.699872 // Mechanical horsepower
 
 // Power units
 val Watts = PowerUnit(null, { it }, { it }, "watt", "W")

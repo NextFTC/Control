@@ -12,29 +12,22 @@ import dev.nextftc.units.unittypes.TimeUnit
  * This class represents angular velocity values like radians per second, RPM, etc. All arithmetic
  * operations return AngularVelocity for type safety.
  */
-class AngularVelocity(magnitude: Double, unit: AngularVelocityUnit) :
-    Per<AngleUnit, TimeUnit>(magnitude, unit) {
-
-    override fun unaryMinus(): AngularVelocity {
-        return AngularVelocity(-magnitude, unit as AngularVelocityUnit)
-    }
+class AngularVelocity(
+    magnitude: Double,
+    unit: AngularVelocityUnit,
+) : Per<AngleUnit, TimeUnit>(magnitude, unit) {
+    override fun unaryMinus(): AngularVelocity = AngularVelocity(-magnitude, unit as AngularVelocityUnit)
 
     override fun plus(other: Measure<out PerUnit<AngleUnit, TimeUnit>>): AngularVelocity {
         val sum = baseUnitMagnitude + other.baseUnitMagnitude
         return AngularVelocity(unit.fromBaseUnits(sum), unit as AngularVelocityUnit)
     }
 
-    override fun minus(other: Measure<out PerUnit<AngleUnit, TimeUnit>>): AngularVelocity {
-        return this + -other
-    }
+    override fun minus(other: Measure<out PerUnit<AngleUnit, TimeUnit>>): AngularVelocity = this + -other
 
-    override fun times(multiplier: Double): AngularVelocity {
-        return AngularVelocity(magnitude * multiplier, unit as AngularVelocityUnit)
-    }
+    override fun times(multiplier: Double): AngularVelocity = AngularVelocity(magnitude * multiplier, unit as AngularVelocityUnit)
 
-    override fun div(divisor: Double): AngularVelocity {
-        return AngularVelocity(magnitude / divisor, unit as AngularVelocityUnit)
-    }
+    override fun div(divisor: Double): AngularVelocity = AngularVelocity(magnitude / divisor, unit as AngularVelocityUnit)
 
     /**
      * Multiplies this angular velocity by a time to get angle.

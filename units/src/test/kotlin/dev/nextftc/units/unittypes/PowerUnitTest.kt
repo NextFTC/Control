@@ -10,9 +10,7 @@ private const val EPSILON = 1e-9
 class PowerUnitTest :
     FunSpec({
         context("PowerUnit constants") {
-            test("Watts should be the base unit") {
-                Watts.baseUnit shouldBeSameInstanceAs Watts
-            }
+            test("Watts should be the base unit") { Watts.baseUnit shouldBeSameInstanceAs Watts }
 
             test("all power units should have Watts as base unit") {
                 Milliwatts.baseUnit shouldBeSameInstanceAs Watts
@@ -82,9 +80,7 @@ class PowerUnitTest :
         }
 
         context("PowerUnit utility methods") {
-            test("isBaseUnit should return true for Watts") {
-                Watts.isBaseUnit() shouldBe true
-            }
+            test("isBaseUnit should return true for Watts") { Watts.isBaseUnit() shouldBe true }
 
             test("isBaseUnit should return false for derived units") {
                 Milliwatts.isBaseUnit() shouldBe false
@@ -108,4 +104,3 @@ class PowerUnitTest :
             }
         }
     })
-
