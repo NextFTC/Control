@@ -19,7 +19,7 @@ internal constructor(override val magnitude: Double, override val unit: Distance
      *
      * @return a measure equal to zero minus this measure
      */
-    override fun unaryMinus(): Measure<DistanceUnit> {
+    override fun unaryMinus(): Distance {
         return Distance(-magnitude, unit)
     }
 
@@ -29,7 +29,7 @@ internal constructor(override val magnitude: Double, override val unit: Distance
      * @param other the measurement to add
      * @return a measure of the sum of both measures
      */
-    override fun plus(other: Measure<out DistanceUnit>): Measure<DistanceUnit> {
+    override fun plus(other: Measure<out DistanceUnit>): Distance {
         val otherInBaseUnits = other.baseUnitMagnitude
         val sumInBaseUnits = this.baseUnitMagnitude + otherInBaseUnits
         return Distance(unit.fromBaseUnits(sumInBaseUnits), unit)
@@ -41,7 +41,7 @@ internal constructor(override val magnitude: Double, override val unit: Distance
      * @param other the measurement to subtract
      * @return a measure of the difference between the measures
      */
-    override fun minus(other: Measure<out DistanceUnit>): Measure<DistanceUnit> {
+    override fun minus(other: Measure<out DistanceUnit>): Distance {
         val otherInBaseUnits = other.baseUnitMagnitude
         val diffInBaseUnits = this.baseUnitMagnitude - otherInBaseUnits
         return Distance(unit.fromBaseUnits(diffInBaseUnits), unit)
@@ -53,7 +53,7 @@ internal constructor(override val magnitude: Double, override val unit: Distance
      * @param multiplier the scalar multiplication factor
      * @return the scaled result
      */
-    override fun times(multiplier: Double): Measure<DistanceUnit> {
+    override fun times(multiplier: Double): Distance {
         return Distance(magnitude * multiplier, unit)
     }
 
@@ -63,7 +63,7 @@ internal constructor(override val magnitude: Double, override val unit: Distance
      * @param divisor the value to divide by
      * @return the division result
      */
-    override fun div(divisor: Double): Measure<DistanceUnit> {
+    override fun div(divisor: Double): Distance {
         return Distance(magnitude / divisor, unit)
     }
 

@@ -18,7 +18,7 @@ class Voltage internal constructor(override val magnitude: Double, override val 
      *
      * @return a measure equal to zero minus this measure
      */
-    override fun unaryMinus(): Measure<VoltageUnit> {
+    override fun unaryMinus(): Voltage {
         return Voltage(-magnitude, unit)
     }
 
@@ -28,7 +28,7 @@ class Voltage internal constructor(override val magnitude: Double, override val 
      * @param other the measurement to add
      * @return a measure of the sum of both measures
      */
-    override fun plus(other: Measure<out VoltageUnit>): Measure<VoltageUnit> {
+    override fun plus(other: Measure<out VoltageUnit>): Voltage {
         val otherInBaseUnits = other.baseUnitMagnitude
         val sumInBaseUnits = this.baseUnitMagnitude + otherInBaseUnits
         return Voltage(unit.fromBaseUnits(sumInBaseUnits), unit)
@@ -40,7 +40,7 @@ class Voltage internal constructor(override val magnitude: Double, override val 
      * @param other the measurement to subtract
      * @return a measure of the difference between the measures
      */
-    override fun minus(other: Measure<out VoltageUnit>): Measure<VoltageUnit> {
+    override fun minus(other: Measure<out VoltageUnit>): Voltage {
         val otherInBaseUnits = other.baseUnitMagnitude
         val diffInBaseUnits = this.baseUnitMagnitude - otherInBaseUnits
         return Voltage(unit.fromBaseUnits(diffInBaseUnits), unit)
@@ -52,7 +52,7 @@ class Voltage internal constructor(override val magnitude: Double, override val 
      * @param multiplier the scalar multiplication factor
      * @return the scaled result
      */
-    override fun times(multiplier: Double): Measure<VoltageUnit> {
+    override fun times(multiplier: Double): Voltage {
         return Voltage(magnitude * multiplier, unit)
     }
 
@@ -62,7 +62,7 @@ class Voltage internal constructor(override val magnitude: Double, override val 
      * @param divisor the value to divide by
      * @return the division result
      */
-    override fun div(divisor: Double): Measure<VoltageUnit> {
+    override fun div(divisor: Double): Voltage {
         return Voltage(magnitude / divisor, unit)
     }
 }

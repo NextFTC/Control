@@ -22,7 +22,7 @@ open class Mul<N : Unit<N>, D : Unit<D>>(
      *
      * @return a measure equal to zero minus this measure
      */
-    override fun unaryMinus(): Measure<MulUnit<N, D>> {
+    override fun unaryMinus(): Mul<N, D> {
         return Mul(-magnitude, unit)
     }
 
@@ -32,7 +32,7 @@ open class Mul<N : Unit<N>, D : Unit<D>>(
      * @param other the measurement to add
      * @return a measure of the sum of both measures
      */
-    override fun plus(other: Measure<out MulUnit<N, D>>): Measure<MulUnit<N, D>> {
+    override fun plus(other: Measure<out MulUnit<N, D>>): Mul<N, D> {
         val sum = baseUnitMagnitude + other.baseUnitMagnitude
         return Mul(unit.fromBaseUnits(sum), unit)
     }
@@ -43,7 +43,7 @@ open class Mul<N : Unit<N>, D : Unit<D>>(
      * @param other the measurement to subtract
      * @return a measure of the difference between the measures
      */
-    override fun minus(other: Measure<out MulUnit<N, D>>): Measure<MulUnit<N, D>> {
+    override fun minus(other: Measure<out MulUnit<N, D>>): Mul<N, D> {
         return this + -other
     }
 
@@ -53,7 +53,7 @@ open class Mul<N : Unit<N>, D : Unit<D>>(
      * @param multiplier the scalar multiplication factor
      * @return the scaled result
      */
-    override fun times(multiplier: Double): Measure<MulUnit<N, D>> {
+    override fun times(multiplier: Double): Mul<N, D> {
         return Mul(magnitude * multiplier, unit)
     }
 
@@ -63,7 +63,7 @@ open class Mul<N : Unit<N>, D : Unit<D>>(
      * @param divisor the value to divide by
      * @return the division result
      */
-    override fun div(divisor: Double): Measure<MulUnit<N, D>> {
+    override fun div(divisor: Double): Mul<N, D> {
         return Mul(magnitude / divisor, unit)
     }
 }

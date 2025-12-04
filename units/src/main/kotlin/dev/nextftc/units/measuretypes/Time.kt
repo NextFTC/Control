@@ -32,7 +32,7 @@ class Time internal constructor(private val duration: Duration, override val uni
      * @param other the measurement to add
      * @return a measure of the sum of both measures
      */
-    override fun plus(other: Measure<out TimeUnit>): Measure<TimeUnit> {
+    override fun plus(other: Measure<out TimeUnit>): Time {
         val baseUnitDuration = baseUnit.durationUnit ?: DurationUnit.SECONDS
         val otherDuration = other.baseUnitMagnitude.toDuration(baseUnitDuration)
 
@@ -45,7 +45,7 @@ class Time internal constructor(private val duration: Duration, override val uni
      * @param other the measurement to subtract
      * @return a measure of the difference between the measures
      */
-    override fun minus(other: Measure<out TimeUnit>): Measure<TimeUnit> {
+    override fun minus(other: Measure<out TimeUnit>): Time {
         val baseUnitDuration = baseUnit.durationUnit ?: DurationUnit.SECONDS
         val otherDuration = other.baseUnitMagnitude.toDuration(baseUnitDuration)
 
@@ -58,7 +58,7 @@ class Time internal constructor(private val duration: Duration, override val uni
      * @param multiplier the scalar multiplication factor
      * @return the scaled result
      */
-    override fun times(multiplier: Double): Measure<TimeUnit> {
+    override fun times(multiplier: Double): Time {
         return Time(this.duration * multiplier, unit)
     }
 
@@ -68,7 +68,7 @@ class Time internal constructor(private val duration: Duration, override val uni
      * @param divisor the value to divide by
      * @return the division result
      */
-    override fun div(divisor: Double): Measure<TimeUnit> {
+    override fun div(divisor: Double): Time {
         return Time(this.duration / divisor, unit)
     }
 

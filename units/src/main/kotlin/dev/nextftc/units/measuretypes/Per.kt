@@ -19,7 +19,7 @@ open class Per<N : Unit<N>, D : Unit<D>>(
      *
      * @return a measure equal to zero minus this measure
      */
-    override fun unaryMinus(): Measure<PerUnit<N, D>> {
+    override fun unaryMinus(): Per<N, D> {
         return Per(-magnitude, unit)
     }
 
@@ -29,7 +29,7 @@ open class Per<N : Unit<N>, D : Unit<D>>(
      * @param other the measurement to add
      * @return a measure of the sum of both measures
      */
-    override fun plus(other: Measure<out PerUnit<N, D>>): Measure<PerUnit<N, D>> {
+    override fun plus(other: Measure<out PerUnit<N, D>>): Per<N, D> {
         val sum = baseUnitMagnitude + other.baseUnitMagnitude
         return Per(unit.fromBaseUnits(sum), unit)
     }
@@ -40,7 +40,7 @@ open class Per<N : Unit<N>, D : Unit<D>>(
      * @param other the measurement to subtract
      * @return a measure of the difference between the measures
      */
-    override fun minus(other: Measure<out PerUnit<N, D>>): Measure<PerUnit<N, D>> {
+    override fun minus(other: Measure<out PerUnit<N, D>>): Per<N, D> {
         return this + -other
     }
 
@@ -50,7 +50,7 @@ open class Per<N : Unit<N>, D : Unit<D>>(
      * @param multiplier the scalar multiplication factor
      * @return the scaled result
      */
-    override fun times(multiplier: Double): Measure<PerUnit<N, D>> {
+    override fun times(multiplier: Double): Per<N, D> {
         return Per(magnitude * multiplier, unit)
     }
 
@@ -60,7 +60,7 @@ open class Per<N : Unit<N>, D : Unit<D>>(
      * @param divisor the value to divide by
      * @return the division result
      */
-    override fun div(divisor: Double): Measure<PerUnit<N, D>> {
+    override fun div(divisor: Double): Per<N, D> {
         return Per(magnitude / divisor, unit)
     }
 }

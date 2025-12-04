@@ -18,7 +18,7 @@ class Angle internal constructor(override val magnitude: Double, override val un
      *
      * @return a measure equal to zero minus this measure
      */
-    override fun unaryMinus(): Measure<AngleUnit> {
+    override fun unaryMinus(): Angle {
         return Angle(-magnitude, unit)
     }
 
@@ -28,7 +28,7 @@ class Angle internal constructor(override val magnitude: Double, override val un
      * @param other the measurement to add
      * @return a measure of the sum of both measures
      */
-    override fun plus(other: Measure<out AngleUnit>): Measure<AngleUnit> {
+    override fun plus(other: Measure<out AngleUnit>): Angle {
         val otherInBaseUnits = other.baseUnitMagnitude
         val sumInBaseUnits = this.baseUnitMagnitude + otherInBaseUnits
         return Angle(unit.fromBaseUnits(sumInBaseUnits), unit)
@@ -40,7 +40,7 @@ class Angle internal constructor(override val magnitude: Double, override val un
      * @param other the measurement to subtract
      * @return a measure of the difference between the measures
      */
-    override fun minus(other: Measure<out AngleUnit>): Measure<AngleUnit> {
+    override fun minus(other: Measure<out AngleUnit>): Angle {
         val otherInBaseUnits = other.baseUnitMagnitude
         val diffInBaseUnits = this.baseUnitMagnitude - otherInBaseUnits
         return Angle(unit.fromBaseUnits(diffInBaseUnits), unit)
@@ -52,7 +52,7 @@ class Angle internal constructor(override val magnitude: Double, override val un
      * @param multiplier the scalar multiplication factor
      * @return the scaled result
      */
-    override fun times(multiplier: Double): Measure<AngleUnit> {
+    override fun times(multiplier: Double): Angle {
         return Angle(magnitude * multiplier, unit)
     }
 
@@ -62,7 +62,7 @@ class Angle internal constructor(override val magnitude: Double, override val un
      * @param divisor the value to divide by
      * @return the division result
      */
-    override fun div(divisor: Double): Measure<AngleUnit> {
+    override fun div(divisor: Double): Angle {
         return Angle(magnitude / divisor, unit)
     }
 
