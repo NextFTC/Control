@@ -6,6 +6,7 @@ plugins {
 description = "A custom linear algebra library for NextControl."
 
 dependencies {
+    implementation(libs.ejml)
 }
 
 nextFTCPublishing {

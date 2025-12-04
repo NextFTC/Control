@@ -3,6 +3,7 @@ kotlin = "2.2.21"
 kotest = "5.9.1"
 ojalgo = "56.1.1"
 spotless = "8.1.0"
+ejml = "0.41"
 
 [libraries]
 ojalgo = { module = "org.ojalgo:ojalgo", version.ref = "ojalgo" }
@@ -12,6 +13,7 @@ kotest-property = { module = "io.kotest:kotest-property", version.ref = "kotest"
 kotest-data-driven = { module = "io.kotest:kotest-framework-datatest", version.ref = "kotest" }
 mockk = { module = "io.mockk:mockk", version = "1.14.2" }
 functional-interfaces = { module = "dev.nextftc:functional-interfaces", version = "1.0.1" }
+ejml = { module = "org.ejml:ejml-simple", version.ref = "ejml" }
 
 [bundles]
 kotest = ["kotest-runner", "kotest-assertations", "kotest-property", "kotest-data-driven"]
