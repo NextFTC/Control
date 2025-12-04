@@ -23,15 +23,23 @@ tasks.withType<Test>().configureEach { useJUnitPlatform() }
 
 spotless {
     kotlin {
-        ktfmt().googleStyle().configure {
-            it.setBlockIndent(4)
-            it.setContinuationIndent(4)
-        }
+        ktlint().editorConfigOverride(
+            mapOf(
+                "ktlint_code_style" to "intellij_idea",
+                "indent_size" to "4",
+                "continuation_indent_size" to "4",
+                "ktlint_standard_no-wildcard-imports" to "disabled",
+            ),
+        )
     }
     kotlinGradle {
-        ktfmt().googleStyle().configure {
-            it.setBlockIndent(4)
-            it.setContinuationIndent(4)
-        }
+        ktlint().editorConfigOverride(
+            mapOf(
+                "ktlint_code_style" to "intellij_idea",
+                "indent_size" to "4",
+                "continuation_indent_size" to "4",
+                "ktlint_standard_no-wildcard-imports" to "disabled",
+            ),
+        )
     }
 }
