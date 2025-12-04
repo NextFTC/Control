@@ -3,6 +3,7 @@ import io.deepmedia.tools.deployer.DeployerExtension
 plugins {
     alias(libs.plugins.kotlin) apply false
     alias(libs.plugins.nextftc.publishing)
+    alias(libs.plugins.spotless)
 }
 
 allprojects {

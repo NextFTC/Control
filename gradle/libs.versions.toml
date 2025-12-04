@@ -2,6 +2,7 @@
 kotlin = "2.2.21"
 kotest = "5.9.1"
 ojalgo = "56.1.1"
+spotless = "8.1.0"
 
 [libraries]
 ojalgo = { module = "org.ojalgo:ojalgo", version.ref = "ojalgo" }
@@ -19,3 +20,4 @@ kotest = ["kotest-runner", "kotest-assertations", "kotest-property", "kotest-dat
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 dokka = { id = "org.jetbrains.dokka", version = "2.0.0" }
 nextftc-publishing = { id = "dev.nextftc.publishing.multi-module", version = "1.0.1" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
