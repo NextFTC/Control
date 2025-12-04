@@ -1,0 +1,57 @@
+package dev.nextftc.units.unittypes
+
+import dev.nextftc.units.Measure
+import dev.nextftc.units.Unit
+import dev.nextftc.units.measuretypes.Torque
+
+/**
+ * Unit of measurement for torque (force × distance).
+ *
+ * Supported units include newton-meters (base unit), pound-feet, newton-centimeters.
+ * Torque is dimensionally equivalent to force × distance = mass × distance² / time².
+ */
+class TorqueUnit(
+    baseUnit: TorqueUnit?,
+    toBaseConverter: (Double) -> Double,
+    fromBaseConverter: (Double) -> Double,
+    unitName: String,
+    unitSymbol: String
+) : Unit<TorqueUnit>(
+    baseUnit, toBaseConverter, fromBaseConverter, unitName, unitSymbol
+) {
+    internal constructor(
+        baseUnit: TorqueUnit,
+        baseUnitEquivalent: Double,
+        name: String,
+        symbol: String
+    ) : this(
+        baseUnit,
+        { x -> x * baseUnitEquivalent },
+        { x -> x / baseUnitEquivalent },
+        name,
+        symbol
+    )
+
+    override fun of(magnitude: Double): Torque {
+        return Torque(magnitude, this)
+    }
+
+    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<TorqueUnit> {
+        return of(this.fromBaseUnits(baseUnitMagnitude))
+    }
+
+    override fun per(time: TimeUnit): Unit<*> {
+        TODO("Torque rate units not yet implemented")
+    }
+}
+
+// Conversion constants
+private const val POUND_FEET_PER_NEWTON_METER = 1.3558179483314  // 1 lb·ft ≈ 1.356 N·m
+private const val NEWTON_CENTIMETERS_PER_NEWTON_METER = 0.01  // 1 N·cm = 0.01 N·m
+private const val NEWTON_MILLIMETERS_PER_NEWTON_METER = 0.001  // 1 N·mm = 0.001 N·m
+
+// Torque units
+val NewtonMeters = TorqueUnit(null, { it }, { it }, "newton-meter", "N·m")
+val PoundFeet = TorqueUnit(NewtonMeters, POUND_FEET_PER_NEWTON_METER, "pound-foot", "lb·ft")
+val NewtonCentimeters = TorqueUnit(NewtonMeters, NEWTON_CENTIMETERS_PER_NEWTON_METER, "newton-centimeter", "N·cm")
+val NewtonMillimeters = TorqueUnit(NewtonMeters, NEWTON_MILLIMETERS_PER_NEWTON_METER, "newton-millimeter", "N·mm")
