@@ -1,0 +1,42 @@
+package dev.nextftc.units.measuretypes
+
+import dev.nextftc.units.Measure
+import dev.nextftc.units.unittypes.TemperatureUnit
+
+/**
+ * Immutable measurement of temperature.
+ *
+ * This class represents temperature values in Celsius, Fahrenheit, or Kelvin.
+ * It supports arithmetic operations and conversions between different temperature units.
+ */
+class Temperature internal constructor(
+    override val magnitude: Double,
+    override val unit: TemperatureUnit
+) : Measure<TemperatureUnit> {
+    override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
+
+    override fun unaryMinus(): Temperature {
+        return Temperature(-magnitude, unit)
+    }
+
+    override fun plus(other: Measure<out TemperatureUnit>): Temperature {
+        val otherInBaseUnits = other.baseUnitMagnitude
+        val sumInBaseUnits = this.baseUnitMagnitude + otherInBaseUnits
+        return Temperature(unit.fromBaseUnits(sumInBaseUnits), unit)
+    }
+
+    override fun minus(other: Measure<out TemperatureUnit>): Temperature {
+        val otherInBaseUnits = other.baseUnitMagnitude
+        val diffInBaseUnits = this.baseUnitMagnitude - otherInBaseUnits
+        return Temperature(unit.fromBaseUnits(diffInBaseUnits), unit)
+    }
+
+    override fun times(multiplier: Double): Temperature {
+        return Temperature(magnitude * multiplier, unit)
+    }
+
+    override fun div(divisor: Double): Temperature {
+        return Temperature(magnitude / divisor, unit)
+    }
+}
+

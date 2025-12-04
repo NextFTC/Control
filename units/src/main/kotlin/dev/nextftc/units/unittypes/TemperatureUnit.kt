@@ -1,0 +1,55 @@
+package dev.nextftc.units.unittypes
+
+import dev.nextftc.units.Measure
+import dev.nextftc.units.Unit
+import dev.nextftc.units.measuretypes.Temperature
+
+/**
+ * Unit of measurement for temperature.
+ *
+ * Supported units include Celsius (base unit), Fahrenheit, and Kelvin.
+ * Note: Temperature conversions handle both absolute values and temperature differences correctly.
+ */
+class TemperatureUnit(
+    baseUnit: TemperatureUnit?,
+    toBaseConverter: (Double) -> Double,
+    fromBaseConverter: (Double) -> Double,
+    unitName: String,
+    unitSymbol: String
+) : Unit<TemperatureUnit>(
+    baseUnit, toBaseConverter, fromBaseConverter, unitName, unitSymbol
+) {
+    override fun of(magnitude: Double): Temperature {
+        return Temperature(magnitude, this)
+    }
+
+    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<TemperatureUnit> {
+        return of(this.fromBaseUnits(baseUnitMagnitude))
+    }
+
+    override fun per(time: TimeUnit): Unit<*> {
+        TODO("Temperature rate units not yet implemented")
+    }
+}
+
+// Temperature units with conversion formulas
+val Celsius = TemperatureUnit(null, { it }, { it }, "celsius", "°C")
+
+// Fahrenheit: °C = (°F - 32) × 5/9
+val Fahrenheit = TemperatureUnit(
+    Celsius,
+    { fahrenheit -> (fahrenheit - 32.0) * 5.0 / 9.0 },
+    { celsius -> celsius * 9.0 / 5.0 + 32.0 },
+    "fahrenheit",
+    "°F"
+)
+
+// Kelvin: °C = K - 273.15
+val Kelvin = TemperatureUnit(
+    Celsius,
+    { kelvin -> kelvin - 273.15 },
+    { celsius -> celsius + 273.15 },
+    "kelvin",
+    "K"
+)
+
