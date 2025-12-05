@@ -40,7 +40,8 @@ class MassUnit(
 
     override fun of(magnitude: Double): Mass = Mass(magnitude, this)
 
-    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<MassUnit> = of(this.fromBaseUnits(baseUnitMagnitude))
+    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<MassUnit> =
+        of(this.fromBaseUnits(baseUnitMagnitude))
 
     override fun per(time: TimeUnit): Unit<*> {
         TODO("Mass flow rate units not yet implemented")

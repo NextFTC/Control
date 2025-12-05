@@ -107,7 +107,8 @@ class PhysicalRelationshipsTest :
                 val energy = originalPower * time
                 val recoveredPower = energy / time
 
-                recoveredPower.baseUnitMagnitude shouldBe (originalPower.baseUnitMagnitude plusOrMinus EPSILON)
+                recoveredPower.baseUnitMagnitude shouldBe
+                    (originalPower.baseUnitMagnitude plusOrMinus EPSILON)
             }
         }
 

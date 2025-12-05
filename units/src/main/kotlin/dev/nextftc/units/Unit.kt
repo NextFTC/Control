@@ -212,7 +212,8 @@ protected constructor(
         if (this === other) return true
         if (other !is Unit<*>) return false
 
-        return unitName == other.unitName && unitSymbol == other.unitSymbol && this.equivalent(other)
+        return unitName == other.unitName && unitSymbol == other.unitSymbol &&
+            this.equivalent(other)
     }
 
     override fun hashCode(): Int {

@@ -8,7 +8,10 @@ import kotlin.time.DurationUnit
 class TimeUnitTest :
     FunSpec({
         context("TimeUnit constants") {
-            test("Seconds should be the base unit") { Seconds.baseUnit shouldBeSameInstanceAs Seconds }
+            test("Seconds should be the base unit") {
+                Seconds.baseUnit shouldBeSameInstanceAs
+                    Seconds
+            }
 
             test("all time units should have Seconds as base unit") {
                 Milliseconds.baseUnit shouldBeSameInstanceAs Seconds

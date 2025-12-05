@@ -40,7 +40,8 @@ class ForceUnit(
 
     override fun of(magnitude: Double): Force = Force(magnitude, this)
 
-    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<ForceUnit> = of(this.fromBaseUnits(baseUnitMagnitude))
+    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<ForceUnit> =
+        of(this.fromBaseUnits(baseUnitMagnitude))
 
     override fun per(time: TimeUnit): Unit<*> {
         TODO("Force rate units not yet implemented")

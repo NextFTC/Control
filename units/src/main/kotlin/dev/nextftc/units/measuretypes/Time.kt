@@ -8,10 +8,8 @@ import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
 class Time
-internal constructor(
-    private val duration: Duration,
-    override val unit: TimeUnit,
-) : Measure<TimeUnit> {
+internal constructor(private val duration: Duration, override val unit: TimeUnit) :
+    Measure<TimeUnit> {
     override val magnitude = duration.toDouble(unit.durationUnit ?: DurationUnit.MILLISECONDS)
 
     override val baseUnitMagnitude: Double =

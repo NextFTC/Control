@@ -11,7 +11,10 @@ private const val EPSILON = 1e-9
 class CurrentUnitTest :
     FunSpec({
         context("CurrentUnit constants") {
-            test("Amperes should be the base unit") { Amperes.baseUnit shouldBeSameInstanceAs Amperes }
+            test("Amperes should be the base unit") {
+                Amperes.baseUnit shouldBeSameInstanceAs
+                    Amperes
+            }
 
             test("all current units should have Amperes as base unit") {
                 Milliamperes.baseUnit shouldBeSameInstanceAs Amperes

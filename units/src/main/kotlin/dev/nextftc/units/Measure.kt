@@ -130,10 +130,7 @@ interface Measure<U : Unit<U>> : Comparable<Measure<U>> {
      * @param unit unit to use
      * @return the value of the measure in the given unit with the sign of the provided measure
      */
-    fun copySign(
-        other: Measure<U>,
-        unit: U,
-    ): Double = this.into(unit).withSign(other.into(unit))
+    fun copySign(other: Measure<U>, unit: U): Double = this.into(unit).withSign(other.into(unit))
 
     /**
      * Returns a measure equivalent to this one equal to zero minus its current value. For non-linear
@@ -252,10 +249,7 @@ interface Measure<U : Unit<U>> : Comparable<Measure<U>> {
      *   checking if a value is within 1% means a value of 0.01 should be passed, and so on.
      * @return true if this unit is near the other measure, otherwise false
      */
-    fun isNear(
-        other: Measure<*>,
-        varianceThreshold: Double,
-    ): Boolean {
+    fun isNear(other: Measure<*>, varianceThreshold: Double): Boolean {
         if (!this.unit.baseUnit.equivalent(other.unit.baseUnit)) {
             return false // Disjoint units, not compatible
         }
@@ -280,10 +274,10 @@ interface Measure<U : Unit<U>> : Comparable<Measure<U>> {
      *   other.
      * @return true if this unit is near the other measure, otherwise false.
      */
-    fun isNear(
-        other: Measure<U>,
-        tolerance: Measure<U>,
-    ): Boolean = (abs(this.baseUnitMagnitude - other.baseUnitMagnitude) <= abs(tolerance.baseUnitMagnitude))
+    fun isNear(other: Measure<U>, tolerance: Measure<U>): Boolean = (
+        abs(this.baseUnitMagnitude - other.baseUnitMagnitude) <=
+            abs(tolerance.baseUnitMagnitude)
+        )
 
     /**
      * Checks if this measure is equivalent to another measure of the same unit.
@@ -297,7 +291,8 @@ interface Measure<U : Unit<U>> : Comparable<Measure<U>> {
             abs(baseUnitMagnitude - other.baseUnitMagnitude) <= EQUIVALENCE_THRESHOLD
     }
 
-    override fun compareTo(other: Measure<U>): Int = this.baseUnitMagnitude.compareTo(other.baseUnitMagnitude)
+    override fun compareTo(other: Measure<U>): Int =
+        this.baseUnitMagnitude.compareTo(other.baseUnitMagnitude)
 
     /**
      * Returns a string representation of this measurement in a shorthand form. The symbol of the

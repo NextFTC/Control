@@ -98,7 +98,10 @@ class MassUnitTest :
         }
 
         context("MassUnit utility methods") {
-            test("isBaseUnit should return true for Kilograms") { Kilograms.isBaseUnit() shouldBe true }
+            test("isBaseUnit should return true for Kilograms") {
+                Kilograms.isBaseUnit() shouldBe
+                    true
+            }
 
             test("isBaseUnit should return false for derived units") {
                 Grams.isBaseUnit() shouldBe false

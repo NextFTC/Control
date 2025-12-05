@@ -10,7 +10,10 @@ private const val EPSILON = 1e-9
 class TemperatureUnitTest :
     FunSpec({
         context("TemperatureUnit constants") {
-            test("Celsius should be the base unit") { Celsius.baseUnit shouldBeSameInstanceAs Celsius }
+            test("Celsius should be the base unit") {
+                Celsius.baseUnit shouldBeSameInstanceAs
+                    Celsius
+            }
 
             test("all temperature units should have Celsius as base unit") {
                 Fahrenheit.baseUnit shouldBeSameInstanceAs Celsius
@@ -56,7 +59,8 @@ class TemperatureUnitTest :
             test("should convert -40°C to -40°F (intersection point)") {
                 val celsius = Celsius.of(-40.0)
                 val fahrenheit = Fahrenheit.of(-40.0)
-                celsius.baseUnitMagnitude shouldBe (fahrenheit.baseUnitMagnitude plusOrMinus EPSILON)
+                celsius.baseUnitMagnitude shouldBe
+                    (fahrenheit.baseUnitMagnitude plusOrMinus EPSILON)
             }
 
             test("should convert 20°C to 68°F") {

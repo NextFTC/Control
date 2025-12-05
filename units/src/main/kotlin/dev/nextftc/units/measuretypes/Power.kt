@@ -11,10 +11,8 @@ import dev.nextftc.units.unittypes.PowerUnit
  * operations and conversions between different power units.
  */
 class Power
-internal constructor(
-    override val magnitude: Double,
-    override val unit: PowerUnit,
-) : Measure<PowerUnit> {
+internal constructor(override val magnitude: Double, override val unit: PowerUnit) :
+    Measure<PowerUnit> {
     override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
     override fun unaryMinus(): Power = Power(-magnitude, unit)

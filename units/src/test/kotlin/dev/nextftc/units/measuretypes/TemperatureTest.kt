@@ -149,8 +149,10 @@ class TemperatureTest :
                 val boilingF = Fahrenheit.of(212.0)
                 val boilingK = Kelvin.of(373.15)
 
-                (boilingC.baseUnitMagnitude) shouldBe (boilingF.baseUnitMagnitude plusOrMinus EPSILON)
-                (boilingC.baseUnitMagnitude) shouldBe (boilingK.baseUnitMagnitude plusOrMinus EPSILON)
+                (boilingC.baseUnitMagnitude) shouldBe
+                    (boilingF.baseUnitMagnitude plusOrMinus EPSILON)
+                (boilingC.baseUnitMagnitude) shouldBe
+                    (boilingK.baseUnitMagnitude plusOrMinus EPSILON)
             }
         }
     })

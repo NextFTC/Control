@@ -13,22 +13,27 @@ import dev.nextftc.units.unittypes.TimeUnit
  * This class represents acceleration values like meters per second squared. All arithmetic
  * operations return LinearAcceleration for type safety.
  */
-class LinearAcceleration(
-    magnitude: Double,
-    unit: LinearAccelerationUnit,
-) : Per<PerUnit<DistanceUnit, TimeUnit>, TimeUnit>(magnitude, unit) {
-    override fun unaryMinus(): LinearAcceleration = LinearAcceleration(-magnitude, unit as LinearAccelerationUnit)
+class LinearAcceleration(magnitude: Double, unit: LinearAccelerationUnit) :
+    Per<PerUnit<DistanceUnit, TimeUnit>, TimeUnit>(magnitude, unit) {
+    override fun unaryMinus(): LinearAcceleration =
+        LinearAcceleration(-magnitude, unit as LinearAccelerationUnit)
 
-    override fun plus(other: Measure<out PerUnit<PerUnit<DistanceUnit, TimeUnit>, TimeUnit>>): LinearAcceleration {
+    override fun plus(
+        other: Measure<out PerUnit<PerUnit<DistanceUnit, TimeUnit>, TimeUnit>>,
+    ): LinearAcceleration {
         val sum = baseUnitMagnitude + other.baseUnitMagnitude
         return LinearAcceleration(unit.fromBaseUnits(sum), unit as LinearAccelerationUnit)
     }
 
-    override fun minus(other: Measure<out PerUnit<PerUnit<DistanceUnit, TimeUnit>, TimeUnit>>): LinearAcceleration = this + -other
+    override fun minus(
+        other: Measure<out PerUnit<PerUnit<DistanceUnit, TimeUnit>, TimeUnit>>,
+    ): LinearAcceleration = this + -other
 
-    override fun times(multiplier: Double): LinearAcceleration = LinearAcceleration(magnitude * multiplier, unit as LinearAccelerationUnit)
+    override fun times(multiplier: Double): LinearAcceleration =
+        LinearAcceleration(magnitude * multiplier, unit as LinearAccelerationUnit)
 
-    override fun div(divisor: Double): LinearAcceleration = LinearAcceleration(magnitude / divisor, unit as LinearAccelerationUnit)
+    override fun div(divisor: Double): LinearAcceleration =
+        LinearAcceleration(magnitude / divisor, unit as LinearAccelerationUnit)
 
     /**
      * Multiplies this acceleration by a time to get velocity.

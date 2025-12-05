@@ -16,13 +16,12 @@ import dev.nextftc.units.measuretypes.LinearVelocity
  * @param distance the distance unit (numerator)
  * @param time the time unit (denominator)
  */
-class LinearVelocityUnit(
-    distance: DistanceUnit,
-    time: TimeUnit,
-) : PerUnit<DistanceUnit, TimeUnit>(distance, time) {
+class LinearVelocityUnit(distance: DistanceUnit, time: TimeUnit) :
+    PerUnit<DistanceUnit, TimeUnit>(distance, time) {
     override fun of(magnitude: Double): LinearVelocity = LinearVelocity(magnitude, this)
 
-    override fun ofBaseUnits(baseUnitMagnitude: Double): LinearVelocity = of(this.fromBaseUnits(baseUnitMagnitude))
+    override fun ofBaseUnits(baseUnitMagnitude: Double): LinearVelocity =
+        of(this.fromBaseUnits(baseUnitMagnitude))
 }
 
 // Common linear velocity units

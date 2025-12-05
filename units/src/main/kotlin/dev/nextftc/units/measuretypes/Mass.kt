@@ -11,10 +11,8 @@ import dev.nextftc.units.unittypes.Newtons
  * and conversions between different mass units.
  */
 class Mass
-internal constructor(
-    override val magnitude: Double,
-    override val unit: MassUnit,
-) : Measure<MassUnit> {
+internal constructor(override val magnitude: Double, override val unit: MassUnit) :
+    Measure<MassUnit> {
     override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
     override fun unaryMinus(): Mass = Mass(-magnitude, unit)

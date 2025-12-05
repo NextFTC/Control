@@ -27,7 +27,8 @@ class TemperatureUnit(
 ) {
     override fun of(magnitude: Double): Temperature = Temperature(magnitude, this)
 
-    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<TemperatureUnit> = of(this.fromBaseUnits(baseUnitMagnitude))
+    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<TemperatureUnit> =
+        of(this.fromBaseUnits(baseUnitMagnitude))
 
     override fun per(time: TimeUnit): Unit<*> {
         TODO("Temperature rate units not yet implemented")

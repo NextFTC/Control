@@ -14,11 +14,10 @@ import dev.nextftc.units.unittypes.TimeUnit
  * This class represents angular acceleration values like radians per second squared. All arithmetic
  * operations return AngularAcceleration for type safety.
  */
-class AngularAcceleration(
-    magnitude: Double,
-    unit: AngularAccelerationUnit,
-) : Per<PerUnit<AngleUnit, TimeUnit>, TimeUnit>(magnitude, unit) {
-    override fun unaryMinus(): AngularAcceleration = AngularAcceleration(-magnitude, unit as AngularAccelerationUnit)
+class AngularAcceleration(magnitude: Double, unit: AngularAccelerationUnit) :
+    Per<PerUnit<AngleUnit, TimeUnit>, TimeUnit>(magnitude, unit) {
+    override fun unaryMinus(): AngularAcceleration =
+        AngularAcceleration(-magnitude, unit as AngularAccelerationUnit)
 
     override fun plus(
         other: Measure<out PerUnit<PerUnit<AngleUnit, TimeUnit>, TimeUnit>>,
@@ -31,9 +30,11 @@ class AngularAcceleration(
         other: Measure<out PerUnit<PerUnit<AngleUnit, TimeUnit>, TimeUnit>>,
     ): AngularAcceleration = this + -other
 
-    override fun times(multiplier: Double): AngularAcceleration = AngularAcceleration(magnitude * multiplier, unit as AngularAccelerationUnit)
+    override fun times(multiplier: Double): AngularAcceleration =
+        AngularAcceleration(magnitude * multiplier, unit as AngularAccelerationUnit)
 
-    override fun div(divisor: Double): AngularAcceleration = AngularAcceleration(magnitude / divisor, unit as AngularAccelerationUnit)
+    override fun div(divisor: Double): AngularAcceleration =
+        AngularAcceleration(magnitude / divisor, unit as AngularAccelerationUnit)
 
     /**
      * Multiplies this angular acceleration by a time to get angular velocity.

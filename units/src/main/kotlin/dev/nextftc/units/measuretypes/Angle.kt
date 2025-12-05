@@ -10,10 +10,8 @@ import dev.nextftc.units.unittypes.AngleUnit
  * arithmetic operations and conversions between different angle units.
  */
 class Angle
-internal constructor(
-    override val magnitude: Double,
-    override val unit: AngleUnit,
-) : Measure<AngleUnit> {
+internal constructor(override val magnitude: Double, override val unit: AngleUnit) :
+    Measure<AngleUnit> {
     override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
     /**

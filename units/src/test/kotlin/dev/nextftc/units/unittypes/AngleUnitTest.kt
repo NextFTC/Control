@@ -10,7 +10,10 @@ private const val EPSILON = 1e-9
 class AngleUnitTest :
     FunSpec({
         context("AngleUnit constants") {
-            test("Radians should be the base unit") { Radians.baseUnit shouldBeSameInstanceAs Radians }
+            test("Radians should be the base unit") {
+                Radians.baseUnit shouldBeSameInstanceAs
+                    Radians
+            }
 
             test("all angle units should have Radians as base unit") {
                 Degrees.baseUnit shouldBeSameInstanceAs Radians

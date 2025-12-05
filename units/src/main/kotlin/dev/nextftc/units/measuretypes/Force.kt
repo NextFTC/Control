@@ -12,10 +12,8 @@ import dev.nextftc.units.unittypes.NewtonMeters
  * operations and conversions between different force units.
  */
 class Force
-internal constructor(
-    override val magnitude: Double,
-    override val unit: ForceUnit,
-) : Measure<ForceUnit> {
+internal constructor(override val magnitude: Double, override val unit: ForceUnit) :
+    Measure<ForceUnit> {
     override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
     override fun unaryMinus(): Force = Force(-magnitude, unit)

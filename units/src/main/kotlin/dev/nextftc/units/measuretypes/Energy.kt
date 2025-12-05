@@ -11,10 +11,8 @@ import dev.nextftc.units.unittypes.Watts
  * arithmetic operations and conversions between different energy units.
  */
 class Energy
-internal constructor(
-    override val magnitude: Double,
-    override val unit: EnergyUnit,
-) : Measure<EnergyUnit> {
+internal constructor(override val magnitude: Double, override val unit: EnergyUnit) :
+    Measure<EnergyUnit> {
     override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
     override fun unaryMinus(): Energy = Energy(-magnitude, unit)

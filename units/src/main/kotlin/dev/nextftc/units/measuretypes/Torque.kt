@@ -11,10 +11,8 @@ import dev.nextftc.units.unittypes.TorqueUnit
  * operations and conversions between different torque units.
  */
 class Torque
-internal constructor(
-    override val magnitude: Double,
-    override val unit: TorqueUnit,
-) : Measure<TorqueUnit> {
+internal constructor(override val magnitude: Double, override val unit: TorqueUnit) :
+    Measure<TorqueUnit> {
     override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
     override fun unaryMinus(): Torque = Torque(-magnitude, unit)

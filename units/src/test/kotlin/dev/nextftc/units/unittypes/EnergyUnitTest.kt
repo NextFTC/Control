@@ -76,7 +76,8 @@ class EnergyUnitTest :
                 val whEnergy = WattHours.of(1000.0)
                 val kwhEnergy = KilowattHours.of(1.0)
 
-                whEnergy.baseUnitMagnitude shouldBe (kwhEnergy.baseUnitMagnitude plusOrMinus EPSILON)
+                whEnergy.baseUnitMagnitude shouldBe
+                    (kwhEnergy.baseUnitMagnitude plusOrMinus EPSILON)
             }
         }
 

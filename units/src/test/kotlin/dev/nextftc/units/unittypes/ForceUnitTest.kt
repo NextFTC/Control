@@ -11,7 +11,10 @@ private const val EPSILON = 1e-9
 class ForceUnitTest :
     FunSpec({
         context("ForceUnit constants") {
-            test("Newtons should be the base unit") { Newtons.baseUnit shouldBeSameInstanceAs Newtons }
+            test("Newtons should be the base unit") {
+                Newtons.baseUnit shouldBeSameInstanceAs
+                    Newtons
+            }
 
             test("all force units should have Newtons as base unit") {
                 Kilonewtons.baseUnit shouldBeSameInstanceAs Newtons

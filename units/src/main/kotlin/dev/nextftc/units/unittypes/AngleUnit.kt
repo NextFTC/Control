@@ -45,7 +45,8 @@ class AngleUnit(
      * @param baseUnitMagnitude the magnitude in terms of the base unit
      * @return the measurement object
      */
-    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<AngleUnit> = of(this.fromBaseUnits(baseUnitMagnitude))
+    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<AngleUnit> =
+        of(this.fromBaseUnits(baseUnitMagnitude))
 
     /**
      * Combines this unit with a unit of time to create an angular velocity unit.
