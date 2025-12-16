@@ -8,6 +8,8 @@ description = "A WPIMath inspired library for controls and other math classes an
 dependencies {
     api(project(":units"))
     api(project(":linalg"))
+
+    testImplementation(libs.bundles.kotest)
 }
 
 nextFTCPublishing {
@@ -21,6 +23,8 @@ kotlin {
         freeCompilerArgs.addAll("-Xconsistent-data-class-copy-visibility")
     }
 }
+
+tasks.withType<Test>().configureEach { useJUnitPlatform() }
 
 spotless {
     kotlin {
