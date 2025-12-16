@@ -9,6 +9,7 @@
 package dev.nextftc.units
 
 import kotlin.math.abs
+import kotlin.math.sign
 import kotlin.math.withSign
 
 /**
@@ -135,6 +136,11 @@ interface Measure<U : Unit<U>> : Comparable<Measure<U>> {
      * @return the value of the measure in the given unit with the sign of the provided measure
      */
     fun copySign(other: Measure<U>, unit: U): Double = this.into(unit).withSign(other.into(unit))
+
+    /**
+     * Returns the sign of this measure.
+     */
+    val sign get() = magnitude.sign
 
     /**
      * Returns a measure equivalent to this one equal to zero minus its current value. For non-linear
