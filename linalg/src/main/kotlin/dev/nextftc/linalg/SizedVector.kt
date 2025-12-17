@@ -35,6 +35,8 @@ class SizedVector<N : Nat> internal constructor(simple: SimpleMatrix, internal v
         require(simple.numCols() == 1) { "Vector must have exactly one column" }
     }
 
+    constructor(matrix: SizedMatrix<N, N1>) : this(matrix.simple, matrix.rowNat)
+
     @Suppress("ktlint")
     companion object {
         /**
