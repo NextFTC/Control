@@ -1,5 +1,5 @@
 /*
- * Copyright (c)  NextFTC Team
+ * Copyright (c) 2025 NextFTC Team
  *
  *  Use of this source code is governed by an BSD-3-clause
  *  license that can be found in the LICENSE.md file at the root of this repository or at
@@ -16,11 +16,6 @@ import io.kotest.matchers.shouldBe
 class FunsiesTest :
     FunSpec({
         test("funsies") {
-            val d = 10.0.meters
-            val t = 2.0.seconds
-
-            val v = d / t
-
-            v.magnitude shouldBe 5.0
+            println("Elphaba Two Drivers".toByteArray().size)
         }
     })
