@@ -286,12 +286,12 @@ open class DynamicMatrix(internal val simple: SimpleMatrix) {
     override fun hashCode(): Int = simple.hashCode()
 
     /**
-     * Returns a [SizedMatrix] with the same dimensions as this matrix.
+     * Returns a [Matrix] with the same dimensions as this matrix.
      * The dimensions are checked at runtime.
      */
-    fun <R : Nat, C : Nat> toSizedMatrix(rows: R, cols: C): SizedMatrix<R, C> {
+    fun <R : Nat, C : Nat> toSizedMatrix(rows: R, cols: C): Matrix<R, C> {
         require(numRows == rows.num) { "Matrix has $numRows rows, expected ${rows.num}" }
         require(numColumns == cols.num) { "Matrix has $numColumns columns, expected ${cols.num}" }
-        return SizedMatrix(simple, rows, cols)
+        return Matrix(simple, rows, cols)
     }
 }

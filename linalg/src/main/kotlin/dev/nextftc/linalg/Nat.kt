@@ -12,7 +12,7 @@ package dev.nextftc.linalg
 
 /**
  * Type-level natural numbers for compile-time matrix dimension checking.
- * Use these as generic bounds on [SizedMatrix] to ensure dimensional correctness at compile time.
+ * Use these as generic bounds on [Matrix] to ensure dimensional correctness at compile time.
  */
 sealed interface Nat {
     val num: Int

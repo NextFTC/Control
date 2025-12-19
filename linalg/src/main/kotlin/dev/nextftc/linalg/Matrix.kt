@@ -30,7 +30,7 @@ import org.ejml.simple.SimpleMatrix
  * @param R The row dimension type
  * @param C The column dimension type
  */
-open class SizedMatrix<R : Nat, C : Nat> internal constructor(
+open class Matrix<R : Nat, C : Nat> internal constructor(
     internal val simple: SimpleMatrix,
     internal val rowNat: R,
     internal val colNat: C,
@@ -44,52 +44,52 @@ open class SizedMatrix<R : Nat, C : Nat> internal constructor(
          * Creates a zero matrix with dimensions specified by the [Nat] type parameters.
          */
         @JvmStatic
-        fun <R : Nat, C : Nat> zero(rows: R, cols: C): SizedMatrix<R, C> =
-            SizedMatrix(SimpleMatrix(rows.num, cols.num), rows, cols)
+        fun <R : Nat, C : Nat> zero(rows: R, cols: C): Matrix<R, C> =
+            Matrix(SimpleMatrix(rows.num, cols.num), rows, cols)
 
         /**
          * Creates a zero matrix with dimensions [rows] x [cols].
          */
         @JvmStatic
         @Suppress("UNCHECKED_CAST")
-        fun <R : Nat, C : Nat> zero(rows: Int, cols: Int): SizedMatrix<R, C> {
+        fun <R : Nat, C : Nat> zero(rows: Int, cols: Int): Matrix<R, C> {
             val rNat = natOf(rows)
             val cNat = natOf(cols)
-            return zero(rNat, cNat) as SizedMatrix<R, C>
+            return zero(rNat, cNat) as Matrix<R, C>
         }
 
         /**
          * Creates an identity matrix with dimensions [size] x [size].
          */
         @JvmStatic
-        fun <N : Nat> identity(size: N): SizedMatrix<N, N> =
-            SizedMatrix(SimpleMatrix.identity(size.num), size, size)
+        fun <N : Nat> identity(size: N): Matrix<N, N> =
+            Matrix(SimpleMatrix.identity(size.num), size, size)
 
         /**
          * Creates a matrix with [data] along the diagonal.
          */
         @JvmStatic
-        fun <N : Nat> diagonal(size: N, vararg data: Double): SizedMatrix<N, N> {
+        fun <N : Nat> diagonal(size: N, vararg data: Double): Matrix<N, N> {
             require(data.size == size.num) { "Data size must match dimension" }
-            return SizedMatrix(SimpleMatrix.diag(*data), size, size)
+            return Matrix(SimpleMatrix.diag(*data), size, size)
         }
 
         /**
          * Creates a row vector (1 x C matrix).
          */
         @JvmStatic
-        fun <C : Nat> row(cols: C, vararg data: Double): SizedMatrix<N1, C> {
+        fun <C : Nat> row(cols: C, vararg data: Double): Matrix<N1, C> {
             require(data.size == cols.num) { "Data size must match column dimension" }
-            return SizedMatrix(SimpleMatrix(1, data.size, true, data), N1, cols)
+            return Matrix(SimpleMatrix(1, data.size, true, data), N1, cols)
         }
 
         /**
          * Creates a column vector (R x 1 matrix).
          */
         @JvmStatic
-        fun <R : Nat> column(rows: R, vararg data: Double): SizedMatrix<R, N1> {
+        fun <R : Nat> column(rows: R, vararg data: Double): Matrix<R, N1> {
             require(data.size == rows.num) { "Data size must match row dimension" }
-            return SizedMatrix(SimpleMatrix(data.size, 1, false, data), rows, N1)
+            return Matrix(SimpleMatrix(data.size, 1, false, data), rows, N1)
         }
 
         /**
@@ -100,10 +100,10 @@ open class SizedMatrix<R : Nat, C : Nat> internal constructor(
             rows: R,
             cols: C,
             data: Array<DoubleArray>,
-        ): SizedMatrix<R, C> {
+        ): Matrix<R, C> {
             require(data.size == rows.num) { "Row count must match row dimension" }
             require(data.all { it.size == cols.num }) { "All rows must have column dimension size" }
-            return SizedMatrix(SimpleMatrix(data), rows, cols)
+            return Matrix(SimpleMatrix(data), rows, cols)
         }
     }
 
@@ -121,21 +121,21 @@ open class SizedMatrix<R : Nat, C : Nat> internal constructor(
 
     /** The transpose of this matrix, with swapped dimension types. */
     @get:JvmName("transpose")
-    val transpose: SizedMatrix<C, R>
-        get() = SizedMatrix(simple.transpose(), colNat, rowNat)
+    val transpose: Matrix<C, R>
+        get() = Matrix(simple.transpose(), colNat, rowNat)
 
     /** Returns a copy of this matrix. */
-    open fun copy(): SizedMatrix<R, C> = SizedMatrix(simple.copy(), rowNat, colNat)
+    open fun copy(): Matrix<R, C> = Matrix(simple.copy(), rowNat, colNat)
 
     /** The inverse of this matrix. Only valid for square matrices. */
     @get:JvmName("inverse")
-    val inverse: SizedMatrix<R, C>
-        get() = SizedMatrix(simple.invert(), rowNat, colNat)
+    val inverse: Matrix<R, C>
+        get() = Matrix(simple.invert(), rowNat, colNat)
 
     /** The pseudo-inverse of this matrix. */
     @get:JvmName("pseudoInverse")
-    val pseudoInverse: SizedMatrix<C, R>
-        get() = SizedMatrix(simple.pseudoInverse(), colNat, rowNat)
+    val pseudoInverse: Matrix<C, R>
+        get() = Matrix(simple.pseudoInverse(), colNat, rowNat)
 
     /** The Frobenius norm of this matrix. */
     @get:JvmName("norm")
@@ -143,37 +143,37 @@ open class SizedMatrix<R : Nat, C : Nat> internal constructor(
         get() = simple.normF()
 
     /** Negates all elements of this matrix. */
-    open operator fun unaryMinus(): SizedMatrix<R, C> =
-        SizedMatrix(simple.negative(), rowNat, colNat)
+    open operator fun unaryMinus(): Matrix<R, C> =
+        Matrix(simple.negative(), rowNat, colNat)
 
     /** Adds another matrix with the same dimensions. */
-    operator fun plus(other: SizedMatrix<R, C>): SizedMatrix<R, C> =
-        SizedMatrix(simple + other.simple, rowNat, colNat)
+    operator fun plus(other: Matrix<R, C>): Matrix<R, C> =
+        Matrix(simple + other.simple, rowNat, colNat)
 
     /** Subtracts another matrix with the same dimensions. */
-    operator fun minus(other: SizedMatrix<R, C>): SizedMatrix<R, C> =
-        SizedMatrix(simple - other.simple, rowNat, colNat)
+    operator fun minus(other: Matrix<R, C>): Matrix<R, C> =
+        Matrix(simple - other.simple, rowNat, colNat)
 
     /**
      * Multiplies this matrix by another matrix.
      * The inner dimensions must match: (R x C) * (C x K) = (R x K)
      */
-    operator fun <K : Nat> times(other: SizedMatrix<C, K>): SizedMatrix<R, K> =
-        SizedMatrix(simple.mult(other.simple), rowNat, other.colNat)
+    operator fun <K : Nat> times(other: Matrix<C, K>): Matrix<R, K> =
+        Matrix(simple.mult(other.simple), rowNat, other.colNat)
 
     /** Multiplies this matrix by a scalar. */
-    open operator fun times(scalar: Double): SizedMatrix<R, C> =
-        SizedMatrix(simple.scale(scalar), rowNat, colNat)
+    open operator fun times(scalar: Double): Matrix<R, C> =
+        Matrix(simple.scale(scalar), rowNat, colNat)
 
     /** Multiplies this matrix by a scalar. */
-    open operator fun times(scalar: Int): SizedMatrix<R, C> = times(scalar.toDouble())
+    open operator fun times(scalar: Int): Matrix<R, C> = times(scalar.toDouble())
 
     /**
      * Solves for X in the equation AX = B,
      * where A is this matrix and B is [other].
      */
-    fun <K : Nat> solve(other: SizedMatrix<R, K>): SizedMatrix<C, K> =
-        SizedMatrix(simple.solve(other.simple), colNat, other.colNat)
+    fun <K : Nat> solve(other: Matrix<R, K>): Matrix<C, K> =
+        Matrix(simple.solve(other.simple), colNat, other.colNat)
 
     /** Returns the element at the given indices. */
     operator fun get(i: Int, j: Int): Double = simple[i, j]
@@ -200,16 +200,16 @@ open class SizedMatrix<R : Nat, C : Nat> internal constructor(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        return other is SizedMatrix<*, *> && this.simple.isIdentical(other.simple, 1e-6)
+        return other is Matrix<*, *> && this.simple.isIdentical(other.simple, 1e-6)
     }
 
     override fun hashCode(): Int = simple.hashCode()
 }
 
 /** Scalar multiplication from the left. */
-operator fun <R : Nat, C : Nat> Double.times(matrix: SizedMatrix<R, C>): SizedMatrix<R, C> =
+operator fun <R : Nat, C : Nat> Double.times(matrix: Matrix<R, C>): Matrix<R, C> =
     matrix * this
 
 /** Scalar multiplication from the left. */
-operator fun <R : Nat, C : Nat> Int.times(matrix: SizedMatrix<R, C>): SizedMatrix<R, C> =
+operator fun <R : Nat, C : Nat> Int.times(matrix: Matrix<R, C>): Matrix<R, C> =
     matrix * this

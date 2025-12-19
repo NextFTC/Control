@@ -9,27 +9,27 @@
 package dev.nextftc.control.model
 
 import dev.nextftc.linalg.Nat
-import dev.nextftc.linalg.SizedMatrix
-import dev.nextftc.linalg.SizedVector
+import dev.nextftc.linalg.Matrix
+import dev.nextftc.linalg.Vector
 
 interface Model<State : Nat, Input : Nat, Output : Nat> {
-    fun derivative(state: SizedVector<State>, input: SizedVector<Input>): SizedVector<State>
+    fun derivative(state: Vector<State>, input: Vector<Input>): Vector<State>
 
-    fun output(state: SizedVector<State>, input: SizedVector<Input>): SizedVector<Output>
+    fun output(state: Vector<State>, input: Vector<Input>): Vector<Output>
 }
 
 @Suppress("PropertyName")
 class LinearModel<State : Nat, Input : Nat, Output : Nat>(
-    val A: SizedMatrix<State, State>,
-    val B: SizedMatrix<State, Input>,
-    val C: SizedMatrix<Output, State>,
-    val D: SizedMatrix<Output, Input>,
+    val A: Matrix<State, State>,
+    val B: Matrix<State, Input>,
+    val C: Matrix<Output, State>,
+    val D: Matrix<Output, Input>,
 ) : Model<State, Input, Output> {
     override fun derivative(
-        state: SizedVector<State>,
-        input: SizedVector<Input>,
-    ): SizedVector<State> = SizedVector(A * state + B * input)
+        state: Vector<State>,
+        input: Vector<Input>,
+    ): Vector<State> = Vector(A * state + B * input)
 
-    override fun output(state: SizedVector<State>, input: SizedVector<Input>): SizedVector<Output> =
-        SizedVector(C * state + D * input)
+    override fun output(state: Vector<State>, input: Vector<Input>): Vector<Output> =
+        Vector(C * state + D * input)
 }
