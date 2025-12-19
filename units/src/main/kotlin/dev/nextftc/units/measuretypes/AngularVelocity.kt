@@ -79,4 +79,6 @@ class AngularVelocity(magnitude: Double, unit: AngularVelocityUnit) :
         val torqueInNm = torque.baseUnitMagnitude
         return Power(angularVelocityInRadPerSec * torqueInNm, dev.nextftc.units.unittypes.Watts)
     }
+
+    override fun toString() = toShortString()
 }

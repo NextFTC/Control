@@ -65,4 +65,6 @@ open class Mul<N : Unit<N>, D : Unit<D>>(
      * @return the division result
      */
     override fun div(divisor: Double): Mul<N, D> = Mul(magnitude / divisor, unit)
+
+    override fun toString() = toShortString()
 }

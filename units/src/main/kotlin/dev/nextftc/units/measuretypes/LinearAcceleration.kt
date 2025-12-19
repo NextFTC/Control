@@ -72,4 +72,6 @@ class LinearAcceleration(magnitude: Double, unit: LinearAccelerationUnit) :
         val massInKg = mass.baseUnitMagnitude
         return Force(accelerationInMps2 * massInKg, dev.nextftc.units.unittypes.Newtons)
     }
+
+    override fun toString() = toShortString()
 }

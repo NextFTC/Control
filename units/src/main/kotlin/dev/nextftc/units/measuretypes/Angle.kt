@@ -81,4 +81,6 @@ internal constructor(override val magnitude: Double, override val unit: AngleUni
                 .AngularVelocityUnit(unit, time.unit)
         return AngularVelocity(magnitude / time.magnitude, velocityUnit)
     }
+
+    override fun toString() = toShortString()
 }

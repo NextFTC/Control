@@ -54,4 +54,6 @@ internal constructor(override val magnitude: Double, override val unit: MassUnit
         val accelerationInMps2 = acceleration.baseUnitMagnitude
         return Force(massInKg * accelerationInMps2, Newtons)
     }
+
+    override fun toString() = toShortString()
 }

@@ -97,4 +97,6 @@ internal constructor(
         val forceInNewtons = force.baseUnitMagnitude
         return Energy(distanceInMeters * forceInNewtons, dev.nextftc.units.unittypes.Joules)
     }
+
+    override fun toString() = toShortString()
 }

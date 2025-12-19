@@ -54,4 +54,6 @@ internal constructor(override val magnitude: Double, override val unit: PowerUni
         val timeInSeconds = time.baseUnitMagnitude
         return Energy(powerInWatts * timeInSeconds, Joules)
     }
+
+    override fun toString() = toShortString()
 }

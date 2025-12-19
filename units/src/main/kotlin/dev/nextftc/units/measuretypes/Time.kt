@@ -106,4 +106,6 @@ internal constructor(private val duration: Duration, override val unit: TimeUnit
      * @return the angular velocity achieved
      */
     operator fun times(acceleration: AngularAcceleration): AngularVelocity = acceleration * this
+
+    override fun toString() = toShortString()
 }

@@ -56,4 +56,6 @@ internal constructor(
         val voltageInVolts = voltage.baseUnitMagnitude
         return Power(currentInAmperes * voltageInVolts, Watts)
     }
+
+    override fun toString() = toShortString()
 }

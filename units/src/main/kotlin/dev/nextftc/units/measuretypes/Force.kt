@@ -69,4 +69,6 @@ internal constructor(override val magnitude: Double, override val unit: ForceUni
         val distanceInMeters = momentArm.baseUnitMagnitude
         return Torque(forceInNewtons * distanceInMeters, NewtonMeters)
     }
+
+    override fun toString() = toShortString()
 }

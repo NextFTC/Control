@@ -62,4 +62,6 @@ open class Per<N : Unit<N>, D : Unit<D>>(
      * @return the division result
      */
     override fun div(divisor: Double): Per<N, D> = Per(magnitude / divisor, unit)
+
+    override fun toString() = toShortString()
 }

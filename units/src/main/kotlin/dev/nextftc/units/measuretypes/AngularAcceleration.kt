@@ -59,4 +59,6 @@ class AngularAcceleration(magnitude: Double, unit: AngularAccelerationUnit) :
         val timeInCorrectUnit = time.into(unit.denominator)
         return AngularVelocity(magnitude * timeInCorrectUnit, velocityUnit)
     }
+
+    override fun toString() = toShortString()
 }

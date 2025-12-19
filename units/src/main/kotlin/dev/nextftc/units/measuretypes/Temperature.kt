@@ -41,4 +41,6 @@ internal constructor(
     override fun times(multiplier: Double): Temperature = Temperature(magnitude * multiplier, unit)
 
     override fun div(divisor: Double): Temperature = Temperature(magnitude / divisor, unit)
+
+    override fun toString() = toShortString()
 }

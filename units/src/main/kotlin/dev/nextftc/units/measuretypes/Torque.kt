@@ -66,4 +66,6 @@ internal constructor(override val magnitude: Double, override val unit: TorqueUn
         val angularVelocityInRadPerSec = angularVelocity.baseUnitMagnitude
         return Power(torqueInNm * angularVelocityInRadPerSec, dev.nextftc.units.unittypes.Watts)
     }
+
+    override fun toString() = toShortString()
 }
