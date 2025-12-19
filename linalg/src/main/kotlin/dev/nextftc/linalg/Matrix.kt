@@ -111,9 +111,19 @@ open class Matrix<R : Nat, C : Nat> internal constructor(
     @JvmField
     val numRows: Int = simple.numRows()
 
+    /** Natural number representing the number of rows. */
+    @JvmField
+    val natRows: R = rowNat
+
     /** The number of columns in the matrix. */
     @JvmField
     val numColumns: Int = simple.numCols()
+
+    /**
+     * Natural number representing the number of columns.
+     */
+    @JvmField
+    val natColumns: C = colNat
 
     /** The size of the matrix as (rows, columns). */
     @JvmField
