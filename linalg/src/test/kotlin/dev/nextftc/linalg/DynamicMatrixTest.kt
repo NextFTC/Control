@@ -419,4 +419,31 @@ class DynamicMatrixTest :
                 }
             }
         }
+
+        context("Matrix Exponential") {
+            test("exp of identity matrix equals e*I") {
+                val matrix = DynamicMatrix.identity(2)
+                val result = matrix.exp()
+
+                result[0, 0] shouldBe (Math.E plusOrMinus 1e-9)
+                result[0, 1] shouldBe (0.0 plusOrMinus 1e-9)
+                result[1, 0] shouldBe (0.0 plusOrMinus 1e-9)
+                result[1, 1] shouldBe (Math.E plusOrMinus 1e-9)
+            }
+
+            test("exp of scaled matrix") {
+                val matrix = DynamicMatrix(
+                    arrayOf(
+                        doubleArrayOf(1.0, 2.0),
+                        doubleArrayOf(3.0, 4.0)
+                    )
+                )
+                val result = (matrix * 0.01).exp()
+
+                result[0, 0] shouldBe (1.01035625 plusOrMinus 1e-8)
+                result[0, 1] shouldBe (0.02050912 plusOrMinus 1e-8)
+                result[1, 0] shouldBe (0.03076368 plusOrMinus 1e-8)
+                result[1, 1] shouldBe (1.04111993 plusOrMinus 1e-8)
+            }
+        }
     })

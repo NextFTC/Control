@@ -11,6 +11,7 @@
 
 package dev.nextftc.linalg
 
+import dev.nextftc.linalg.Matrix.Companion.identity
 import org.ejml.simple.SimpleMatrix
 
 /**
@@ -216,3 +217,25 @@ operator fun <R : Nat, C : Nat> Double.times(matrix: Matrix<R, C>): Matrix<R, C>
 
 /** Scalar multiplication from the left. */
 operator fun <R : Nat, C : Nat> Int.times(matrix: Matrix<R, C>): Matrix<R, C> = matrix * this
+
+/**
+ * Computes the matrix exponential of this matrix,
+ * using the Padé approximant.
+ *
+ * Uses the formula:
+ * e^A ≈ (1 + A/2 + A²/9 + A³/72 + A⁴/1008 + A⁵/30240) / (1 - A/2 + A²/9 - A³/72 + A⁴/1008 - A⁵/30240)
+ *
+ * @return The matrix exponential of this matrix.
+ */
+fun <N : Nat> Matrix<N, N>.exp(): Matrix<N, N> {
+    val I = identity(natRows)
+    val A2 = this * this
+    val A3 = A2 * this
+    val A4 = A3 * this
+    val A5 = A4 * this
+
+    val numerator = I + this * 0.5 + A2 * (1.0 / 9.0) + A3 * (1.0 / 72.0) + A4 * (1.0 / 1008.0) + A5 * (1.0 / 30240.0)
+    val denominator = I - this * 0.5 + A2 * (1.0 / 9.0) - A3 * (1.0 / 72.0) + A4 * (1.0 / 1008.0) - A5 * (1.0 / 30240.0)
+
+    return denominator.solve(numerator)
+}

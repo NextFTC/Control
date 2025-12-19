@@ -224,6 +224,30 @@ open class DynamicMatrix(internal val simple: SimpleMatrix) {
     )
 
     /**
+     * Computes the matrix exponential of this matrix,
+     * using the Padé approximant.
+     *
+     * Uses the formula:
+     * e^A ≈ (1 + A/2 + A²/9 + A³/72 + A⁴/1008 + A⁵/30240) / (1 - A/2 + A²/9 - A³/72 + A⁴/1008 - A⁵/30240)
+     *
+     * @return The matrix exponential of this matrix.
+     */
+    fun exp(): DynamicMatrix {
+        require(numRows == numColumns) { "Matrix must be square" }
+
+        val I = identity(numRows)
+        val A2 = this * this
+        val A3 = A2 * this
+        val A4 = A3 * this
+        val A5 = A4 * this
+
+        val numerator = I + this * 0.5 + A2 * (1.0 / 9.0) + A3 * (1.0 / 72.0) + A4 * (1.0 / 1008.0) + A5 * (1.0 / 30240.0)
+        val denominator = I - this * 0.5 + A2 * (1.0 / 9.0) - A3 * (1.0 / 72.0) + A4 * (1.0 / 1008.0) - A5 * (1.0 / 30240.0)
+
+        return denominator.solve(numerator)
+    }
+
+    /**
      * Returns the LLT (Cholesky) decomposition of this matrix.
      * Only works for symmetric, positive-definite matrices.
      * Provides in-place rank-1 update/downdate methods.
