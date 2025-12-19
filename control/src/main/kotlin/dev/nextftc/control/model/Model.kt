@@ -8,6 +8,7 @@
 
 package dev.nextftc.control.model
 
+import dev.nextftc.control.util.discretizeAB
 import dev.nextftc.linalg.Matrix
 import dev.nextftc.linalg.Nat
 import dev.nextftc.linalg.Vector
@@ -19,13 +20,23 @@ interface Model<State : Nat, Input : Nat, Output : Nat> {
 }
 
 @Suppress("PropertyName")
-class LinearModel<State : Nat, Input : Nat, Output : Nat>(
+class LinearModel<State : Nat, Input : Nat, Output : Nat> @JvmOverloads constructor(
     val A: Matrix<State, State>,
     val B: Matrix<State, Input>,
     val C: Matrix<Output, State>,
     val D: Matrix<Output, Input>,
+    val dt: Double = 0.05
 ) : Model<State, Input, Output> {
-    override fun derivative(state: Vector<State>, input: Vector<Input>): Vector<State> = Vector(A * state + B * input)
+    private val Ad: Matrix<State, State>
+    private val Bd: Matrix<State, Input>
+
+    init {
+        val (Ad, Bd) = discretizeAB(A, B, 0.05)
+        this.Ad = Ad
+        this.Bd = Bd
+    }
+
+    override fun derivative(state: Vector<State>, input: Vector<Input>): Vector<State> = Vector(Ad * state + Bd * input)
 
     override fun output(state: Vector<State>, input: Vector<Input>): Vector<Output> = Vector(C * state + D * input)
 }
