@@ -79,7 +79,7 @@ class DynamicVector internal constructor(simple: SimpleMatrix) : DynamicMatrix(s
     override operator fun times(scalar: Double): DynamicVector = DynamicVector(simple.scale(scalar))
 
     /** Multiplies this vector by a scalar. */
-    override operator fun times(scalar: Int): DynamicVector = times(scalar.toDouble())
+    override operator fun times(scalar: Number): DynamicVector = times(scalar.toDouble())
 
     /** Computes the dot product of this vector with another vector. */
     fun dot(other: DynamicVector): Double = simple.transpose().mult(other.simple)[0, 0]
