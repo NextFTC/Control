@@ -40,7 +40,7 @@ private fun <N : Nat> rk4Matrix(
     t0: Double,
     x0: Matrix<N, N>,
     dt: Double,
-    steps: Int = 100
+    steps: Int = 100,
 ): Matrix<N, N> {
     var t = t0
     var x = x0
@@ -66,20 +66,22 @@ class DiscretizationTest :
                 // contA represents: dx/dt = [[0, 1], [0, 0]] * x
                 // This is a double integrator: position derivative = velocity, velocity derivative = 0
                 val contA = Matrix.from(
-                    N2, N2,
+                    N2,
+                    N2,
                     arrayOf(
                         doubleArrayOf(0.0, 1.0),
-                        doubleArrayOf(0.0, 0.0)
-                    )
+                        doubleArrayOf(0.0, 0.0),
+                    ),
                 )
                 // contB represents: dx/dt += [[0], [1]] * u
                 // Input affects acceleration (velocity derivative)
                 val contB = Matrix.from(
-                    N2, dev.nextftc.linalg.N1,
+                    N2,
+                    dev.nextftc.linalg.N1,
                     arrayOf(
                         doubleArrayOf(0.0),
-                        doubleArrayOf(1.0)
-                    )
+                        doubleArrayOf(1.0),
+                    ),
                 )
 
                 val x0 = Vector.of(N2, 1.0, 1.0)
@@ -95,7 +97,7 @@ class DiscretizationTest :
                 val x1Truth = Vector.of(
                     N2,
                     1.0 * x0[0] + 1.0 * x0[1] + 0.5 * u[0],
-                    0.0 * x0[0] + 1.0 * x0[1] + 1.0 * u[0]
+                    0.0 * x0[0] + 1.0 * x0[1] + 1.0 * u[0],
                 )
 
                 x1Discrete shouldBe x1Truth
@@ -108,18 +110,20 @@ class DiscretizationTest :
         context("discretizeAQ") {
             test("discretizes slow model correctly") {
                 val contA = Matrix.from(
-                    N2, N2,
+                    N2,
+                    N2,
                     arrayOf(
                         doubleArrayOf(0.0, 1.0),
-                        doubleArrayOf(0.0, 0.0)
-                    )
+                        doubleArrayOf(0.0, 0.0),
+                    ),
                 )
                 val contQ = Matrix.from(
-                    N2, N2,
+                    N2,
+                    N2,
                     arrayOf(
                         doubleArrayOf(1.0, 0.0),
-                        doubleArrayOf(0.0, 1.0)
-                    )
+                        doubleArrayOf(0.0, 1.0),
+                    ),
                 )
 
                 val dt = 1.0
@@ -135,7 +139,7 @@ class DiscretizationTest :
                     },
                     0.0,
                     Matrix.zero(N2, N2),
-                    dt
+                    dt,
                 )
 
                 val (_, discQ) = discretizeAQ(contA, contQ, dt)
@@ -149,18 +153,20 @@ class DiscretizationTest :
             //                                               0
             test("discretizes fast model correctly") {
                 val contA = Matrix.from(
-                    N2, N2,
+                    N2,
+                    N2,
                     arrayOf(
                         doubleArrayOf(0.0, 1.0),
-                        doubleArrayOf(0.0, -1406.29)
-                    )
+                        doubleArrayOf(0.0, -1406.29),
+                    ),
                 )
                 val contQ = Matrix.from(
-                    N2, N2,
+                    N2,
+                    N2,
                     arrayOf(
                         doubleArrayOf(0.0025, 0.0),
-                        doubleArrayOf(0.0, 1.0)
-                    )
+                        doubleArrayOf(0.0, 1.0),
+                    ),
                 )
 
                 val dt = 0.005
@@ -176,7 +182,7 @@ class DiscretizationTest :
                     },
                     0.0,
                     Matrix.zero(N2, N2),
-                    dt
+                    dt,
                 )
 
                 val (_, discQ) = discretizeAQ(contA, contQ, dt)
@@ -186,4 +192,3 @@ class DiscretizationTest :
             }
         }
     })
-

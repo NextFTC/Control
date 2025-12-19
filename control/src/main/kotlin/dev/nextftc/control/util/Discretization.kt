@@ -6,11 +6,14 @@
  *  https://opensource.org/license/bsd-3-clause.
  */
 
+@file:Suppress("ktlint:standard:property-naming")
+
 package dev.nextftc.control.util
 
 import dev.nextftc.linalg.DynamicMatrix
 import dev.nextftc.linalg.Matrix
 import dev.nextftc.linalg.Nat
+import dev.nextftc.linalg.exp
 
 /**
  * Discretizes a continuous-time system (A, B) to a discrete-time system (Ad, Bd).
@@ -63,7 +66,7 @@ internal fun <States : Nat, Inputs : Nat> discretizeAB(
 internal fun <States : Nat> discretizeAQ(
     A: Matrix<States, States>,
     Q: Matrix<States, States>,
-    dt: Double
+    dt: Double,
 ): Pair<Matrix<States, States>, Matrix<States, States>> {
     val states = A.numRows
 
@@ -93,7 +96,7 @@ internal fun <States : Nat> discretizeAQ(
     // Assign block (states, states): Aᵀ
     for (i in 0 until states) {
         for (j in 0 until states) {
-            M[i + states, j + states] = A[j, i]  // Transpose
+            M[i + states, j + states] = A[j, i] // Transpose
         }
     }
 
@@ -119,6 +122,8 @@ internal fun <States : Nat> discretizeAQ(
     @Suppress("UNCHECKED_CAST")
     return Pair(
         discA.toSizedMatrix(A.natRows, A.natColumns),
-        discQ.toSizedMatrix(Q.natRows, Q.natColumns)
+        discQ.toSizedMatrix(Q.natRows, Q.natColumns),
     )
 }
+
+internal fun <Outputs : Nat> discretizeR(R: Matrix<Outputs, Outputs>, dt: Double): Matrix<Outputs, Outputs> = R / dt

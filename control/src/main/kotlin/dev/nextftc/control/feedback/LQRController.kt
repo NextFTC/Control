@@ -119,4 +119,3 @@ internal fun <States : Nat, Inputs : Nat> computeLQRGain(
 
     return X to K
 }
-

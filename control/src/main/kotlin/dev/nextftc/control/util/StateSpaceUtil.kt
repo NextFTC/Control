@@ -6,6 +6,8 @@
  *  https://opensource.org/license/bsd-3-clause.
  */
 
+@file:Suppress("ktlint:standard:property-naming")
+
 package dev.nextftc.control.util
 
 import dev.nextftc.linalg.Matrix
@@ -14,7 +16,7 @@ import dev.nextftc.linalg.Vector
 import kotlin.math.pow
 
 internal fun <N : Nat> makeBrysonMatrix(tolerances: Vector<N>): Matrix<N, N> {
-    val matrix = Matrix.Companion.zero(tolerances.natRows, tolerances.natRows)
+    val matrix = Matrix.zero(tolerances.natRows, tolerances.natRows)
 
     for (i in 0 until tolerances.numRows) {
         if (tolerances[i].isInfinite()) {
@@ -22,6 +24,16 @@ internal fun <N : Nat> makeBrysonMatrix(tolerances: Vector<N>): Matrix<N, N> {
         } else {
             matrix[i, i] = 1.0 / (tolerances[i].pow(2))
         }
+    }
+
+    return matrix
+}
+
+internal fun <N : Nat> makeCovarianceMatrix(tolerances: Vector<N>): Matrix<N, N> {
+    val matrix = Matrix.zero(tolerances.natRows, tolerances.natRows)
+
+    for (i in 0 until tolerances.numRows) {
+        matrix[i, i] = tolerances[i].pow(2)
     }
 
     return matrix
@@ -71,4 +83,3 @@ internal fun <States : Nat, Inputs : Nat> solveDARE(
 
     return H_K1
 }
-
