@@ -11,7 +11,7 @@
 package dev.nextftc.control.feedback
 
 import dev.nextftc.control.model.LinearModel
-import dev.nextftc.control.util.discretizeSystem
+import dev.nextftc.control.util.discretizeAB
 import dev.nextftc.control.util.makeBrysonMatrix
 import dev.nextftc.control.util.solveDARE
 import dev.nextftc.linalg.Matrix
@@ -52,7 +52,7 @@ class LQRController<States : Nat, Inputs : Nat, Outputs : Nat> @JvmOverloads con
 
     init {
         require(dt > 0) { "Time step (dt) must be positive" }
-        val (Ad, Bd) = discretizeSystem(A, B, dt)
+        val (Ad, Bd) = discretizeAB(A, B, dt)
         val (_, K) = computeLQRGain(Ad, Bd, Q, R)
         this.K = K
     }
