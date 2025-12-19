@@ -435,8 +435,8 @@ class DynamicMatrixTest :
                 val matrix = DynamicMatrix(
                     arrayOf(
                         doubleArrayOf(1.0, 2.0),
-                        doubleArrayOf(3.0, 4.0)
-                    )
+                        doubleArrayOf(3.0, 4.0),
+                    ),
                 )
                 val result = (matrix * 0.01).exp()
 

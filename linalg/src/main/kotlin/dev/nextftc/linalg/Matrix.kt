@@ -172,7 +172,13 @@ open class Matrix<R : Nat, C : Nat> internal constructor(
         Matrix(simple.scale(scalar), rowNat, colNat)
 
     /** Multiplies this matrix by a scalar. */
-    open operator fun times(scalar: Int): Matrix<R, C> = times(scalar.toDouble())
+    open operator fun times(scalar: Number): Matrix<R, C> = times(scalar.toDouble())
+
+    /** Divides this matrix by a scalar. */
+    open operator fun div(scalar: Double) = times(1.0 / scalar)
+
+    /** Divides this matrix by a scalar. */
+    open operator fun div(scalar: Number) = times(1.0 / scalar.toDouble())
 
     /**
      * Solves for X in the equation AX = B,
@@ -227,6 +233,7 @@ operator fun <R : Nat, C : Nat> Int.times(matrix: Matrix<R, C>): Matrix<R, C> = 
  *
  * @return The matrix exponential of this matrix.
  */
+@Suppress("ktlint:standard:property-naming")
 fun <N : Nat> Matrix<N, N>.exp(): Matrix<N, N> {
     val I = identity(natRows)
     val A2 = this * this
@@ -234,8 +241,12 @@ fun <N : Nat> Matrix<N, N>.exp(): Matrix<N, N> {
     val A4 = A3 * this
     val A5 = A4 * this
 
-    val numerator = I + this * 0.5 + A2 * (1.0 / 9.0) + A3 * (1.0 / 72.0) + A4 * (1.0 / 1008.0) + A5 * (1.0 / 30240.0)
-    val denominator = I - this * 0.5 + A2 * (1.0 / 9.0) - A3 * (1.0 / 72.0) + A4 * (1.0 / 1008.0) - A5 * (1.0 / 30240.0)
+    val numerator =
+        I + this * 0.5 + A2 * (1.0 / 9.0) + A3 * (1.0 / 72.0) + A4 * (1.0 / 1008.0) +
+            A5 * (1.0 / 30240.0)
+    val denominator =
+        I - this * 0.5 + A2 * (1.0 / 9.0) - A3 * (1.0 / 72.0) + A4 * (1.0 / 1008.0) -
+            A5 * (1.0 / 30240.0)
 
     return denominator.solve(numerator)
 }

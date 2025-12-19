@@ -175,7 +175,13 @@ open class DynamicMatrix(internal val simple: SimpleMatrix) {
     /**
      * Multiplies this matrix by a scalar.
      */
-    open operator fun times(scalar: Int) = DynamicMatrix(simple * scalar.toDouble())
+    open operator fun times(scalar: Number) = DynamicMatrix(simple * scalar.toDouble())
+
+    /** Divides this matrix by a scalar. */
+    open operator fun div(scalar: Double) = times(1.0 / scalar)
+
+    /** Divides this matrix by a scalar. */
+    open operator fun div(scalar: Number) = times(1.0 / scalar.toDouble())
 
     /**
      * @usesMathJax
@@ -232,6 +238,7 @@ open class DynamicMatrix(internal val simple: SimpleMatrix) {
      *
      * @return The matrix exponential of this matrix.
      */
+    @Suppress("ktlint:standard:property-naming")
     fun exp(): DynamicMatrix {
         require(numRows == numColumns) { "Matrix must be square" }
 
@@ -241,8 +248,12 @@ open class DynamicMatrix(internal val simple: SimpleMatrix) {
         val A4 = A3 * this
         val A5 = A4 * this
 
-        val numerator = I + this * 0.5 + A2 * (1.0 / 9.0) + A3 * (1.0 / 72.0) + A4 * (1.0 / 1008.0) + A5 * (1.0 / 30240.0)
-        val denominator = I - this * 0.5 + A2 * (1.0 / 9.0) - A3 * (1.0 / 72.0) + A4 * (1.0 / 1008.0) - A5 * (1.0 / 30240.0)
+        val numerator =
+            I + this * 0.5 + A2 * (1.0 / 9.0) + A3 * (1.0 / 72.0) + A4 * (1.0 / 1008.0) +
+                A5 * (1.0 / 30240.0)
+        val denominator =
+            I - this * 0.5 + A2 * (1.0 / 9.0) - A3 * (1.0 / 72.0) + A4 * (1.0 / 1008.0) -
+                A5 * (1.0 / 30240.0)
 
         return denominator.solve(numerator)
     }
