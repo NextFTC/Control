@@ -8,8 +8,8 @@
 
 package dev.nextftc.control.model
 
-import dev.nextftc.linalg.Nat
 import dev.nextftc.linalg.Matrix
+import dev.nextftc.linalg.Nat
 import dev.nextftc.linalg.Vector
 
 interface Model<State : Nat, Input : Nat, Output : Nat> {
@@ -25,11 +25,7 @@ class LinearModel<State : Nat, Input : Nat, Output : Nat>(
     val C: Matrix<Output, State>,
     val D: Matrix<Output, Input>,
 ) : Model<State, Input, Output> {
-    override fun derivative(
-        state: Vector<State>,
-        input: Vector<Input>,
-    ): Vector<State> = Vector(A * state + B * input)
+    override fun derivative(state: Vector<State>, input: Vector<Input>): Vector<State> = Vector(A * state + B * input)
 
-    override fun output(state: Vector<State>, input: Vector<Input>): Vector<Output> =
-        Vector(C * state + D * input)
+    override fun output(state: Vector<State>, input: Vector<Input>): Vector<Output> = Vector(C * state + D * input)
 }

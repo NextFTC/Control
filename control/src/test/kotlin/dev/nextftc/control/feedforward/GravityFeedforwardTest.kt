@@ -56,28 +56,32 @@ class GravityFeedforwardTest :
 
         context("ElevatorFeedforward calculate") {
             test("calculates correctly with positive velocity") {
-                val feedforward = ElevatorFeedforward(GravityFeedforwardParameters(0.5, 0.2, 2.0, 0.1))
+                val feedforward =
+                    ElevatorFeedforward(GravityFeedforwardParameters(0.5, 0.2, 2.0, 0.1))
                 // output = kG + kS * sign(velocity) + kV * velocity + kA * acceleration
                 // output = 0.5 + 0.2 * 1 + 2.0 * 3.0 + 0.1 * 0.5 = 0.5 + 0.2 + 6.0 + 0.05 = 6.75
                 feedforward.calculate(3.0, 0.5) shouldBe (6.75 plusOrMinus 0.001)
             }
 
             test("calculates correctly with negative velocity") {
-                val feedforward = ElevatorFeedforward(GravityFeedforwardParameters(0.5, 0.2, 2.0, 0.1))
+                val feedforward =
+                    ElevatorFeedforward(GravityFeedforwardParameters(0.5, 0.2, 2.0, 0.1))
                 // output = kG + kS * sign(velocity) + kV * velocity + kA * acceleration
                 // output = 0.5 + 0.2 * (-1) + 2.0 * (-3.0) + 0.1 * 0.5 = 0.5 - 0.2 - 6.0 + 0.05 = -5.65
                 feedforward.calculate(-3.0, 0.5) shouldBe (-5.65 plusOrMinus 0.001)
             }
 
             test("calculates correctly with zero velocity") {
-                val feedforward = ElevatorFeedforward(GravityFeedforwardParameters(0.5, 0.2, 2.0, 0.1))
+                val feedforward =
+                    ElevatorFeedforward(GravityFeedforwardParameters(0.5, 0.2, 2.0, 0.1))
                 // output = kG + kS * sign(0) + kV * 0 + kA * acceleration
                 // output = 0.5 + 0 + 0 + 0.1 * 2.0 = 0.7
                 feedforward.calculate(0.0, 2.0) shouldBe (0.7 plusOrMinus 0.001)
             }
 
             test("gravity term is constant regardless of velocity") {
-                val feedforward = ElevatorFeedforward(GravityFeedforwardParameters(1.5, 0.0, 0.0, 0.0))
+                val feedforward =
+                    ElevatorFeedforward(GravityFeedforwardParameters(1.5, 0.0, 0.0, 0.0))
                 feedforward.calculate(0.0, 0.0) shouldBe 1.5
                 feedforward.calculate(10.0, 0.0) shouldBe 1.5
                 feedforward.calculate(-10.0, 0.0) shouldBe 1.5
@@ -156,4 +160,3 @@ class GravityFeedforwardTest :
             }
         }
     })
-

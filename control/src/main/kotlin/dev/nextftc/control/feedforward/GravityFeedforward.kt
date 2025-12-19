@@ -82,11 +82,10 @@ class ArmFeedforward(val coefficients: GravityFeedforwardParameters) {
      * @param acceleration the target angular acceleration
      * @return the feedforward output: `kG * cos(position) + kS * sign(velocity) + kV * velocity + kA * acceleration`
      */
-    fun calculate(position: Double, velocity: Double, acceleration: Double) =
-        coefficients.kG * cos(position) +
-            coefficients.kS * velocity.sign +
-            coefficients.kV * velocity +
-            coefficients.kA * acceleration
+    fun calculate(position: Double, velocity: Double, acceleration: Double) = coefficients.kG * cos(position) +
+        coefficients.kS * velocity.sign +
+        coefficients.kV * velocity +
+        coefficients.kA * acceleration
 
     /**
      * Calculates the feedforward output from a [MotionState].

@@ -81,16 +81,13 @@ class Vector<N : Nat> internal constructor(simple: SimpleMatrix, internal val di
     override operator fun unaryMinus(): Vector<N> = Vector(simple.negative(), dimNat)
 
     /** Adds another vector with the same dimension. */
-    operator fun plus(other: Vector<N>): Vector<N> =
-        Vector(simple + other.simple, dimNat)
+    operator fun plus(other: Vector<N>): Vector<N> = Vector(simple + other.simple, dimNat)
 
     /** Subtracts another vector with the same dimension. */
-    operator fun minus(other: Vector<N>): Vector<N> =
-        Vector(simple - other.simple, dimNat)
+    operator fun minus(other: Vector<N>): Vector<N> = Vector(simple - other.simple, dimNat)
 
     /** Multiplies this vector by a scalar. */
-    override operator fun times(scalar: Double): Vector<N> =
-        Vector(simple.scale(scalar), dimNat)
+    override operator fun times(scalar: Double): Vector<N> = Vector(simple.scale(scalar), dimNat)
 
     /** Multiplies this vector by a scalar. */
     override operator fun times(scalar: Int): Vector<N> = times(scalar.toDouble())

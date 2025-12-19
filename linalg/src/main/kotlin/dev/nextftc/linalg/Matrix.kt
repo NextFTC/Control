@@ -96,11 +96,7 @@ open class Matrix<R : Nat, C : Nat> internal constructor(
          * Creates a matrix from a 2D array with specified dimensions.
          */
         @JvmStatic
-        fun <R : Nat, C : Nat> from(
-            rows: R,
-            cols: C,
-            data: Array<DoubleArray>,
-        ): Matrix<R, C> {
+        fun <R : Nat, C : Nat> from(rows: R, cols: C, data: Array<DoubleArray>): Matrix<R, C> {
             require(data.size == rows.num) { "Row count must match row dimension" }
             require(data.all { it.size == cols.num }) { "All rows must have column dimension size" }
             return Matrix(SimpleMatrix(data), rows, cols)
@@ -153,8 +149,7 @@ open class Matrix<R : Nat, C : Nat> internal constructor(
         get() = simple.normF()
 
     /** Negates all elements of this matrix. */
-    open operator fun unaryMinus(): Matrix<R, C> =
-        Matrix(simple.negative(), rowNat, colNat)
+    open operator fun unaryMinus(): Matrix<R, C> = Matrix(simple.negative(), rowNat, colNat)
 
     /** Adds another matrix with the same dimensions. */
     operator fun plus(other: Matrix<R, C>): Matrix<R, C> =
@@ -217,9 +212,7 @@ open class Matrix<R : Nat, C : Nat> internal constructor(
 }
 
 /** Scalar multiplication from the left. */
-operator fun <R : Nat, C : Nat> Double.times(matrix: Matrix<R, C>): Matrix<R, C> =
-    matrix * this
+operator fun <R : Nat, C : Nat> Double.times(matrix: Matrix<R, C>): Matrix<R, C> = matrix * this
 
 /** Scalar multiplication from the left. */
-operator fun <R : Nat, C : Nat> Int.times(matrix: Matrix<R, C>): Matrix<R, C> =
-    matrix * this
+operator fun <R : Nat, C : Nat> Int.times(matrix: Matrix<R, C>): Matrix<R, C> = matrix * this

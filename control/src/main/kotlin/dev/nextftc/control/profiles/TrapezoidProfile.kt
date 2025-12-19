@@ -27,10 +27,7 @@ import kotlin.time.DurationUnit
  * @property maxVelocity The maximum velocity of the profile.
  * @property maxAcceleration The maximum acceleration of the profile.
  */
-data class TrapezoidProfileConstraints(
-    val maxVelocity: LinearVelocity,
-    val maxAcceleration: LinearAcceleration,
-) {
+data class TrapezoidProfileConstraints(val maxVelocity: LinearVelocity, val maxAcceleration: LinearAcceleration) {
     init {
         require(maxVelocity.magnitude >= 0.0) { "Constraints must be non-negative" }
         require(maxAcceleration.magnitude >= 0.0) { "Constraints must be non-negative" }

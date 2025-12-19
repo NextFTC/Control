@@ -34,7 +34,7 @@ spotless {
                 "indent_size" to "4",
                 "continuation_indent_size" to "4",
                 "ktlint_standard_no-wildcard-imports" to "disabled",
-                "max_line_length" to "100",
+                "max_line_length" to "120",
             ),
         )
     }
