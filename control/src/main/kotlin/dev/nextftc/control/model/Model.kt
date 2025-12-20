@@ -25,7 +25,7 @@ class LinearModel<State : Nat, Input : Nat, Output : Nat> @JvmOverloads construc
     val B: Matrix<State, Input>,
     val C: Matrix<Output, State>,
     val D: Matrix<Output, Input>,
-    val dt: Double = 0.05
+    val dt: Double = 0.05,
 ) : Model<State, Input, Output> {
     private val Ad: Matrix<State, State>
     private val Bd: Matrix<State, Input>

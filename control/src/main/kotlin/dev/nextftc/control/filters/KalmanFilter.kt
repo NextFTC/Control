@@ -46,11 +46,11 @@ import dev.nextftc.linalg.Vector
  * @param measurementStdDevs Standard deviations of the measurements (measurement noise)
  * @param dt The discretization timestep in seconds (default 0.05s / 50ms)
  */
-class KalmanFilter<States: Nat, Inputs: Nat, Outputs: Nat> @JvmOverloads constructor(
+class KalmanFilter<States : Nat, Inputs : Nat, Outputs : Nat> @JvmOverloads constructor(
     val plant: LinearModel<States, Inputs, Outputs>,
     val stateStdDevs: Vector<States>,
     val measurementStdDevs: Vector<Outputs>,
-    dt: Double = 0.05
+    dt: Double = 0.05,
 ) {
     private val A: Matrix<States, States>
     private val Q: Matrix<States, States>
@@ -133,8 +133,8 @@ class KalmanFilter<States: Nat, Inputs: Nat, Outputs: Nat> @JvmOverloads constru
 
         // (I−Kₖ₊₁C)Pₖ₊₁⁻(I−Kₖ₊₁C)ᵀ + Kₖ₊₁RKₖ₊₁ᵀ
         P = (Matrix.identity(K.natRows) - K * plant.C) * P *
-                (Matrix.identity(K.natRows) - K * plant.C).transpose +
-                K * R * K.transpose
+            (Matrix.identity(K.natRows) - K * plant.C).transpose +
+            K * R * K.transpose
 
         return Xhat
     }
