@@ -11,7 +11,7 @@ package dev.nextftc.control2.geometry
 import dev.nextftc.units.measuretypes.Angle
 import dev.nextftc.units.measuretypes.Distance
 import dev.nextftc.units.unittypes.DistanceUnit
-import dev.nextftc.units.unittypes.Inches
+import dev.nextftc.units.Inches
 
 /**
  * @usesMathJax

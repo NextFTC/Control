@@ -11,7 +11,7 @@ package dev.nextftc.control2.geometry
 import dev.nextftc.units.measuretypes.Angle
 import dev.nextftc.units.measuretypes.Distance
 import dev.nextftc.units.unittypes.DistanceUnit
-import dev.nextftc.units.unittypes.Inches
+import dev.nextftc.units.Inches
 import kotlin.math.*
 
 /**
@@ -329,3 +329,4 @@ data class Pose2d(
  * @return a small non-zero value (1e-10) with the same sign as x, or 1e-10 if x is zero
  */
 internal fun snz(x: Double): Double = if (abs(x) < 1e-10) 1e-10 else 0.0
+

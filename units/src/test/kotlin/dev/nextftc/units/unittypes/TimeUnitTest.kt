@@ -8,6 +8,8 @@
 
 package dev.nextftc.units.unittypes
 
+import dev.nextftc.units.*
+
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeSameInstanceAs
@@ -189,3 +191,5 @@ class TimeUnitTest :
             }
         }
     })
+
+

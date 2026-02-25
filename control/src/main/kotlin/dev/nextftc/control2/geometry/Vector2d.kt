@@ -10,9 +10,12 @@ package dev.nextftc.control2.geometry
 
 import dev.nextftc.units.Measure
 import dev.nextftc.units.Unit
-import dev.nextftc.units.unittypes.inches
-import dev.nextftc.units.unittypes.inchesPerSecond
-import dev.nextftc.units.unittypes.inchesPerSecondSquared
+import dev.nextftc.units.Inches
+import dev.nextftc.units.InchesPerSecond
+import dev.nextftc.units.InchesPerSecondSquared
+import dev.nextftc.units.inches
+import dev.nextftc.units.inchesPerSecond
+import dev.nextftc.units.inchesPerSecondSquared
 import kotlin.math.sqrt
 
 /**
@@ -195,3 +198,4 @@ data class Vector2d<U : Unit<U>>(@JvmField val x: Measure<U>, @JvmField val y: M
         fun acceleration(ax: Double, ay: Double) = Vector2d(ax.inchesPerSecondSquared, ay.inchesPerSecondSquared)
     }
 }
+

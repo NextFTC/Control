@@ -10,9 +10,9 @@ package dev.nextftc.control2.geometry
 
 import dev.nextftc.units.measuretypes.AngularVelocity
 import dev.nextftc.units.unittypes.DistanceUnit
-import dev.nextftc.units.unittypes.InchesPerSecond
+import dev.nextftc.units.InchesPerSecond
 import dev.nextftc.units.unittypes.PerUnit
-import dev.nextftc.units.unittypes.RadiansPerSecond
+import dev.nextftc.units.RadiansPerSecond
 import dev.nextftc.units.unittypes.TimeUnit
 
 /**

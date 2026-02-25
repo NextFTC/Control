@@ -13,10 +13,12 @@ import dev.nextftc.units.Unit
 import dev.nextftc.units.measuretypes.Per
 import dev.nextftc.units.unittypes.PerUnit
 import dev.nextftc.units.unittypes.TimeUnit
-import dev.nextftc.units.unittypes.degreesPerSecond
-import dev.nextftc.units.unittypes.degreesPerSecondSquared
-import dev.nextftc.units.unittypes.inchesPerSecond
-import dev.nextftc.units.unittypes.inchesPerSecondSquared
+import dev.nextftc.units.degreesPerSecond
+import dev.nextftc.units.degreesPerSecondSquared
+import dev.nextftc.units.InchesPerSecond
+import dev.nextftc.units.InchesPerSecondSquared
+import dev.nextftc.units.inchesPerSecond
+import dev.nextftc.units.inchesPerSecondSquared
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.sqrt
@@ -331,3 +333,4 @@ class TrapezoidProfile<U : Unit<U>>(private val constraints: TrapezoidProfileCon
             initial.position > goal.position
     }
 }
+
