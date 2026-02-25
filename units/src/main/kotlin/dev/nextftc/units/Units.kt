@@ -2,21 +2,7 @@
 
 package dev.nextftc.units
 
-import dev.nextftc.units.unittypes.AngleUnit
-import dev.nextftc.units.unittypes.AngularAccelerationUnit
-import dev.nextftc.units.unittypes.AngularVelocityUnit
-import dev.nextftc.units.unittypes.CurrentUnit
-import dev.nextftc.units.unittypes.DistanceUnit
-import dev.nextftc.units.unittypes.EnergyUnit
-import dev.nextftc.units.unittypes.ForceUnit
-import dev.nextftc.units.unittypes.LinearAccelerationUnit
-import dev.nextftc.units.unittypes.LinearVelocityUnit
-import dev.nextftc.units.unittypes.MassUnit
-import dev.nextftc.units.unittypes.PowerUnit
-import dev.nextftc.units.unittypes.TemperatureUnit
-import dev.nextftc.units.unittypes.TimeUnit
-import dev.nextftc.units.unittypes.TorqueUnit
-import dev.nextftc.units.unittypes.VoltageUnit
+import dev.nextftc.units.unittypes.*
 import kotlin.time.DurationUnit
 
 // Angle conversion constants
@@ -80,79 +66,131 @@ private const val POUNDS_PER_KILOGRAM = 0.45359237
 private const val OUNCES_PER_POUND = 1.0 / 16.0
 
 // Angle units
+@JvmField
 val Radians = AngleUnit(null, { it }, { it }, "radian", "rad")
+@JvmField
 val Degrees = AngleUnit(Radians, DEGREES_PER_RADIAN, "degree", "deg")
+@JvmField
 val Rotations = AngleUnit(Radians, ROTATIONS_PER_RADIAN, "rotation", "rot")
+@JvmField
 val Gradians = AngleUnit(Radians, GRADIANS_PER_RADIAN, "gradian", "grad")
 
 // Time units
+@JvmField
 val Seconds = TimeUnit(null, { it }, { it }, "second", "s")
+@JvmField
 val Milliseconds = TimeUnit(Seconds, MILLISECONDS_PER_SECOND, "millisecond", "ms")
+@JvmField
 val Microseconds = TimeUnit(Seconds, MICROSECONDS_PER_SECOND, "microsecond", "us")
+@JvmField
 val Nanoseconds = TimeUnit(Seconds, NANOSECONDS_PER_SECOND, "nanosecond", "ns")
+@JvmField
 val Minutes = TimeUnit(Seconds, MINUTES_PER_SECOND, "minute", "min")
+@JvmField
 val Hours = TimeUnit(Minutes, HOURS_PER_MINUTE, "hour", "h")
+@JvmField
 val Days = TimeUnit(Hours, DAYS_PER_HOUR, "day", "d")
 
 // Distance units
+@JvmField
 val Meters = DistanceUnit(null, { it }, { it }, "meter", "m")
+@JvmField
 val Millimeters = DistanceUnit(Meters, MILLIMETERS_PER_METER, "millimeter", "mm")
+@JvmField
 val Centimeters = DistanceUnit(Meters, CENTIMETERS_PER_METER, "centimeter", "cm")
+@JvmField
 val Kilometers = DistanceUnit(Meters, KILOMETERS_PER_METER, "kilometer", "km")
+@JvmField
 val Inches = DistanceUnit(Centimeters, INCHES_PER_CM, "inch", "in")
+@JvmField
 val Feet = DistanceUnit(Inches, FEET_PER_INCH, "foot", "ft")
+@JvmField
 val Yards = DistanceUnit(Feet, YARDS_PER_FOOT, "yard", "yd")
+@JvmField
 val Miles = DistanceUnit(Feet, MILES_PER_FOOT, "mile", "mi")
 
 // Mass units
+@JvmField
 val Kilograms = MassUnit(null, { it }, { it }, "kilogram", "kg")
+@JvmField
 val Grams = MassUnit(Kilograms, GRAMS_PER_KILOGRAM, "gram", "g")
+@JvmField
 val Milligrams = MassUnit(Kilograms, MILLIGRAMS_PER_KILOGRAM, "milligram", "mg")
+@JvmField
 val MetricTons = MassUnit(Kilograms, METRIC_TONS_PER_KILOGRAM, "metric ton", "t")
+@JvmField
 val Pounds = MassUnit(Kilograms, POUNDS_PER_KILOGRAM, "pound", "lb")
+@JvmField
 val Ounces = MassUnit(Pounds, OUNCES_PER_POUND, "ounce", "oz")
 
 // Current units
+@JvmField
 val Amperes = CurrentUnit(null, { it }, { it }, "ampere", "A")
+@JvmField
 val Milliamperes = CurrentUnit(Amperes, MILLIAMPERES_PER_AMPERE, "milliampere", "mA")
+@JvmField
 val Microamperes = CurrentUnit(Amperes, MICROAMPERES_PER_AMPERE, "microampere", "ÂµA")
+@JvmField
 val Kiloamperes = CurrentUnit(Amperes, KILOAMPERES_PER_AMPERE, "kiloampere", "kA")
 
 // Voltage units
+@JvmField
 val Volts = VoltageUnit(null, { it }, { it }, "volt", "V")
+@JvmField
 val Millivolts = VoltageUnit(Volts, MILLIVOLTS_PER_VOLT, "millivolt", "mV")
+@JvmField
 val Microvolts = VoltageUnit(Volts, MICROVOLTS_PER_VOLT, "microvolt", "ÂµV")
+@JvmField
 val Kilovolts = VoltageUnit(Volts, KILOVOLTS_PER_VOLT, "kilovolt", "kV")
 
 // Force units
+@JvmField
 val Newtons = ForceUnit(null, { it }, { it }, "newton", "N")
+@JvmField
 val Kilonewtons = ForceUnit(Newtons, KILONEWTONS_PER_NEWTON, "kilonewton", "kN")
+@JvmField
 val PoundsForce = ForceUnit(Newtons, POUNDS_FORCE_PER_NEWTON, "pound-force", "lbf")
+@JvmField
 val KilogramsForce = ForceUnit(Newtons, KILOGRAMS_FORCE_PER_NEWTON, "kilogram-force", "kgf")
 
 // Torque units
+@JvmField
 val NewtonMeters = TorqueUnit(null, { it }, { it }, "newton-meter", "NÂ·m")
+@JvmField
 val PoundFeet = TorqueUnit(NewtonMeters, POUND_FEET_PER_NEWTON_METER, "pound-foot", "lbÂ·ft")
+@JvmField
 val NewtonCentimeters =
     TorqueUnit(NewtonMeters, NEWTON_CENTIMETERS_PER_NEWTON_METER, "newton-centimeter", "NÂ·cm")
+@JvmField
 val NewtonMillimeters =
     TorqueUnit(NewtonMeters, NEWTON_MILLIMETERS_PER_NEWTON_METER, "newton-millimeter", "NÂ·mm")
 
 // Energy units
+@JvmField
 val Joules = EnergyUnit(null, { it }, { it }, "joule", "J")
+@JvmField
 val Kilojoules = EnergyUnit(Joules, KILOJOULES_PER_JOULE, "kilojoule", "kJ")
+@JvmField
 val WattHours = EnergyUnit(Joules, WATT_HOURS_PER_JOULE, "watt-hour", "Wh")
+@JvmField
 val KilowattHours = EnergyUnit(Joules, KILOWATT_HOURS_PER_JOULE, "kilowatt-hour", "kWh")
 
 // Power units
+@JvmField
 val Watts = PowerUnit(null, { it }, { it }, "watt", "W")
+@JvmField
 val Milliwatts = PowerUnit(Watts, MILLIWATTS_PER_WATT, "milliwatt", "mW")
+@JvmField
 val Kilowatts = PowerUnit(Watts, KILOWATTS_PER_WATT, "kilowatt", "kW")
+@JvmField
 val Megawatts = PowerUnit(Watts, MEGAWATTS_PER_WATT, "megawatt", "MW")
+@JvmField
 val Horsepower = PowerUnit(Watts, HORSEPOWER_PER_WATT, "horsepower", "hp")
 
 // Temperature units
+@JvmField
 val Celsius = TemperatureUnit(null, { it }, { it }, "celsius", "Â°C")
+@JvmField
 val Fahrenheit =
     TemperatureUnit(
         Celsius,
@@ -161,6 +199,7 @@ val Fahrenheit =
         "fahrenheit",
         "Â°F",
     )
+@JvmField
 val Kelvin =
     TemperatureUnit(
         Celsius,
@@ -171,26 +210,41 @@ val Kelvin =
     )
 
 // Linear velocity units
+@JvmField
 val MetersPerSecond = LinearVelocityUnit(Meters, Seconds)
+@JvmField
 val KilometersPerHour = LinearVelocityUnit(Kilometers, Hours)
+@JvmField
 val MilesPerHour = LinearVelocityUnit(Miles, Hours)
+@JvmField
 val FeetPerSecond = LinearVelocityUnit(Feet, Seconds)
+@JvmField
 val InchesPerSecond = LinearVelocityUnit(Inches, Seconds)
 
 // Linear acceleration units
+@JvmField
 val MetersPerSecondSquared = LinearAccelerationUnit(MetersPerSecond, Seconds)
+@JvmField
 val FeetPerSecondSquared = LinearAccelerationUnit(FeetPerSecond, Seconds)
+@JvmField
 val InchesPerSecondSquared = LinearAccelerationUnit(InchesPerSecond, Seconds)
 
 // Angular velocity units
+@JvmField
 val RadiansPerSecond = AngularVelocityUnit(Radians, Seconds)
+@JvmField
 val DegreesPerSecond = AngularVelocityUnit(Degrees, Seconds)
+@JvmField
 val RotationsPerMinute = AngularVelocityUnit(Rotations, Minutes)
+@JvmField
 val RotationsPerSecond = AngularVelocityUnit(Rotations, Seconds)
 
 // Angular acceleration units
+@JvmField
 val RadiansPerSecondSquared = AngularAccelerationUnit(RadiansPerSecond, Seconds)
+@JvmField
 val DegreesPerSecondSquared = AngularAccelerationUnit(DegreesPerSecond, Seconds)
+@JvmField
 val RotationsPerSecondSquared = AngularAccelerationUnit(RotationsPerSecond, Seconds)
 
 // Double extension properties
