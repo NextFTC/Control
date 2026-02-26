@@ -77,4 +77,3 @@ class AngleUnit(
     override fun per(time: TimeUnit): AngularVelocityUnit =
         PerUnit.of(this, time) as AngularVelocityUnit
 }
-

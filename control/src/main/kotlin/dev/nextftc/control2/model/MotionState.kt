@@ -11,10 +11,10 @@ package dev.nextftc.control2.model
 import dev.nextftc.linalg.Vector
 import dev.nextftc.linalg.vectorOf
 import dev.nextftc.units.Measure
+import dev.nextftc.units.Seconds
 import dev.nextftc.units.Unit
 import dev.nextftc.units.measuretypes.Per
 import dev.nextftc.units.unittypes.PerUnit
-import dev.nextftc.units.Seconds
 import dev.nextftc.units.unittypes.TimeUnit
 
 /**
@@ -169,4 +169,3 @@ data class MotionState<U : Unit<U>> @JvmOverloads constructor(
      */
     operator fun div(divisor: Number) = div(divisor.toDouble())
 }
-

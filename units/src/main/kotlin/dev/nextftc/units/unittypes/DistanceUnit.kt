@@ -78,4 +78,3 @@ class DistanceUnit(
     override fun per(time: TimeUnit): LinearVelocityUnit =
         PerUnit.of(this, time) as LinearVelocityUnit
 }
-

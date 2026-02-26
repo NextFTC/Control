@@ -62,4 +62,3 @@ class TorqueUnit(
     override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<TorqueUnit> =
         of(this.fromBaseUnits(baseUnitMagnitude))
 }
-

@@ -64,4 +64,3 @@ class TemperatureUnit(
     override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<TemperatureUnit> =
         of(this.fromBaseUnits(baseUnitMagnitude))
 }
-

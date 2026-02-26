@@ -68,4 +68,3 @@ class VoltageUnit(
     override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<VoltageUnit> =
         of(this.fromBaseUnits(baseUnitMagnitude))
 }
-

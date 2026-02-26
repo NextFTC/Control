@@ -8,11 +8,11 @@
 
 package dev.nextftc.control2.geometry
 
-import dev.nextftc.units.Unit
-import dev.nextftc.units.measuretypes.Angle
-import dev.nextftc.units.Radians
 import dev.nextftc.units.Inches
+import dev.nextftc.units.Radians
+import dev.nextftc.units.Unit
 import dev.nextftc.units.inches
+import dev.nextftc.units.measuretypes.Angle
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
@@ -214,4 +214,3 @@ data class Rotation2d(@JvmField val real: Double, @JvmField val imag: Double) {
         val zero = Rotation2d(1.0, 0.0)
     }
 }
-

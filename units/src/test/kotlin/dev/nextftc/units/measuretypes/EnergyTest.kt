@@ -8,8 +8,11 @@
 
 package dev.nextftc.units.measuretypes
 
-import dev.nextftc.units.*
-import dev.nextftc.units.unittypes.*
+import dev.nextftc.units.Joules
+import dev.nextftc.units.Kilojoules
+import dev.nextftc.units.KilowattHours
+import dev.nextftc.units.Seconds
+import dev.nextftc.units.WattHours
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.doubles.plusOrMinus
 import io.kotest.matchers.shouldBe
@@ -148,4 +151,3 @@ class EnergyTest :
             }
         }
     })
-

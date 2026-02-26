@@ -416,4 +416,3 @@ class TrapezoidProfileTest :
     })
 
 infix fun Measure<*>.plusOrMinus(tolerance: Double): ToleranceMatcher = ToleranceMatcher(this.magnitude, tolerance)
-

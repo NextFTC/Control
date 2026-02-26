@@ -33,5 +33,3 @@ class LinearAccelerationUnit(velocity: LinearVelocityUnit, time: TimeUnit) :
 
 // Standard gravity constant (approximately 9.80665 m/s²)
 const val STANDARD_GRAVITY_MPS2 = 9.80665
-
-

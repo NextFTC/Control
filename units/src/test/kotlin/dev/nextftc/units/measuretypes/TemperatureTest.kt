@@ -8,8 +8,9 @@
 
 package dev.nextftc.units.measuretypes
 
-import dev.nextftc.units.*
-import dev.nextftc.units.unittypes.*
+import dev.nextftc.units.Celsius
+import dev.nextftc.units.Fahrenheit
+import dev.nextftc.units.Kelvin
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.doubles.plusOrMinus
 import io.kotest.matchers.shouldBe
@@ -165,4 +166,3 @@ class TemperatureTest :
             }
         }
     })
-

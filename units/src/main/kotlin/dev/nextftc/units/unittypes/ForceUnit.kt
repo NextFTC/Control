@@ -63,4 +63,3 @@ class ForceUnit(
     override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<ForceUnit> =
         of(this.fromBaseUnits(baseUnitMagnitude))
 }
-

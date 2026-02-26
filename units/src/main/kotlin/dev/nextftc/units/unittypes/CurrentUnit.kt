@@ -62,4 +62,3 @@ class CurrentUnit(
     override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<CurrentUnit> =
         of(this.fromBaseUnits(baseUnitMagnitude))
 }
-

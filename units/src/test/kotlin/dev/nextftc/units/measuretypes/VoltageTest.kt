@@ -8,8 +8,10 @@
 
 package dev.nextftc.units.measuretypes
 
-import dev.nextftc.units.*
-import dev.nextftc.units.unittypes.*
+import dev.nextftc.units.Kilovolts
+import dev.nextftc.units.Microvolts
+import dev.nextftc.units.Millivolts
+import dev.nextftc.units.Volts
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.doubles.plusOrMinus
 import io.kotest.matchers.shouldBe
@@ -203,4 +205,3 @@ class VoltageTest :
             }
         }
     })
-

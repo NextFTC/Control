@@ -30,4 +30,3 @@ class AngularAccelerationUnit(angularVelocity: AngularVelocityUnit, time: TimeUn
     override fun ofBaseUnits(baseUnitMagnitude: Double): AngularAcceleration =
         of(this.fromBaseUnits(baseUnitMagnitude))
 }
-

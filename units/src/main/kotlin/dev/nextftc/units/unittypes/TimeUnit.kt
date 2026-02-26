@@ -76,4 +76,3 @@ class TimeUnit(
     override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<TimeUnit> =
         of(this.fromBaseUnits(baseUnitMagnitude))
 }
-

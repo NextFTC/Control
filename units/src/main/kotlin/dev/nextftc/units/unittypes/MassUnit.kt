@@ -63,4 +63,3 @@ class MassUnit(
     override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<MassUnit> =
         of(this.fromBaseUnits(baseUnitMagnitude))
 }
-

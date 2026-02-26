@@ -8,8 +8,10 @@
 
 package dev.nextftc.units.measuretypes
 
-import dev.nextftc.units.*
-import dev.nextftc.units.unittypes.*
+import dev.nextftc.units.Amperes
+import dev.nextftc.units.Kiloamperes
+import dev.nextftc.units.Microamperes
+import dev.nextftc.units.Milliamperes
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.doubles.plusOrMinus
 import io.kotest.matchers.shouldBe
@@ -190,4 +192,3 @@ class CurrentTest :
             }
         }
     })
-

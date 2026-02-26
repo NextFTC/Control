@@ -8,8 +8,10 @@
 
 package dev.nextftc.units.unittypes
 
-import dev.nextftc.units.*
-
+import dev.nextftc.units.Degrees
+import dev.nextftc.units.Gradians
+import dev.nextftc.units.Radians
+import dev.nextftc.units.Rotations
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.doubles.plusOrMinus
 import io.kotest.matchers.shouldBe
@@ -113,5 +115,3 @@ class AngleUnitTest :
             }
         }
     })
-
-
